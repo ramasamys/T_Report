@@ -1,0 +1,217 @@
+body{
+  font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;  
+}
+.overall-container{
+  margin: 0 auto;
+  width: 100%;
+}
+#header{    
+    height:80px;    
+    background:#DBDBDB;    
+    color:#fff;
+    border-bottom: 0.25em solid #f15a29;
+    -webkit-box-shadow: inset 0 -1px rgba(255,255,255,0.05),0 1px rgba(0,0,0,0.05);
+    box-shadow: inset 0 -1px rgba(255,255,255,0.05),0 1px rgba(0,0,0,0.05);    
+    text-shadow: 0 1px rgba(0,0,0,0.1);    
+    margin: 0 auto;
+}
+.logo {
+    font-family: arial;
+    font-size: 30px;     
+    padding: 20px;
+}
+.logo-no{
+    text-decoration: none;
+    color: #fff;
+}
+.content-container {
+-webkit-box-shadow: 0 0 8px #D0D0D0;
+background-color: #fff;
+margin: 0 auto;
+min-height: 500px;
+}
+.loginform {
+    margin: auto;
+    padding: 80px 0 0;
+    width: 320px;
+}
+.error-msg{
+background: #ffebe8;
+border: 1px solid #dd3c10;
+text-align: center;
+font-size: 11px;
+width: 300px;
+clear: both;
+position: relative;
+top: 12px;
+margin-left: 20px;
+}
+.report-login{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-shadow: 0 4px 10px -1px rgba(200, 200, 200, 0.698);
+    font-weight: normal;
+    margin-left: 8px;
+    padding: 26px 24px 0px;  
+}
+.report-login input[placeholder], [placeholder], *[placeholder]{
+	padding-left :5px;
+}	
+.report-login input[type="text"],input[type="password"]{
+
+    background: none repeat scroll 0 0 #FBFBFB;
+    border: 1px solid #E5E5E5;
+    box-shadow: 1px 1px 2px rgba(200, 200, 200, 0.2) inset;
+    color: #555555;
+    font-size: 24px;
+    font-weight: 200;
+    line-height: 1;
+    margin-bottom: 16px;
+    margin-right: 6px;
+    margin-top: 2px;
+    outline: 0 none;
+    padding: 3px;
+    width: 100%;
+}
+.loginTitle {
+  background-image: url('../css/images/memberlogin.gif');
+  background-position: top center;
+  background-repeat: no-repeat;
+  height: 63px;
+}
+.heading{
+  font-style: italic;
+  padding: 10px;  
+}
+.forgetmenot{
+  width: 140px;  
+}
+.forgetmenot input{
+    clear: both;
+    position: relative;
+    top: 2px;  
+}
+.submit {
+    clear: both;
+    float: right;
+    position: relative;
+    top: -60px;
+}
+.forgetmenot label {
+    font-size: 12px;
+    line-height: 19px;
+}
+.report-login label {
+    color: #777777;
+}
+.button-color{
+    height: 30px;
+    line-height: 28px;
+    padding: 0 12px 2px;
+    background-color: #f15a29;
+    border-color: #f15a29 #f15a29 #f15a29;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);    
+    -moz-box-sizing: border-box;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.button-color:hover{
+  font-weight:bold;
+}
+.agent-summary-list{
+  margin-top: 20px;
+}
+.logged-in-name{
+float: right;
+position: relative;
+clear: both;
+top: -2em;
+left: -5em;  
+}
+.logged-in-name span {
+  color: #58595b;
+}
+.logout-container{
+float: right;
+clear: both;
+margin-top: -52px;
+margin-right: 16px; 
+}
+.logged-in-name a:hover{
+  text-decoration: underline;
+}
+.logged-in-name a,.logout-container a{
+  text-decoration:none;
+  color: #58595b;
+}
+.profile-updatation table {
+  line-height: 40px;  
+}
+.logged-in-name .logout{
+  left: -20em;
+}
+.welcome-msg{
+  color:#000;
+}
+.textbox-style {
+  width:200px !important;
+  border:1px solid #58595b !important;
+  padding:3px;
+  background:#fff !important;
+  margin:0px !important;
+  font-size: 12px !important;
+  height: 20px
+}
+.menu-container{
+clear: both;
+position: relative;
+top: -21px;  
+}
+.global-table-style th {
+    text-align: center;
+    background: #58595b;
+    color:#fff;
+    font-weight: normal;
+    padding: 4px;
+    line-height: 24px;
+}
+#hidediv {
+     color: #FFFFFF;
+     display: none;
+     float: right;
+}
+.show-div {
+     color: #FFFFFF;
+     float: right;
+}
+.global-table-style {	
+	margin:0 auto;
+	width:90%;
+	border: 1px solid #CCC;
+	border-collapse: collapse;
+}
+.search-container table{
+  margin:0 auto;
+  /*margin-top:20px;*/
+}
+.footer-container{
+    background:#1b1b1b;
+    color:#f15a29;
+    font-size: 12px;
+    padding: 16px; 
+}
+.footer-container a{
+  color:#f15a29;
+  text-decoration: none;
+}
+.footer-container div{
+   float:left;
+}
+.footer-container span{
+   margin-left: 35em;
+}
