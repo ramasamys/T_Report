@@ -27,6 +27,11 @@ class Summary extends CI_Controller {
 
 	}
 	
+	public function queueSummary()
+	{
+		$this->load->view('queue_summary');
+	}
+	
 } 
 ?>
 
