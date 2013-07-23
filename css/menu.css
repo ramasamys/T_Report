@@ -8,7 +8,7 @@ nav ul ul {
 nav ul {
 	background: #757575; 
 	background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
-	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
+	background: -moz-linear-gradient(top, #757575 0%, #757575 100%); 
 	padding: 0 20px;
 	list-style: none;
 	position: relative;

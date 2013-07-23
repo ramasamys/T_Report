@@ -5,15 +5,15 @@
             var baseUrl = "<?php echo base_url(); ?>";
         </script>
         <meta charset="utf-8">
-
+	    <script src="<?php echo base_url(); ?>js/jquery1.5.1.min.js" type="text/javascript"></script>
+            <script src="<?php echo base_url() ?>js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
+	    
             <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" type="text/css" />
             <link href="<?php echo base_url(); ?>css/menu.css" rel="stylesheet" type="text/css" />
             <link href="<?php echo base_url(); ?>css/jquery-ui-1.8.10.custom.css" rel="stylesheet" type="text/css" />
+	    <link href="<?php echo base_url(); ?>css/jquery-autocomplete.css" rel="stylesheet" type="text/css" />            
 
-         
-            <script src="<?php echo base_url() ?>js/jquery-1.9.1.js" type="text/javascript"></script>             
-	    <script src="<?php echo base_url() ?>js/jquery-ui.1.10.3.js" type="text/javascript"></script>
-
+	    <script src="<?php echo base_url() ?>js/autocomplete-jquery.js" type="text/javascript"></script>
 	    <script src="<?php echo base_url() ?>js/helper.js" type="text/javascript"></script>
 	    
 

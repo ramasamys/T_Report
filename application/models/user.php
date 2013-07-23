@@ -13,6 +13,11 @@ Class User extends CI_Model {
    $query = $this->db->query($sql, array($id));
    return $query->result_array(); 
  }
+  function getAllAgents($q) {
+    $sql = "SELECT username from users where username like '" .$q."%'";
+    $query = $this->db->query($sql);
+    return $query->result();
+  } 
 }
 ?>
 

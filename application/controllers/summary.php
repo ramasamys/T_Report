@@ -12,7 +12,20 @@ class Summary extends CI_Controller {
 	{
 		$this->load->view('agent_summary');
 	}
+	function getAgentList() {
+	    $queryString = $this->input->get('q');
+	    $agent_list = $this->user->getAllAgents($queryString);
+	    $items = array();
+	    foreach ($agent_list as $values) {
+		array_push($items, $values->username);
+	    }
+	    if (count($items) == 0)
+		return;
+	    for ($i = 0; $i < count($items); $i++) {
+		echo "$items[$i] \n";
+	    }
 
+	}
 	
 } 
 ?>
