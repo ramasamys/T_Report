@@ -12,12 +12,12 @@
 		?>
 			    <p>
 			    <label for="user_login">Username <br>
-					<input type="text" name="tv_username" value="<?php echo set_value('tv_username'); ?>"  />
+					<input type="text" name="tv_username" value="<?php echo set_value('tv_username'); ?>" placeholder="username" />
 				</label>
 			    </p>
 				<p>
 					<label for="user_pass">Password <br>
-					<input type="password" name="tv_password" value="<?php echo set_value('tv_password'); ?>"   />
+					<input type="password" name="tv_password" value="<?php echo set_value('tv_password'); ?>" placeholder="password"  />
 				</p>
 <p class="forgetmenot">
 <label for="rememberme">

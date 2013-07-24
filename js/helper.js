@@ -1,8 +1,8 @@
  $(document).ready(function(){
    
-//   if ($('.report-login').find('input[type="text"]').length > 0) { 
-//         $('.report-login').find('input[type="text"]')[0].focus();    
-//   }
+  if ($('#report-login').find('input[type="text"]').length > 0) { 
+        $('#report-login').find('input[type="text"]').focus();    
+  }
   
     $( ".datepicker" ).datepicker({
       changeMonth: true,
