@@ -1,5 +1,5 @@
 <?php include "header.php";?>
-<label class="heading">Queue Summary</label>
+<label class="heading">Agent Summary</label>
 <hr>
 <div class="search-container">
   <table class="global-table-style">
@@ -20,7 +20,7 @@
     <tr style="text-align: center;">
       <td colspan="3">From &nbsp;<input type="text" name="from_data" class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
       To &nbsp;<input type="text" name="from_data"  class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
-      Queue &nbsp;<input type="text" name="agent_name"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/summary/getAgentList' ; ?>" />
+      Agent &nbsp;<input type="text" name="agent_name"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/summary/getAgentList' ; ?>" />
       </td>
       </tr><tr>
       <td colspan="3" style="text-align: center;" ><input type="submit" name="submit_data" value="Search" class="button-color" />
@@ -35,11 +35,9 @@
     <tr>
       <th>Call Time</th>
       <th>Caller ID</th>
-      <th>Queue</th>
-      <th>Wait Time</th>
-      <th>Agent</th>
-      <th>Talk time</th>
-
+      <th>Last Dst</th>
+      <th>State</th>
+      <th>Talk Time</th>
     </tr>
    <? if(!empty($values)){ 
      foreach($values as $value) : ?>
@@ -49,7 +47,7 @@
    <?php endforeach; ?>
    <? } else { ?>
     <tr>
-      <td colspan="6">No Records.</td>
+      <td colspan="5">No Records.</td>
     </tr>
   <? } ?>
   </table>
