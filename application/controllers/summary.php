@@ -10,8 +10,27 @@ class Summary extends CI_Controller {
 	}
 	public function agentSummary()
 	{
-		$this->load->view('agent_summary');
+		$this->load->model('agent_summary');
+		$data['agent_summary'] = $this->agent_summary->agentSummary();
+		$this->load->view('agent_summary',$data);
+		
 	}
+	
+	public function agent_summary_search()
+	
+	{
+		$this->load->model('agent_summary');
+		$from_date = $this->input->post('from_date');	
+		$to_date = $this->input->post('to_date');
+		$agent = $this->input->post('agent_name');
+		
+		$result = $this->agent_summary->agent_summary_search($from_date, $to_date, $agent);
+		$this->load->view('agent_summary',$result);
+	  
+	
+	}
+	
+	
 	function getAgentList() {
 	    $queryString = $this->input->get('q');
 	    $agent_list = $this->user->getAllAgents($queryString);

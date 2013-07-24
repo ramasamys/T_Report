@@ -11,15 +11,15 @@
   </table> 
 <div  class="slide-up-key" style="display: none;">
 <?php
-	$controller_name = "summary/";
+	$controller_name = "summary/agent_summary_search";
 	$attributes = array('class' => '',
 			'id' => '', 'name' => '');
 	echo form_open($controller_name, $attributes);
 ?>
   <table class="global-table-style" style="line-height: 40px;">
     <tr style="text-align: center;">
-      <td colspan="3">From &nbsp;<input type="text" name="from_data" class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
-      To &nbsp;<input type="text" name="from_data"  class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
+      <td colspan="3">From &nbsp;<input type="text" name="from_date" class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
+      To &nbsp;<input type="text" name="to_date"  class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
       Agent &nbsp;<input type="text" name="agent_name"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/summary/getAgentList' ; ?>" />
       </td>
       </tr><tr>
@@ -33,21 +33,29 @@
 <div class="agent-summary-list">
   <table class="global-table-style">
     <tr>
+	  <th>Date</th>
       <th>Agent</th>
       <th>Answered</th>
       <th>Not Answered</th>
       <th>Talk Time</th>
       <th>Pause Time</th>
     </tr>
-   <? if(!empty($values)){ 
-     foreach($values as $value) : ?>
+   <? if(!empty($agent_summary)){ 
+     foreach($agent_summary as $value) : ?>
     <tr>
-      
+	
+	<td><?php echo $value['date1'];?></td>
+	<td><?php echo $value['agent'];?></td>
+	<td><?php echo $value['tot'];?></td>
+	<td><?php echo $value['no'];?></td>
+	<td><?php echo $value['totaltime'];?></td>
+	<td><?php echo $value['pause'];?></td>
+	
     </tr>
    <?php endforeach; ?>
    <? } else { ?>
     <tr>
-      <td colspan="5">No Records.</td>
+      <td colspan="6">No Records.</td>
     </tr>
   <? } ?>
   </table>
