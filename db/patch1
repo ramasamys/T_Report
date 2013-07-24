@@ -1,0 +1,109 @@
+queue_log table:
+
+
+CREATE TABLE IF NOT EXISTS `queue_log` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `time` char(26) default NULL,
+  `callid` varchar(32) NOT NULL default '',
+  `queuename` varchar(32) NOT NULL default '',
+  `agent` varchar(32) NOT NULL default '',
+  `event` varchar(32) NOT NULL default '',
+  `data1` varchar(100) NOT NULL default '',
+  `data2` varchar(100) NOT NULL default '',
+  `data3` varchar(100) NOT NULL default '',
+  `data4` varchar(100) NOT NULL default '',
+  `data5` varchar(100) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35190 ;
+
+
+
+sipname table :
+
+
+CREATE TABLE IF NOT EXISTS `sipname` (
+  `id` int(11) NOT NULL auto_increment,
+  `exten` varchar(30) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+
+
+
+
+sipusers table:
+
+
+
+CREATE TABLE IF NOT EXISTS `sipusers` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(80) NOT NULL default '',
+  `host` varchar(31) NOT NULL default '',
+  `nat` varchar(5) NOT NULL default 'no',
+  `type` enum('user','peer','friend') NOT NULL default 'friend',
+  `accountcode` varchar(20) default NULL,
+  `amaflags` varchar(13) default NULL,
+  `callcounter` varchar(45) default 'yes',
+  `callgroup` varchar(10) default NULL,
+  `callerid` varchar(80) default NULL,
+  `cancallforward` char(3) default 'yes',
+  `canreinvite` char(3) default 'yes',
+  `context` varchar(80) default NULL,
+  `defaultip` varchar(15) default NULL,
+  `dtmfmode` varchar(7) default NULL,
+  `fromuser` varchar(80) default NULL,
+  `fromdomain` varchar(80) default NULL,
+  `insecure` varchar(4) default NULL,
+  `language` char(2) default NULL,
+  `mailbox` varchar(50) default NULL,
+  `md5secret` varchar(80) default NULL,
+  `deny` varchar(95) default NULL,
+  `permit` varchar(95) default NULL,
+  `mask` varchar(95) default NULL,
+  `musiconhold` varchar(100) default NULL,
+  `pickupgroup` varchar(10) default NULL,
+  `qualify` char(3) NOT NULL default 'yes',
+  `regexten` varchar(80) default NULL,
+  `restrictcid` char(3) default NULL,
+  `rtptimeout` char(3) default NULL,
+  `rtpholdtimeout` char(3) default NULL,
+  `secret` varchar(80) default NULL,
+  `setvar` varchar(100) default NULL,
+  `disallow` varchar(100) default NULL,
+  `allow` varchar(100) default NULL,
+  `fullcontact` varchar(80) NOT NULL default '',
+  `ipaddr` varchar(45) default NULL,
+  `port` mediumint(5) unsigned NOT NULL default '0',
+  `regserver` varchar(100) default NULL,
+  `regseconds` int(11) NOT NULL default '0',
+  `lastms` int(11) NOT NULL default '0',
+  `username` varchar(80) NOT NULL default '',
+  `defaultuser` varchar(80) NOT NULL default '',
+  `subscribecontext` varchar(80) default NULL,
+  `useragent` varchar(20) default NULL,
+  `sippasswd` varchar(80) default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name_uk` (`name`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+
+
+
+qpause table :
+
+
+
+
+CREATE TABLE IF NOT EXISTS `qpause` (
+  `id` int(11) NOT NULL,
+  `queue` varchar(30) NOT NULL,
+  `membername` varchar(30) NOT NULL,
+  `start` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `end` timestamp NULL default '0000-00-00 00:00:00',
+  `duration` varchar(50) default NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
