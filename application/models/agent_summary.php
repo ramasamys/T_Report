@@ -11,13 +11,16 @@ $sql = "SELECT callid,date( time ) AS date1, queuename, agent,(select count(even
    return $query->result_array();
 }
 
-function queueSummary() {
+function queueSummary($filter) {
 
 
-$queue_sql = "select distinct(queuename),(select distinct(queuename) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename ) as que,(select count(distinct(callid)) from queue_log where event='abandon' and queuename=q.queuename )as Abandon,round(((select count(distinct(callid)) from queue_log where event='abandon' and queuename=q.queuename ) * 100)/(select count(distinct(callid)) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename ),0) as aban_avg,(select count(distinct(callid)) from queue_log where event='CONNECT' and queuename=q.queuename ) as Answered,round(((select count(distinct(callid)) from queue_log where event='CONNECT' and queuename=q.queuename ) * 100)/(select count(distinct(callid)) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename ),0) as answer_avg,(select count(distinct(callid)) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename ) as total from queue_log as q where queuename!='' group by queuename";
+$sql = "select distinct(queuename),(select distinct(queuename) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename ) as que,(select count(distinct(callid)) from queue_log where event='abandon' and queuename=q.queuename )as Abandon,round(((select count(distinct(callid)) from queue_log where event='abandon' and queuename=q.queuename ) * 100)/(select count(distinct(callid)) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename ),0) as aban_avg,(select count(distinct(callid)) from queue_log where event='CONNECT' and queuename=q.queuename ) as Answered,round(((select count(distinct(callid)) from queue_log where event='CONNECT' and queuename=q.queuename ) * 100)/(select count(distinct(callid)) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename ),0) as answer_avg,(select count(distinct(callid)) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename ) as total from queue_log as q where queuename!='' group by queuename";
 
-   $queue_query = $this->db->query($queue_sql);
-   return $queue_query->result_array();
+           if($filter!=NULL){
+              $sql .= " WHERE ='$filter['ll']' OR  ='$filter' OR  ='$filter' OR  ='$filter'" ;             
+           } 
+   $query = $this->db->query($sql);
+   return $query->result_array();
 }
 
 }

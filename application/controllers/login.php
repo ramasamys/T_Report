@@ -22,7 +22,7 @@ class Login extends CI_Controller {
 	  if($this->form_validation->run() == FALSE) { 
 	    $this->load->view('login_form');
 	  } else {
-	    redirect('login/checkSession');
+	    $this->checkSession();
 	  }
 
 	}
@@ -35,7 +35,7 @@ class Login extends CI_Controller {
 	      $this->load->view('agent');
 	     }
 	     if(empty($sessionValues)){
-	      redirect('login/logout');
+	      $this->logout();
 	     }	
 	}
 	function check_database($password) {
