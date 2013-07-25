@@ -25,9 +25,14 @@
 	      <div class="logo">
                  <label><a href="<?php echo base_url(); ?>" class="logo-no"><img src='<?php echo base_url().'css/images/asterfone.png'?>' width='220px' height='46px' /> </a></label>
 	      </div>
-	      <? if($this->session->userdata('logged_in')) { ?>
-	      <div class="logged-in-name">
-	       
+	      <? if($this->session->userdata('logged_in')) { 
+	          $base = base_url().'index.php';
+		  $current = current_url();
+		    if($current == $base) {
+			redirect('bambeeqapps/projects');
+		    }		  
+	      ?>
+	      <div class="logged-in-name">	       
 		  <? $sessionValues = $this->session->userdata('logged_in'); ?>
 		  <span class='welcome-msg'>Welcome:</span>
 		  <a href='<? echo base_url().'index.php/login/profile' ?>' title='profile' ><? echo $sessionValues['first_name']; ?></a>
