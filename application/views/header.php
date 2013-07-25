@@ -34,8 +34,9 @@
 		      
 		  </div>
 		  <div class='logout-container'><a href='<? echo base_url().'index.php/login/logout' ?>' class='logout' title='logout' >logout</a></div>
-
+<? if($sessionValues['role'] == 'Administrator' ){ ?>
 	  <?php include "menu.php";?>  
+<? } ?>	  
 	<? } ?>  		
         </div>
     

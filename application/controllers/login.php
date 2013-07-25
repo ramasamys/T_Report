@@ -22,7 +22,12 @@ class Login extends CI_Controller {
 	  if($this->form_validation->run() == FALSE) { 
 	    $this->load->view('login_form');
 	  } else {
-	     $this->load->view('admin_settings');
+	    $sessionValues = $this->session->userdata('logged_in');
+	    if(!empty($sessionValues) && $sessionValues['role'] == 'Administrator') {
+	      $this->load->view('admin_settings');
+	     }else{
+	      $this->load->view('agent');
+	     }
 	  }
 
 	}
@@ -38,7 +43,8 @@ class Login extends CI_Controller {
 	      $user_details = array(
 		'id' => $row['id'],
 		'first_name' => $row['first_name'],
-		'username' => $row['username']
+		'username' => $row['username'],
+		'role' => $row['role']
 	      );
 	      $this->session->set_userdata('logged_in', $user_details);
 	    endforeach;
@@ -64,7 +70,7 @@ class Login extends CI_Controller {
 	  $this->form_validation->set_rules('tv_lastname', 'Last Name', 'trim|required|min_length[4]|max_length[12]|xss_clean');
 	  $this->form_validation->set_rules('tv_password', 'Password', 'trim|required|min_length[5]|max_length[15]|matches[passconf]');
 	  $this->form_validation->set_rules('tv_confirm_password', 'Confirm Password', 'trim|required');
-	  $this->form_validation->set_message('required', 'Your custom message here');
+	 // $this->form_validation->set_message('required', 'Your custom message here');
 	  if($this->form_validation->run() == FALSE) { 
 	    $this->load->view('profile');
 	  } else {
