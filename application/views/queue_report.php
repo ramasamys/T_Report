@@ -33,6 +33,7 @@
 <div class="agent-summary-list">
   <table class="global-table-style">
     <tr>
+	
       <th>Call Time</th>
       <th>Caller ID</th>
       <th>Queue</th>
@@ -41,9 +42,17 @@
       <th>Talk time</th>
 
     </tr>
-   <? if(!empty($values)){ 
-     foreach($values as $value) : ?>
+   <? if(!empty($queue_report)){ 
+     foreach($queue_report as $value) : ?>
     <tr>
+
+	<td><?php echo $value['time'];?></td>
+	<td><?php echo $value['Callerid'];?></td>
+	<td><?php echo $value['queuename'];?></td>
+	<td><?php echo $value['Wait_Time'];?></td>
+	<td><?php echo $value['agent'];?></td>
+	<td><?php echo $value['Talk_Time'];?></td>
+	
       
     </tr>
    <?php endforeach; ?>
