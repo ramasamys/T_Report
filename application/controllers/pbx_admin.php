@@ -9,7 +9,7 @@ class Pbx_admin extends CI_Controller {
 
 	}
 	
-	function extension()
+	function add_extension()
 	{
 		$this->load->view('extension_view.php');
 	}

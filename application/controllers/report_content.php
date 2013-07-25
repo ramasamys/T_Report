@@ -39,15 +39,15 @@ class Report_content extends CI_Controller {
 	public function predictive()
 	{
 		$this->load->model('report');
-		$data['predictive_report'] = $this->report->outboundReport();
+		$data['predictive_report'] = $this->report->dialerReport();
 		$this->load->view('predictive_report',$data);
 	}
 	
 	public function record()
 	{
 		$this->load->model('report');
-		$data['predictive_report'] = $this->report->outboundReport();
-		$this->load->view('predictive_report',$data);
+		$data['record_report'] = $this->report->recordReport();
+		$this->load->view('record_report',$data);
 	}
 	
 } 

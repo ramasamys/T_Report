@@ -32,7 +32,7 @@ $sql = "SELECT callid,queuename,TIMEDIFF((SELECT DATE_FORMAT( TIME,  '%H:%i:%s' 
 
 function dialerReport(){ 
 
-$sql = "select * from predictve";
+$sql = "select * from predictive";
 
    $query = $this->db->query($sql);
    return $query->result_array();
