@@ -1,5 +1,5 @@
  $(document).ready(function(){
-   
+   //Ramasamy
   if ($('#report-login').find('input[type="text"]').length > 0) { 
         $('#report-login').find('input[type="text"]').focus();    
   }
@@ -32,7 +32,8 @@
 		autoFill:true,
 		selectFirst: true
 
-    });    
+    });  
+    
  });
  
   
