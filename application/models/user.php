@@ -4,7 +4,7 @@ Class User extends CI_Model {
 
 
  function checkLogin($username,$password) {
-   $sql = "SELECT id,first_name,username FROM users WHERE username=? AND password=?";
+   $sql = "SELECT id,first_name,username,role FROM users WHERE username=? AND password=?";
    $query = $this->db->query($sql, array($username,md5($password)));      
    return $query->result_array();
  }
