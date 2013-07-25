@@ -16,6 +16,15 @@ class Summary extends CI_Controller {
 		
 	}
 	
+	public function queueSummary()
+	{
+	
+		$this->load->model('agent_summary');
+		$data['queue_summary'] = $this->agent_summary->queueSummary();
+		$this->load->view('queue_summary',$data);
+	
+	}
+	
 	public function agent_summary_search()
 	
 	{
@@ -46,10 +55,7 @@ class Summary extends CI_Controller {
 
 	}
 	
-	public function queueSummary()
-	{
-		$this->load->view('queue_summary');
-	}
+	
 	
 } 
 ?>

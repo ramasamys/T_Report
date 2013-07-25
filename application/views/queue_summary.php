@@ -18,9 +18,9 @@
 ?>
   <table class="global-table-style" style="line-height: 40px;">
     <tr style="text-align: center;">
-      <td colspan="3">From &nbsp;<input type="text" name="from_data" class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
-      To &nbsp;<input type="text" name="from_data"  class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
-      Queue &nbsp;<input type="text" name="agent_name"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/summary/getAgentList' ; ?>" />
+      <td colspan="3">From &nbsp;<input type="text" name="from_date" class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
+      To &nbsp;<input type="text" name="to_date"  class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
+      Queue &nbsp;<input type="text" name="queue"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/summary/getAgentList' ; ?>" />
       </td>
       </tr><tr>
       <td colspan="3" style="text-align: center;" ><input type="submit" name="submit_data" value="Search" class="button-color" />
@@ -33,23 +33,32 @@
 <div class="agent-summary-list">
   <table class="global-table-style">
     <tr>
-      <th>Call Time</th>
-      <th>Caller ID</th>
+      <th>Date</th>
       <th>Queue</th>
-      <th>Wait Time</th>
-      <th>Agent</th>
-      <th>Talk time</th>
-
+      <th>Total calls</th>
+      <th>Answered calls</th>
+      <th>Avg.Answered</th>
+      <th>Abandon calls</th>
+	  <th>Avg.Abandon</th>
     </tr>
-   <? if(!empty($values)){ 
-     foreach($values as $value) : ?>
+   <? if(!empty($queue_summary)){ 
+     foreach($queue_summary as $value) : ?>
     <tr>
-      
+     
+	<td><?php echo $value['queuename'];?></td>
+	<td><?php echo $value['que'];?></td>
+	<td><?php echo $value['Abandon'];?></td>
+	<td><?php echo $value['aban_avg'];?></td>
+	<td><?php echo $value['Answered'];?></td>
+	<td><?php echo $value['answer_avg'];?></td>
+	<td><?php echo $value['total'];?></td>
+
+	
     </tr>
    <?php endforeach; ?>
    <? } else { ?>
     <tr>
-      <td colspan="6">No Records.</td>
+      <td colspan="7">No Records.</td>
     </tr>
   <? } ?>
   </table>

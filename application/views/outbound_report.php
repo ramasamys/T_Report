@@ -39,10 +39,16 @@
       <th>State</th>
       <th>Talk Time</th>
     </tr>
-   <? if(!empty($values)){ 
-     foreach($values as $value) : ?>
+   <? if(!empty($outbound_report)){ 
+     foreach($outbound_report as $value) : ?>
     <tr>
-      
+     
+	<td><?php echo $value['calldate'];?></td>
+	<td><?php echo $value['clid'];?></td>
+	<td><?php echo $value['dst'];?></td>
+	<td><?php echo $value['disposition'];?></td>
+	<td><?php echo $value['b'];?></td>
+	
     </tr>
    <?php endforeach; ?>
    <? } else { ?>
