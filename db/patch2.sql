@@ -1,4 +1,4 @@
-ALTER TABLE  `users` ADD  `role` VARCHAR( 30 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER  `password`
+ALTER TABLE  `users` ADD  `role` VARCHAR( 30 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER  `password`;
 UPDATE  `project1`.`users` SET  `role` =  'Administrator' WHERE  `users`.`id` =1;
 
 INSERT INTO  `project1`.`users` (
