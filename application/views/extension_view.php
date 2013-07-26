@@ -51,9 +51,7 @@ function foo(isChecked){
 	<tr>
 	<td>Password</td> <td><input type="text" name="password" id="password" disabled="disabled" value="<?php echo set_value('password'); ?>"></td>
     </tr>
-	<tr>
-	<td>Call waiting:</td> <td><input type="text" name="waiting" value="<?php echo set_value('waiting'); ?>"></td>
-    </tr>
+	
   </table>
 <div align="center">  
   <input type="submit" name="insert" value="Insert">

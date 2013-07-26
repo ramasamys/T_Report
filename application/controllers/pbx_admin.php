@@ -5,9 +5,15 @@ class Pbx_admin extends CI_Controller {
 	 function __construct() {
 	      parent::__construct();
 	      $this->load->helper(array('url','form'));
-	      $this->load->model('user','user',TRUE);
+	      $this->load->model('pbxadmin','admin',TRUE);
 		  $this->load->library('form_validation');
+		
 
+	}
+	
+	function list_extension()
+	{
+	$this->load->view('extension_list');
 	}
 	
 	function add_extension()
@@ -32,13 +38,16 @@ class Pbx_admin extends CI_Controller {
 		
 			if ($this->form_validation->run() == FALSE)
 				{
+				
 					$this->load->view('extension_view');
+			
 				}
 			else
 				{
 					
+					$this->pbxadmin->extensionInsert();
+					redirect('pbx_admin/extension_list');
 					
-				$this->load->view('extension_list');
 				}
 		
 	}
