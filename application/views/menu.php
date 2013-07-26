@@ -3,8 +3,8 @@
 	<ul>
 		<li><a href="#">Summary</a>
 		  <ul>
-		    <li><a href="<? echo base_url().'index.php/summary/agentSummary'?>">Agent Summary</a></li>
-		    <li><a href="<? echo base_url().'index.php/summary/queueSummary'?>">Queue Summary</a></li>
+		    <li><a href="<? echo base_url().'index.php/summary/agent'?>">Agent Summary</a></li>
+		    <li><a href="<? echo base_url().'index.php/summary/queue'?>">Queue Summary</a></li>
 		  </ul>		
 		</li>
 		<li><a href="#">Reports</a>

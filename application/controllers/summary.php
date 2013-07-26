@@ -6,38 +6,38 @@ class Summary extends CI_Controller {
 	      parent::__construct();
 	      $this->load->helper(array('url','form'));
 	      $this->load->model('user','user',TRUE);
-
+	      $this->load->model('agent_summary','agent',TRUE);
 	}
-	public function agentSummary()
+	public function agent()
 	{
-		$this->load->model('agent_summary');
-		$data['agent_summary'] = $this->agent_summary->agentSummary();
+		$data['agent_summary'] = $this->agent->agentSummary();
 		$this->load->view('agent_summary',$data);
-		
 	}
 	
-	public function queueSummary()
+	public function queue()
 	{
-	
-		$this->load->model('agent_summary');
-		$data['queue_summary'] = $this->agent_summary->queueSummary();
+	$search['from'] = $this->input->post('from_date');
+	$search['to'] = $this->input->post('to_date');
+	$search['aname'] = $this->input->post('agent_name');
+
+		$data['queue_summary'] = $this->agent->queueSummary($search);
 		$this->load->view('queue_summary',$data);
 	
 	}
 	
-	public function agent_summary_search()
-	
-	{
-		$this->load->model('agent_summary');
-		$from_date = $this->input->post('from_date');	
-		$to_date = $this->input->post('to_date');
-		$agent = $this->input->post('agent_name');
-		
-		$result = $this->agent_summary->agent_summary_search($from_date, $to_date, $agent);
-		$this->load->view('agent_summary',$result);
-	  
-	
-	}
+// 	public function agent_summary_search()
+// 	
+// 	{
+// 		$this->load->model('agent_summary');
+// 		$from_date = $this->input->post('from_date');	
+// 		$to_date = $this->input->post('to_date');
+// 		$agent = $this->input->post('agent_name');
+// 		
+// 		$result = $this->agent_summary->agent_summary_search($from_date, $to_date, $agent);
+// 		$this->load->view('agent_summary',$result);
+// 	  
+// 	
+// 	}
 	
 	
 	function getAgentList() {

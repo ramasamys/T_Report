@@ -29,7 +29,7 @@
 	          $base = base_url().'index.php';
 		  $current = current_url();
 		    if($current == $base) {
-			redirect('bambeeqapps/projects');
+			redirect('login/checkSession');
 		    }		  
 	      ?>
 	      <div class="logged-in-name">	       

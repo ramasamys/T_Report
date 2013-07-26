@@ -11,9 +11,9 @@
   </table> 
 <div  class="slide-up-key" style="display: none;">
 <?php
-	$controller_name = "summary/agent_summary_search";
-	$attributes = array('class' => '',
-			'id' => '', 'name' => '');
+	$controller_name = "summary/agent";
+	$attributes = array('class' => 'agent-summary-search',
+			'id' => 'agent-summary-search', 'name' => 'agent_summary_search');
 	echo form_open($controller_name, $attributes);
 ?>
   <table class="global-table-style" style="line-height: 40px;">
