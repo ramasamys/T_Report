@@ -11,7 +11,7 @@
   </table> 
 <div  class="slide-up-key" style="display: none;">
 <?php
-	$controller_name = "summary/queue";
+	$controller_name = "summary/agent";
 	$attributes = array('class' => 'agent-summary-search',
 			'id' => 'agent-summary-search', 'name' => 'agent_summary_search');
 	echo form_open($controller_name, $attributes);
