@@ -12,8 +12,8 @@ $tsql = "select * from sipusers";
 
 function extensionInsert() {
 
-$insertsql = "insert into sipusers(name,host,context,fromuser,mailbox,username,sippasswd,callgroup,pickupgroup)values()";
-$insertnamesql = "insert into sipname(exten,name) values()";
+$insertsql = "insert into sipusers(name,host,context,fromuser,mailbox,username,sippasswd,callgroup,pickupgroup)values('$name','$host','$context','$fromuser','$mailbox','$username','$sippasswd','$callgroup','$pickupgroup')";
+$insertnamesql = "insert into sipname(exten,name) values('$name','$sipname')";
    $insertquery = $this->db->query($insertsql);
    $insertnamequery = $this->db->query($insertnamesql);
 //   return $insertquery->result_array();
@@ -31,7 +31,7 @@ $updatesql = "update sipusers set nat='$nat',type='$type',context='$context',fro
 
 function extensionDelete() {
 
-$deletesql = "delete from sipusers where name=''";
+$deletesql = "delete from sipusers where id='$id'";
 
    $deletequery = $this->db->query($deletesql);
 //   return $deletequery->result_array();
@@ -51,7 +51,7 @@ $selectsql = "select * from queue_table";
     
 function queueInsert() {
 
-$addsql = "insert into queue_table(`name`,`timeout`, `queue_callswaiting`, `queue_reporthold`, `announce_frequency`,`announce_holdtime`, `retry`, `wrapuptime`, `maxlen`, `servicelevel`, `strategy`, `joinempty`, `leavewhenempty`, `eventmemberstatus`, `eventwhencalled`, `memberdelay`, `weight`, `timeoutrestart`, `periodic_announce_frequency`, `ringinuse`)value()";
+$addsql = "insert into queue_table(`name`,`timeout`, `queue_callswaiting`, `queue_reporthold`, `announce_frequency`,`announce_holdtime`, `retry`, `wrapuptime`, `maxlen`, `servicelevel`, `strategy`, `joinempty`, `leavewhenempty`, `eventmemberstatus`, `eventwhencalled`, `memberdelay`, `weight`, `timeoutrestart`, `periodic_announce_frequency`, `ringinuse`)value('$name','$timeout','$queue_callswaiting','$queue_reporthold','$announce_frequency','$announce_holdtime','$retry','$wrapuptime','$maxlen','$servicelevel','$strategy','$joinempty','$leavewhenempty','$eventmemberstatus','$eventwhencalled','$memberdelay','$weight','$timeoutrestart','$periodic_announce_frequency','$ringinuse')";
 
    $addquery = $this->db->query($addsql);
 //   return $addquery->result_array();
@@ -60,7 +60,7 @@ $addsql = "insert into queue_table(`name`,`timeout`, `queue_callswaiting`, `queu
     
 function queueUpdate() {
 
-$editsql = "update queue_table set announce_frequency='$announce_frequency',announce_holdtime='$announce_holdtime',eventmemberstatus='$eventmemberstatus',eventwhencalled='$eventwhencalled', joinempty='$joinempty',leavewhenempty='$leavewhenempty',memberdelay='$memberdelay',queue_callswaiting ='$queue_callswaiting',reportholdtime='$reportholdtime', retry='$retry', ringinuse='$ringinuse', servicelevel='$servicelevel', strategy='$strategy',timeout='$timeout',timeoutrestart='$timeoutrestart',weight='$weight',wrapuptime='$wrapuptime' where name='$name'";
+$editsql = "update queue_table set announce_frequency='$announce_frequency',announce_holdtime='$announce_holdtime',eventmemberstatus='$eventmemberstatus',eventwhencalled='$eventwhencalled', joinempty='$joinempty',leavewhenempty='$leavewhenempty',memberdelay='$memberdelay',queue_callswaiting ='$queue_callswaiting',reportholdtime='$reportholdtime', retry='$retry', ringinuse='$ringinuse', servicelevel='$servicelevel', strategy='$strategy',timeout='$timeout',timeoutrestart='$timeoutrestart',weight='$weight',wrapuptime='$wrapuptime',name='$name' where id='$id'";
 
    $editquery = $this->db->query($editsql);
 //   return $editquery->result_array();
@@ -69,7 +69,7 @@ $editsql = "update queue_table set announce_frequency='$announce_frequency',anno
     
 function queueDelete() {
 
-$removesql = "delete from queue_table where id=''";
+$removesql = "delete from queue_table where id='$id'";
 
    $removequery = $this->db->query($removesql);
 //   return $removequery->result_array();
@@ -88,7 +88,7 @@ $list = "select * from inbound_route";
     
 function inboundInsert() {
 
-$add = "insert into inbound_route(id,did_num,did_name,setdst,dst)values()";
+$add = "insert into inbound_route(did_num,did_name,setdst,dst)values('$did_num','$did_name','$setdst','$dst')";
 
    $addinbound = $this->db->query($add);
 //   return $addinbound->result_array();
