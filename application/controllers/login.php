@@ -7,6 +7,7 @@ class Login extends CI_Controller {
 	      $this->load->helper(array('url','form'));
 	      $this->load->library('form_validation');
 	      $this->load->model('user','user',TRUE);
+	      
 
 	}
 	public function index()
@@ -43,15 +44,22 @@ class Login extends CI_Controller {
 	  $username = $this->input->post('username');
 
 	  $result = $this->user->checkLogin($username, $password);
+  
 
 	  if(!empty($result)){
+	  	  $date = date('Y-m-d H:i:s');
+			   $timestamp = strtotime($date);
+			   $timestamp.=".".rand(00,100);  
+	  	  	  	  
+	  	  $this->user->insertlogindetail($result[0]['username'],$timestamp);
 	    $user_details = array();
 	    foreach($result as $row) : 
 	      $user_details = array(
 		'id' => $row['id'],
 		'first_name' => $row['first_name'],
 		'username' => $row['username'],
-		'role' => $row['role']
+		'role' => $row['role'],
+		'sessionId'=>$timestamp
 	      );
 	      $this->session->set_userdata('logged_in', $user_details);
 	    endforeach;
@@ -87,10 +95,25 @@ class Login extends CI_Controller {
 	  }	  
 	
 	}
-	public function logout(){
 	
-	      $this->session->sess_destroy();
-	      redirect();	
+	
+	function queue_login(){
+	$number=$this->user->agentQueue();
+	
+	}
+	
+	
+	function agentmaincontrol()
+	{
+	$this->load->view('agentmain');	
+		
+	}
+
+	
+	public function logout(){
+	   $this->user->loggedout();
+	   $this->session->sess_destroy();
+	   redirect();	
 	}	
 } 
 ?>
