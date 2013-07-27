@@ -44,9 +44,12 @@ class Pbx_admin extends CI_Controller {
 				}
 			else
 				{
+					$this->load->model('pbxadmin');
+					$myarray = array();
+					$myarray['id'] = $this->pbxadmin->extensionInsert();
+					$this->load->view('success',$myarray);
+					//print_r($myarray);exit;
 					
-					$this->pbxadmin->extensionInsert();
-					redirect('pbx_admin/extension_list');
 					
 				}
 		

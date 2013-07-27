@@ -13,13 +13,20 @@ $tsql = "select * from sipusers";
 function extensionInsert() 
 	{
 	
+		$call_group		=	"";
+		$pickup_group	=	"";
+		$mailid			=	NULL;
+		$password		=	NULL;
 		$ext			=	$_POST['ext'];
 		$name			=	$_POST['name'];
 		$secret			=	$_POST['secret'];
 		$call_group		=	$_POST['call_group'];
 		$pickup_group	=	$_POST['pickup_group'];
-		$mailid			=	$_POST['mailid'];
-		$password		=	$_POST['password'];
+		if (isset($_POST['mail']))
+				{
+					$mailid			=	$_POST['mailid'];
+					$password		=	$_POST['password'];
+				}
 
 		$insertsql = "insert into sipusers(name,host,context,fromuser,mailbox,username,sippasswd,callgroup,pickupgroup)values('$ext','dynamic','default','$ext','$mailid','$ext','$secret','$call_group','$pickup_group')";
 		
@@ -28,14 +35,21 @@ function extensionInsert()
 		$insertvoicesql = "INSERT INTO voiceboxes(customer_id, mailbox,password,email,context) values('$ext','$ext','$password','$mailid','default')";
 		
 		$insertquery = $this->db->query($insertsql);
-		//echo mysql_insert_id();
-		$insertnamequery = $this->db->query($insertnamesql);
-		//echo mysql_insert_id();
-		$insertvoicequery = $this->db->query($insertvoicesql);
-		//echo mysql_insert_id();
+		$userid =	0;
+		$userid	=	mysql_insert_id();	
 		
-		//exit;
-
+		$insertnamequery = $this->db->query($insertnamesql);
+		$nameid	=	0;
+		$nameid	=	mysql_insert_id();
+		
+		$insertvoicequery = $this->db->query($insertvoicesql);
+		$voiceid =	0;
+		$voiceid =	mysql_insert_id();
+		
+		$id = array();
+		$id = array("$userid","$nameid","$voiceid");
+		return $id;		
+		
    }
    
 function extensionUpdate() {

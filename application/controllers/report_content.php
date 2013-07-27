@@ -5,47 +5,49 @@ class Report_content extends CI_Controller {
 	 function __construct() {
 	      parent::__construct();
 	      $this->load->helper(array('url','form'));
-	     // $this->load->model('user','user',TRUE);
+		  $this->load->library("pagination");
+	      $this->load->model('report','report',TRUE);
+		  $this->load->model('global_pagination','global_pagination',TRUE);
 
 	}
 	
 	public function ivr()
 	{
-		$this->load->model('report');
+		
 		
 	}
 	
 	public function did()
-	{
-		$this->load->model('report');
-		$data['did_report'] = $this->report->didReport();
+	{		
+		
+		$page_url 			=	base_url() . "index.php/report_content/did";
+		$total_users 		=	$this->report->did_count();
+		$result_page		=	$this->global_pagination->index($page_url,$total_users);
+		$data['did_report'] = $this->report->didReport(3,$result_page);
+		$data['links']	=$this->pagination->create_links();
 		$this->load->view('did_report',$data);
 	}
 	
 	public function queue()
-	{
-		$this->load->model('report');
+	{		
 		$data['queue_report'] = $this->report->queueReport();
 		$this->load->view('queue_report',$data);
 	}
 	
 	public function outbound()
-	{
-		$this->load->model('report');
+	{		
 		$data['outbound_report'] = $this->report->outboundReport();
 		$this->load->view('outbound_report',$data);
 	}	
 	
 	public function predictive()
 	{
-		$this->load->model('report');
 		$data['predictive_report'] = $this->report->dialerReport();
 		$this->load->view('predictive_report',$data);
 	}
 	
 	public function record()
 	{
-		$this->load->model('report');
 		$data['record_report'] = $this->report->recordReport();
 		$this->load->view('record_report',$data);
 	}

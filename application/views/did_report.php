@@ -26,6 +26,7 @@
       <input type="button" name="export_data" value="Export" class="button-color" /></td>
     </tr>
   </table>
+  
 </form>  
 </div>
 </div>
@@ -58,5 +59,6 @@
     </tr>
   <? } ?>
   </table>
+  <?php echo $links;?>
 </div>
 <?php include "footer.php";?>

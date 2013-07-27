@@ -3,12 +3,24 @@
 Class Report extends CI_Model {
 
 
-function didReport() {
+function didReport($limit, $start) {
 
+$this->db->limit($limit, $start);
+
+$sql = "select calldate,clid,src,dst,disposition,sec_to_time(duration) as b from cdr where uniqueid!='' and lastdata like '%SIP/%' order by calldate desc LIMIT " .$limit . ",10 ";
+
+   $query = $this->db->query($sql);
+    return $query->result_array();
+}
+
+function did_count()
+{
 $sql = "select calldate,clid,src,dst,disposition,sec_to_time(duration) as b from cdr where uniqueid!='' and lastdata like '%SIP/%' order by calldate desc";
 
    $query = $this->db->query($sql);
-   return $query->result_array();
+ //  $num_rows = mysql_num_rows($query);
+   return 65;
+   
 }
 
 function outboundReport(){
