@@ -34,26 +34,31 @@
   <table class="global-table-style">
     <tr>
       <th>Call Time</th>
-      <th>Caller ID</th>
-      <th>Last Dst</th>
-      <th>State</th>
-      <th>Talk Time</th>
+      <th>Source</th>
+      <th>Destination</th>
+      <th>Status</th>
+      <th>Duration</th>
+      <th>Download</th>
+	  <th>Play audio</th>
+		  
     </tr>
-   <? if(!empty($outbound_report)){ 
-     foreach($outbound_report as $value) : ?>
+   <? if(!empty($record_report)){ 
+     foreach($record_report as $value) : ?>
     <tr>
-     
+
 	<td><?php echo $value['calldate'];?></td>
 	<td><?php echo $value['clid'];?></td>
 	<td><?php echo $value['dst'];?></td>
 	<td><?php echo $value['disposition'];?></td>
 	<td><?php echo $value['b'];?></td>
+	<td><a href="#"><img src="<?php echo base_url();?>css/images/10.png"/></a></td>
+	<td><a href="#"><img src="<?php echo base_url();?>css/images/audio.png"/></a></td>
 	
     </tr>
    <?php endforeach; ?>
    <? } else { ?>
     <tr>
-      <td colspan="5">No Records.</td>
+      <td colspan="7">No Records.</td>
     </tr>
   <? } ?>
   </table>

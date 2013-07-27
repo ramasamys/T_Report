@@ -33,21 +33,21 @@
 <div class="agent-summary-list">
   <table class="global-table-style">
     <tr>
-      <th>Call Time</th>
-      <th>Caller ID</th>
-      <th>Last Dst</th>
-      <th>State</th>
-      <th>Talk Time</th>
+      <th>Destination</th>
+      <th>Agent</th>
+      <th>Time</th>
+      <th>Status</th>
+      <th>Reason</th>
     </tr>
-   <? if(!empty($outbound_report)){ 
-     foreach($outbound_report as $value) : ?>
+   <? if(!empty($predictive_report)){ 
+     foreach($predictive_report as $value) : ?>
     <tr>
      
-	<td><?php echo $value['calldate'];?></td>
-	<td><?php echo $value['clid'];?></td>
-	<td><?php echo $value['dst'];?></td>
-	<td><?php echo $value['disposition'];?></td>
-	<td><?php echo $value['b'];?></td>
+	<td><?php echo $value['dest'];?></td>
+	<td><?php echo $value['agent'];?></td>
+	<td><?php echo $value['time'];?></td>
+	<td><?php echo $value['status'];?></td>
+	<td><?php echo $value['reason'];?></td>
 	
     </tr>
    <?php endforeach; ?>

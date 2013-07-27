@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/l/project1/';
+$config['base_url']	= 'http://localhost/learning/T_Report/';
 
 /*
 |--------------------------------------------------------------------------

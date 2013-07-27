@@ -22,14 +22,21 @@ class Login extends CI_Controller {
 	  if($this->form_validation->run() == FALSE) { 
 	    $this->load->view('login_form');
 	  } else {
+	    $this->checkSession();
+	  }
+
+	}
+	function checkSession(){
 	    $sessionValues = $this->session->userdata('logged_in');
 	    if(!empty($sessionValues) && $sessionValues['role'] == 'Administrator') {
 	      $this->load->view('admin_settings');
-	     }else{
+	     }
+	     if(!empty($sessionValues) && $sessionValues['role'] == 'Agent'){
 	      $this->load->view('agent');
 	     }
-	  }
-
+	     if(empty($sessionValues)){
+	      $this->logout();
+	     }	
 	}
 	function check_database($password) {
 	  
@@ -61,6 +68,8 @@ class Login extends CI_Controller {
 		$sessionValues = $this->session->userdata('logged_in');
 		$data['user_details'] = $this->user->getUserInformation($sessionValues['id']);
 		$this->load->view('profile',$data);
+	    } else {
+	      redirect('login/logout');
 	    }
 	    
 	}

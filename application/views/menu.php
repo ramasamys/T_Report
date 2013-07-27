@@ -3,8 +3,8 @@
 	<ul>
 		<li><a href="#">Summary</a>
 		  <ul>
-		    <li><a href="<? echo base_url().'index.php/summary/agentSummary'?>">Agent Summary</a></li>
-		    <li><a href="<? echo base_url().'index.php/summary/queueSummary'?>">Queue Summary</a></li>
+		    <li><a href="<? echo base_url().'index.php/summary/agent'?>">Agent Summary</a></li>
+		    <li><a href="<? echo base_url().'index.php/summary/queue'?>">Queue Summary</a></li>
 		  </ul>		
 		</li>
 		<li><a href="#">Reports</a>
@@ -13,8 +13,8 @@
 				<li><a href="<? echo base_url().'index.php/report_content/did'?>">DID Report</a></li>
 				<li><a href="<? echo base_url().'index.php/report_content/queue'?>">Queue Report</a></li>
 				<li><a href="<? echo base_url().'index.php/report_content/outbound'?>">Outbound Report</a></li>
-				<li><a href="<? echo base_url().'index.php/report_content/outbound'?>">Predictive</a></li>
-				<li><a href="<? echo base_url().'index.php/report_content/outbound'?>">Records</a></li>
+				<li><a href="<? echo base_url().'index.php/report_content/predictive'?>">Predictive</a></li>
+				<li><a href="<? echo base_url().'index.php/report_content/record'?>">Records</a></li>
 			</ul>
 		</li>
 		<li><a href="#">PBX Admin</a>
