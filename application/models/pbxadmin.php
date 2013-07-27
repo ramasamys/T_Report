@@ -54,9 +54,30 @@ function extensionInsert()
    
 function extensionUpdate() {
 
+$nat = $_POST['nat'];
+$type = $_POST['type'];
+$context = $_POST['context'];
+$fromuser = $_POST['fromuser'];
+$mailbox = $_POST['mailbox'];
+$sippasswd = $_POST['sippasswd'];
+$callerid = $_POST['callerid'];
+$cancallforward = $_POST['cancallforward'];
+$canreinvite = $_POST['canreinvite'];
+$mask = $_POST['mask'];
+$musiconhold = $_POST['musiconhold'];
+$port = $_POST['port'];
+$regseconds = $_POST['regseconds'];
+$lastms = $_POST['lastms'];
+$username = $_POST['username'];
+
+$nat = $_POST['name'];
+
 $updatesql = "update sipusers set nat='$nat',type='$type',context='$context',fromuser='$fromuser', mailbox='$mailbox',sippasswd='$sippasswd',callerid='$callerid',cancallforward ='$cancallforward',canreinvite='$canreinvite', mask='$mask', musiconhold='$musiconhold', port='$port', regseconds='$regseconds',lastms='$lastms' where username='$username'";
 
+$update_namesql = "update sipname set name='$name' where exten='$username'";
+
    $updatequery = $this->db->query($updatesql);
+   $update_namequery = $this->db->query($update_namesql);
 //   return $updatequery->result_array();
 
     }
@@ -145,7 +166,7 @@ $delete = "delete from inbound_route where id = '$id'";
 
     }
 
-function followInsert() {
+function followmeInsert() {
 
 $insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
 
@@ -154,7 +175,7 @@ $insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values
 
     }
     
-function followUpdate() {
+function followmeUpdate() {
 
 $edit = "update followme set folloename='$followname',ringtime='$ringtime',extlist='$extlist',setdst='$setdst',dst='$dst' where id='$id'";
 
@@ -163,7 +184,7 @@ $edit = "update followme set folloename='$followname',ringtime='$ringtime',extli
 
     }  
     
-function followDelete() {
+function followmeDelete() {
 
 $remove = "delete from followme where id = '$id'";
 
@@ -172,7 +193,7 @@ $remove = "delete from followme where id = '$id'";
 
     }
     
-function followList() {
+function followmeList() {
 
 $select = "select * from followme";
 
