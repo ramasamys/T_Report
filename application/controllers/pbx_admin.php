@@ -5,6 +5,7 @@ if (!defined('BASEPATH'))
 
 class Pbx_admin extends CI_Controller {
 
+
     function __construct() {
         parent::__construct();
         $this->load->helper(array('url', 'form'));
@@ -14,7 +15,14 @@ class Pbx_admin extends CI_Controller {
 
     function list_extension() {
         if ($this->session->userdata('logged_in')) {
-            $this->load->view('extension_list');
+		$page_url 			=	base_url() . "index.php/pbx_admin/list_extension";
+		$total_users 		=	$this->pbxadmin->extension_count();
+		$result_page		=	$this->global_pagination->index($page_url,$total_users);
+		$result_per_page	=	10;		
+		$data['result'] = $this->pbxadmin->extensionSelect($result_per_page,$result_page);
+		$data['links']	=$this->pagination->create_links();
+		//print_r($data);
+		$this->load->view('list_extension',$data);
         } else {
             redirect('login/logout');
         }

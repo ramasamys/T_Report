@@ -2,11 +2,29 @@
 
 Class Pbxadmin extends CI_Model {
 
-function extensionSelect() {
+public function extension_count() 
+			{
+				return $this->db->count_all("sipusers");
+			}
 
-$tsql = "select * from sipusers";
+function extensionSelect($limit, $start) {
+
+/*   $sql = "select * from sipusers";
    $query = $this->db->query($sql);
    return $query->result_array();
+   
+  */ 
+   	$this->db->limit($limit, $start);
+				$query = $this->db->get("sipusers");
+					if ($query->num_rows() > 0) 
+						{
+							foreach ($query->result() as $row) 	
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+							return false;
 
    }
 
@@ -93,10 +111,9 @@ $deletesql = "delete from sipusers where id='$id'";
 
 function queueSelect() {
 
-$selectsql = "select * from queue_table";
-
-   $selectquery = $this->db->query($selectsql);
-   return $addquery->result_array();
+	$selectsql = "select * from queue_table";
+	$selectquery = $this->db->query($selectsql);
+	return $selectquery->result_array();
 
     }
     
@@ -104,7 +121,27 @@ $selectsql = "select * from queue_table";
     
 function queueInsert() {
 
-$addsql = "insert into queue_table(`name`,`timeout`, `queue_callswaiting`, `queue_reporthold`, `announce_frequency`,`announce_holdtime`, `retry`, `wrapuptime`, `maxlen`, `servicelevel`, `strategy`, `joinempty`, `leavewhenempty`, `eventmemberstatus`, `eventwhencalled`, `memberdelay`, `weight`, `timeoutrestart`, `periodic_announce_frequency`, `ringinuse`)value('$name','$timeout','$queue_callswaiting','$queue_reporthold','$announce_frequency','$announce_holdtime','$retry','$wrapuptime','$maxlen','$servicelevel','$strategy','$joinempty','$leavewhenempty','$eventmemberstatus','$eventwhencalled','$memberdelay','$weight','$timeoutrestart','$periodic_announce_frequency','$ringinuse')";
+$qname					=	$_POST['qname'];
+$timeout				=	$_POST['time_out'];
+$queue_callswaiting		=	$_POST['qwait'];
+$queue_reporthold		=	$_POST['hold_time'];
+$announce_frequency		=	$_POST['frequency'];
+$announce_holdtime		=	$_POST['hold'];
+$retry					=	$_POST['retry'];
+$wrapuptime				=	$_POST['wrap_time'];
+$maxlen					=	$_POST['max_wait'];
+$servicelevel			=	$_POST['service_level'];
+$strategy				=	$_POST['ring_statergy'];
+$joinempty				=	$_POST['join_empty'];
+$leavewhenempty			=	$_POST['leave_empty'];
+$eventmemberstatus		=	$_POST['member_status'];
+$eventwhencalled		=	$_POST['when_called'];
+$memberdelay			=	$_POST['member_delay'];
+$weight					=	$_POST['weight'];
+$timeoutrestart			=	$_POST['restart'];
+$ringinuse				=	$_POST['ring_use'];
+
+$addsql = "insert into queue_table(`name`,`timeout`, `queue_callswaiting`, `queue_reporthold`, `announce_frequency`,`announce_holdtime`, `retry`, `wrapuptime`, `maxlen`, `servicelevel`, `strategy`, `joinempty`, `leavewhenempty`, `eventmemberstatus`, `eventwhencalled`, `memberdelay`, `weight`, `timeoutrestart`,  `ringinuse`)value('$qname','$timeout','$queue_callswaiting','$queue_reporthold','$announce_frequency','$announce_holdtime','$retry','$wrapuptime','$maxlen','$servicelevel','$strategy','$joinempty','$leavewhenempty','$eventmemberstatus','$eventwhencalled','$memberdelay','$weight','$timeoutrestart','$ringinuse')";
 
    $addquery = $this->db->query($addsql);
 //   return $addquery->result_array();
@@ -131,10 +168,9 @@ $removesql = "delete from queue_table where id='$id'";
 
 function inboundList() {
 
-$list = "select * from inbound_route";
-
-   $listinbound = $this->db->query($list);
-//   return $listinbound->result_array();
+	$list = "select * from inbound_rout";
+	$listinbound = $this->db->query($list);
+	return $listinbound->result_array();
 
     }
     

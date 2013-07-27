@@ -56,7 +56,8 @@ function foo(isChecked){
 <div align="center">  
   <input type="submit" name="insert" value="Insert">
   <input type="reset" name="reset" value="Reset">
-</div>
+  </div>
+
 </form>
   </div>
 <?php include "footer.php";?>
