@@ -21,24 +21,10 @@ class Summary extends CI_Controller {
 	{
 
 
-		$data['queue_summary'] = $this->agent->queueSummary($search);
+		$data['queue_summary'] = $this->agent->queueSummary();
 		$this->load->view('queue_summary',$data);
 	
 	}
-	
-// 	public function agent_summary_search()
-// 	
-// 	{
-// 		$this->load->model('agent_summary');
-// 		$from_date = $this->input->post('from_date');	
-// 		$to_date = $this->input->post('to_date');
-// 		$agent = $this->input->post('agent_name');
-// 		
-// 		$result = $this->agent_summary->agent_summary_search($from_date, $to_date, $agent);
-// 		$this->load->view('agent_summary',$result);
-// 	  
-// 	
-// 	}
 	
 	
 	function getAgentList() {
