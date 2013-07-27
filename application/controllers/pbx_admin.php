@@ -5,13 +5,23 @@ class Pbx_admin extends CI_Controller {
 	 function __construct() {
 	      parent::__construct();
 	      $this->load->helper(array('url','form'));
-	      $this->load->model('pbxadmin','admin',TRUE);
+		  $this->load->library("pagination");
+	      $this->load->model('pbxadmin','pbxadmin',TRUE);
+		   $this->load->model('global_pagination','global_pagination',TRUE);
 		  $this->load->library('form_validation');
 	}
 	
 	function list_extension()
 	{
-	$this->load->view('extension_list');
+		$page_url 			=	base_url() . "index.php/pbx_admin/list_extension";
+		$total_users 		=	$this->pbxadmin->extension_count();
+		$result_page		=	$this->global_pagination->index($page_url,$total_users);
+		$result_per_page	=	10;		
+		$data['result'] = $this->pbxadmin->extensionSelect($result_per_page,$result_page);
+		$data['links']	=$this->pagination->create_links();
+		//print_r($data);
+		$this->load->view('list_extension',$data);
+			
 	}
 	
 	function add_extension()
@@ -85,8 +95,8 @@ class Pbx_admin extends CI_Controller {
 	function delete_extension()
 	{		
 				
-					$this->pbxadmin->extensionDelete();
-					redirect('pbx_admin/extension_list');
+			$this->pbxadmin->extensionDelete();
+			redirect('pbx_admin/extension_list');
 		
 	}
 	
@@ -95,14 +105,16 @@ class Pbx_admin extends CI_Controller {
 	{
 					
 			$data['result'] = $this->pbxadmin->followmeList();
-			$this->load->view('followme_list',$data);
+			$this->load->view('list_followme',$data);
+			
 					
 	}
 	function followme_insert()
 	{
-					
+			/*		
 			$this->pbxadmin->followmeInsert();
-			redirect('pbx_admin/followme_list');
+			redirect('pbx_admin/followme_list');*/
+			$this->load->view('add_followme');
 					
 	}
 	
@@ -123,15 +135,37 @@ class Pbx_admin extends CI_Controller {
 	
 	function queue_list()
 	{
-		        $data['result'] = $this->pbxadmin->queueSelect();
-			$this->load->view('queue_list',$data);
+		    $data['result'] = $this->pbxadmin->queueSelect();
+			$this->load->view('list_queue',$data);
+			
 	
 	}
 	
 	function queue_insert()
 	{
-		        $this->pbxadmin->queueInsert();
+	
+			$this->form_validation->set_rules('qname', 'Queue_name', 'trim|required|alphanumeric|xss_clean');
+			
+			$this->form_validation->set_rules('qwait', 'Queue_call_waiting', 'trim|required|alphanumeric|xss_clean');
+				
+				if ($this->form_validation->run() == FALSE)
+					{
+				
+						$this->load->view('add_queue');
+			
+					}
+				
+				else
+					{
+						$this->pbxadmin->queueInsert();
+						redirect('pbx_admin/queue_list');
+					}
+	
+	
+	
+		       /* $this->pbxadmin->queueInsert();
 			redirect('pbx_admin/queue_list');
+			$this->load->view('add_queue');*/
 	
 	}
 	
@@ -144,14 +178,21 @@ class Pbx_admin extends CI_Controller {
 	
 	function queue_delete()
 	{
-		        $this->pbxadmin->queueDelete();
+		    $this->pbxadmin->queueDelete();
 			redirect('pbx_admin/queue_list');
 	
 	}
 		
-	function inbound()
+	function inbound_list()
 	{
+		$data['result'] = $this->pbxadmin->inboundList();
+		$this->load->view('list_inbound',$data);
+	}
 	
+			
+	function inbound_insert()
+	{
+		$this->load->view('add_inbound');
 	}
 	
 	}	
