@@ -47,6 +47,7 @@ class Login extends CI_Controller {
         $result = $this->user->checkLogin($username, $password);
 
         if (!empty($result)) {
+        $timestamp = sha1(uniqid(5));
             $this->user->insertlogindetail($result[0]['username'], sha1(uniqid(5)));
             $user_details = array();
             foreach ($result as $row) :
