@@ -25,19 +25,19 @@
 							<li><a href="<? echo base_url().'index.php/pbx_admin/list_extension'?>">View</a></li>
 					</ul>
 				</li>
-				<li><a href="<? echo base_url().'index.php/pbx_admin/follow_me'?>">Follow Me</a>
+				<li><a href="#">Follow Me</a>
 					<ul>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/followme_insert'?>">Add</a></li>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/followme_list'?>">View</a></li>
 					</ul>
 				</li>
-				<li><a href="<? echo base_url().'index.php/pbx_admin/queue'?>">Queues</a>
+				<li><a href="#">Queues</a>
 					<ul>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/queue_insert'?>">Add </a></li>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/queue_list'?>">View </a></li>
 					</ul>
 				</li>
-				<li><a href="<? echo base_url().'index.php/pbx_admin/inbound'?>">Inbound</a>
+				<li><a href="#">Inbound</a>
 					<ul>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/inbound_insert'?>">Add </a></li>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/inbound_list'?>">View </a></li>
