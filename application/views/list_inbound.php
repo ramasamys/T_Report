@@ -42,7 +42,7 @@
    <? if(!empty($result)){ 
      foreach($result as $value) : ?>
     <tr>
-		<td><?php echo $value['did_num']; ?></td>
+		<td><?php echo $value->did_num; ?></td>
 		<td><a href="#">Edit</a>|<a href="#">Delete</a></td>
     </tr>
    <?php endforeach; ?>
@@ -52,5 +52,6 @@
     </tr>
   <? } ?>
   </table>
+  <p><?php echo $links; ?>
 </div>
 <?php include "footer.php";?>
