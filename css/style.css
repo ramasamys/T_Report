@@ -167,6 +167,15 @@ margin-right: 16px;
   font-size: 12px !important;
   height: 20px
 }
+.textbox-style1 {
+width: 300px !important;
+border: 1px solid #58595b !important;
+padding: 3px;
+background: #fff !important;
+margin: 0px !important;
+font-size: 12px !important;
+height: 20px;
+}
 .menu-container{
 clear: both;
 position: relative;
@@ -194,6 +203,7 @@ top: -21px;
 	width:90%;
 	border: 1px solid #CCC;
 	border-collapse: collapse;
+        line-height: 30px;
 }
 .search-container table{
   margin:0 auto;
@@ -215,4 +225,16 @@ top: -21px;
 }
 .footer-container span{
    margin-left: 35em;
+}
+/* Ram changes */
+sup {
+    color:#FF0000;
+}
+.mandatory-fields {
+float: right;
+clear: both;
+position: relative;
+right: 6em;
+font-size: 11px;
+color:#ccc;
 }

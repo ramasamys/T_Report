@@ -13,7 +13,7 @@ class Pbx_admin extends CI_Controller {
         $this->load->library('form_validation');
     }
 
-    function list_extension() {
+    function viewExtension() {
         if ($this->session->userdata('logged_in')) {
             $page_url = base_url() . "index.php/pbx_admin/list_extension";
             $total_users = $this->pbxadmin->extension_count();
@@ -28,7 +28,7 @@ class Pbx_admin extends CI_Controller {
         }
     }
 
-    function add_extension() {
+    function createExtension() {
         if ($this->session->userdata('logged_in')) {
             $this->load->view('extension_view');
         } else {
