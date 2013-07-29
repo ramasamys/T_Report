@@ -10,11 +10,7 @@ function foo(isChecked){
 <?php include "header.php";?>
 <label class="heading">Agent Summary</label>
 <hr>
-<div class="search-container">
 
-<div  class="slide-up-key" style="display: none;">
-</div>
-</div>
 <div class="agent-summary-list">
 
 <?php echo validation_errors(); ?>

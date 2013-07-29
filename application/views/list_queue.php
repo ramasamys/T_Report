@@ -19,7 +19,7 @@
   <table class="global-table-style" style="line-height: 40px;">
     <tr style="text-align: center;">
       <td>
-      Queue  : &nbsp; <input type="text" name="queue"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/summary/getAgentList' ; ?>" />
+      Queue  : &nbsp; <input type="text" name="queue"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/pbx_admin/getQueue' ; ?>" />
       </td>
       </tr><tr>
       <td style="text-align: center;" ><input type="submit" name="submit_data" value="Search" class="button-color" />

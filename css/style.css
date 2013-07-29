@@ -179,6 +179,7 @@ top: -21px;
     font-weight: normal;
     padding: 4px;
     line-height: 24px;
+
 }
 #hidediv {
      color: #FFFFFF;
@@ -194,6 +195,7 @@ top: -21px;
 	width:90%;
 	border: 1px solid #CCC;
 	border-collapse: collapse;
+	clear:both;
 }
 .search-container table{
   margin:0 auto;
