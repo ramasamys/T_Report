@@ -1,12 +1,3 @@
-<script language="javascript">
-function foo(isChecked){
-    document.getElementById('mailid').disabled = isChecked ? "" : "disabled";
-    document.getElementById('password').disabled = isChecked ? "" : "disabled";
-}
-</script>
-
-
-
 <?php include "header.php";?>
 <label class="heading">Agent Summary</label>
 <hr>
@@ -24,36 +15,39 @@ function foo(isChecked){
     </tr>
    
     <tr>
-	<td>*SIP Extension:</td> <td><input type="text" name="ext" value="<?php echo set_value('ext'); ?>"></td>
+        <td>SIP Extension <sup>*</sup></td> <td><input type="text" name="ext" class="textbox-style1" value="<?php echo set_value('ext'); ?>"></td>
     </tr>
     <tr>
-	<td>*Display Name:</td> <td><input type="text" name="name" value="<?php echo set_value('name'); ?>"></td>
+	<td>Display Name <sup>*</sup></td> <td><input type="text" name="name" class="textbox-style1" value="<?php echo set_value('name'); ?>"></td>
     </tr>
     <tr>
-	<td>*Secret:</td> <td><input type="text" name="secret" value="<?php echo set_value('secret'); ?>"></td>
+	<td>Secret <sup>*</sup></td> <td><input type="text" name="secret" class="textbox-style1" value="<?php echo set_value('secret'); ?>"></td>
     </tr>
     <tr>
-	<td>Call Group:	</td> <td><input type="text" name="call_group" value="<?php echo set_value('call_group'); ?>"></td>
+	<td>Call Group	</td> <td><input type="text" name="call_group" class="textbox-style1" value="<?php echo set_value('call_group'); ?>"></td>
     </tr>
     <tr>
-	<td>Call pickup Group:</td> <td><input type="text" name="pickup_group" value="<?php echo set_value('pickup_group'); ?>"></td>
+	<td>Call pickup Group</td> <td><input type="text" name="pickup_group" class="textbox-style1" value="<?php echo set_value('pickup_group'); ?>"></td>
     </tr>
     <tr>
-	<td>Mailbox:</td> <td><input  type="checkbox" name="mail" id="mail" onchange="foo(this.checked);" value="<?php echo set_value('mail'); ?>"/>Enable</td>
+	<td>Mailbox</td> <td><input  type="checkbox" name="mail" class="mailbox" value="<?php echo set_value('mail'); ?>"/>Enable</td>
     </tr>
-    <tr>
-	<td>Email id:</td> <td><input type="text" name="mailid" id="mailid" disabled="disabled" value="<?php echo set_value('mailid'); ?>" ></td>
+    <tr style="display:none;" class="show-fields">
+	<td>Email id</td> <td><input type="text" name="mailid" id="mailid" class="textbox-style1" value="<?php echo set_value('mailid'); ?>" ></td>
     </tr>	
-	<tr>
-	<td>Password</td> <td><input type="text" name="password" id="password" disabled="disabled" value="<?php echo set_value('password'); ?>"></td>
+	<tr style="display:none;" class="show-fields" >
+	<td>Password</td> <td><input type="text" name="password" id="password" class="textbox-style1"  value="<?php echo set_value('password'); ?>"></td>
     </tr>
-	
+    <tr>
+        <td></td>
+        <td><input type="submit" name="insert" value="Save" class="button-color">&nbsp;<input type="reset" name="reset" value="Reset" class="button-color"></td>
+    </tr>
   </table>
-<div align="center">  
-  <input type="submit" name="insert" value="Insert">
-  <input type="reset" name="reset" value="Reset">
-  </div>
-
 </form>
+<table class="mandatory-fields">
+        <tr>        
+        <td colspan="2">Field marked with <sup>*</sup> are mandatory</td>
+    </tr>
+</table>
   </div>
 <?php include "footer.php";?>

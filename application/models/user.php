@@ -62,6 +62,14 @@ return $agentarray;
     $query=$this->db->query($sql_queuelogout);
   	  
   }
+function agentpausefun(){
+    $sessionValues = $this->session->userdata('logged_in'); 
+          $sessionId =  $sessionValues['sessionId'];
+          $agent=$sessionValues['username'];
+$sql="update queue_member_table set paused='1' where membername='$agent'"; 
+  $query=$this->db->query($sql);
+
+}
   
   
   

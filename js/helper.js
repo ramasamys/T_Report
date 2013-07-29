@@ -33,7 +33,13 @@
 		selectFirst: true
 
     });  
-    
+    $('.mailbox').live('click',function(){
+        if($(this).is(':checked')){   
+            $('.show-fields').show();
+        } else {
+            $('.show-fields').hide();
+        }
+    });
     //rakesh
     
         $("#enterqueue").click(function(){	
@@ -61,7 +67,7 @@
  url: baseUrl+"index.php/login/queue_login", 
   data: dataString,
   success: function(response){
-    window.location.href =baseUrl+"login/agentmaincontrol";
+    window.location.href =baseUrl+"index.php/login/agentmaincontrol";
   //alert(response);
     /*
   if(($.trim(response) != "success")){
@@ -143,7 +149,37 @@
 			.multiselect2side('addOption', {name: 'test not selected', value: 'test2', selected: false});
 			
     
-    
+   			
+	$("#pause").click(function(){
+			alert('puase');
+			var usr=$('#agent').val();
+			var dataString='agent='+usr+'&flag=f3';
+			$.ajax({
+					type:"POST",
+					url:"",
+					data:dataString,
+					success:function(response){
+						
+					}
+			});
+	
+ });	
+			
+			
+	$("#unpause").click(function(){
+			alert('unpause');
+			var usr=$('#agent').val();
+			var dataString='agent='+usr+'&flag=f4';
+			$.ajax({
+					type:"POST",
+					url:"",
+					data:dataString,
+					success:function(response){
+						
+					}
+			});
+	
+ });	 
     
     
     
