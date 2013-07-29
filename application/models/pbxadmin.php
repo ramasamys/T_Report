@@ -95,12 +95,11 @@ $update_namesql = "update sipname set name='$name' where exten='$username'";
 
     }
 
-function extensionDelete() {
+function extensionDelete($id) {
 
-$deletesql = "delete from sipusers where id='$id'";
+    $sql = "delete from sipusers where id=?";
 
-   $deletequery = $this->db->query($deletesql);
-//   return $deletequery->result_array();
+   $query = $this->db->query($sql, array($id));
 
     }
 

@@ -81,9 +81,10 @@ class Pbx_admin extends CI_Controller {
         }
     }
 
-    function delete_extension() {
+    function deleteExtension() {
         if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->extensionDelete();
+            $id = stripslashes($this->input->get('delete_id'));           
+            $this->pbxadmin->extensionDelete($id);
             redirect('pbx_admin/extension_list');
         } else {
             redirect('login/logout');
