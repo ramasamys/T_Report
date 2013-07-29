@@ -9,7 +9,7 @@ class Pbx_admin extends CI_Controller {
         parent::__construct();
         $this->load->helper(array('url', 'form'));
         $this->load->model('pbxadmin', 'pbxadmin', TRUE);
-		$this->load->model('global_pagination', 'global_pagination', TRUE);
+        $this->load->model('global_pagination', 'global_pagination', TRUE);
         $this->load->library('form_validation');
     }
 
@@ -91,30 +91,22 @@ class Pbx_admin extends CI_Controller {
     }
 
     function followme_list() {
-        if ($this->session->userdata('logged_in')) 
-			{
-         
-				$page_url = base_url() . "index.php/pbx_admin/followme_list";
-				$total_users = $this->pbxadmin->followme_count();
-				$result_page = $this->global_pagination->index($page_url, $total_users);
-				$result_per_page = 10;
-				$data['result'] = $this->pbxadmin->followmeList($result_per_page, $result_page);
-				$data['links'] = $this->pagination->create_links();
-            	$this->load->view('list_followme', $data);
-			            
-			
-			} 
-			else 
-			{
-				redirect('login/logout');
-			}
+        if ($this->session->userdata('logged_in')) {
+
+            $page_url = base_url() . "index.php/pbx_admin/followme_list";
+            $total_users = $this->pbxadmin->followme_count();
+            $result_page = $this->global_pagination->index($page_url, $total_users);
+            $result_per_page = 10;
+            $data['result'] = $this->pbxadmin->followmeList($result_per_page, $result_page);
+            $data['links'] = $this->pagination->create_links();
+            $this->load->view('list_followme', $data);
+        } else {
+            redirect('login/logout');
+        }
     }
 
     function followme_insert() {
         if ($this->session->userdata('logged_in')) {
-            /* 		
-              $this->pbxadmin->followmeInsert();
-              redirect('pbx_admin/followme_list'); */
             $this->load->view('add_followme');
         } else {
             redirect('login/logout');
@@ -141,17 +133,13 @@ class Pbx_admin extends CI_Controller {
 
     function queue_list() {
         if ($this->session->userdata('logged_in')) {
-		
-		
-		    $page_url = base_url() . "index.php/pbx_admin/queue_list";
+            $page_url = base_url() . "index.php/pbx_admin/queue_list";
             $total_users = $this->pbxadmin->queue_count();
             $result_page = $this->global_pagination->index($page_url, $total_users);
             $result_per_page = 10;
             $data['result'] = $this->pbxadmin->queueSelect($result_per_page, $result_page);
             $data['links'] = $this->pagination->create_links();
             $this->load->view('list_queue', $data);
-		
-		
         } else {
             redirect('login/logout');
         }
@@ -198,18 +186,15 @@ class Pbx_admin extends CI_Controller {
     }
 
     function inbound_list() {
-	
-	
-		    $page_url = base_url() . "index.php/pbx_admin/queue_list";
-            $total_users = $this->pbxadmin->inbound_count();
-            $result_page = $this->global_pagination->index($page_url, $total_users);
-            $result_per_page = 10;
-            $data['result'] = $this->pbxadmin->inboundList($result_per_page, $result_page);
-            $data['links'] = $this->pagination->create_links();
-            $this->load->view('list_inbound', $data);
-			
-			
-	
+        $page_url = base_url() . "index.php/pbx_admin/queue_list";
+        $total_users = $this->pbxadmin->inbound_count();
+        $result_page = $this->global_pagination->index($page_url, $total_users);
+        $result_per_page = 10;
+        $data['result'] = $this->pbxadmin->inboundList($result_per_page, $result_page);
+        $data['links'] = $this->pagination->create_links();
+        $this->load->view('list_inbound', $data);
     }
+
 }
+
 ?>
