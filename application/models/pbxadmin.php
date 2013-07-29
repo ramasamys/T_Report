@@ -9,11 +9,6 @@ public function extension_count()
 
 function extensionSelect($limit, $start) {
 
-/*   $sql = "select * from sipusers";
-   $query = $this->db->query($sql);
-   return $query->result_array();
-   
-  */ 
    	$this->db->limit($limit, $start);
 				$query = $this->db->get("sipusers");
 					if ($query->num_rows() > 0) 
@@ -107,14 +102,80 @@ $deletesql = "delete from sipusers where id='$id'";
    $deletequery = $this->db->query($deletesql);
 //   return $deletequery->result_array();
 
-    }    
+    }
 
-function queueSelect() {
+public function followme_count() 
+			{
+				return $this->db->count_all("followme");
+			}
 
-	$selectsql = "select * from queue_table";
-	$selectquery = $this->db->query($selectsql);
-	return $selectquery->result_array();
+function followmeList($limit, $start) 
+{
 
+	
+		$this->db->limit($limit, $start);
+		$query = $this->db->get("followme");
+			if ($query->num_rows() > 0) 
+				{
+					foreach ($query->result() as $row) 	
+						{
+							$data[] = $row;
+						}
+							return $data;
+				}
+							return false;
+
+  }
+			
+function followmeInsert() {
+
+$insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
+
+   $insertfollow = $this->db->query($insert);
+//   return $insertfollow->result_array();
+
+    }
+    
+function followmeUpdate() {
+
+$edit = "update followme set folloename='$followname',ringtime='$ringtime',extlist='$extlist',setdst='$setdst',dst='$dst' where id='$id'";
+
+   $editfollow = $this->db->query($edit);
+//   return $editfollow->result_array();
+
+    }  
+    
+function followmeDelete() {
+
+$remove = "delete from followme where id = '$id'";
+
+   $removefollow = $this->db->query($remove);
+//   return $removefollow->result_array();
+
+    }
+    
+
+    
+
+public function queue_count() 
+			{
+				return $this->db->count_all("queue_table");
+			}
+			
+			
+function queueSelect($limit, $start) {
+
+	  	$this->db->limit($limit, $start);
+				$query = $this->db->get("queue_table");
+					if ($query->num_rows() > 0) 
+						{
+							foreach ($query->result() as $row) 	
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+							return false;
     }
     
     
@@ -166,11 +227,25 @@ $removesql = "delete from queue_table where id='$id'";
 
     }
 
-function inboundList() {
-
-	$list = "select * from inbound_rout";
-	$listinbound = $this->db->query($list);
-	return $listinbound->result_array();
+	
+public function inbound_count() 
+			{
+				return $this->db->count_all("inbound_rout");
+			}
+			
+function inboundList($limit, $start) {
+	
+	  	$this->db->limit($limit, $start);
+				$query = $this->db->get("inbound_rout");
+					if ($query->num_rows() > 0) 
+						{
+							foreach ($query->result() as $row) 	
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+							return false;
 
     }
     
@@ -202,57 +277,5 @@ $delete = "delete from inbound_route where id = '$id'";
 
     }
 
-public function followme_count() 
-			{
-				return $this->db->count_all("followme");
-			}
-			
-function followmeInsert() {
-
-$insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
-
-   $insertfollow = $this->db->query($insert);
-//   return $insertfollow->result_array();
-
-    }
-    
-function followmeUpdate() {
-
-$edit = "update followme set folloename='$followname',ringtime='$ringtime',extlist='$extlist',setdst='$setdst',dst='$dst' where id='$id'";
-
-   $editfollow = $this->db->query($edit);
-//   return $editfollow->result_array();
-
-    }  
-    
-function followmeDelete() {
-
-$remove = "delete from followme where id = '$id'";
-
-   $removefollow = $this->db->query($remove);
-//   return $removefollow->result_array();
-
-    }
-    
-function followmeList($limit, $start) 
-{
-
-	/*$select = "select * from followme";
-	$selectfollow = $this->db->query($select);
-	return $selectfollow->result_array();*/
-	
-		$this->db->limit($limit, $start);
-		$query = $this->db->get("followme");
-			if ($query->num_rows() > 0) 
-				{
-					foreach ($query->result() as $row) 	
-						{
-							$data[] = $row;
-						}
-							return $data;
-				}
-							return false;
-
-    }
     
 }
