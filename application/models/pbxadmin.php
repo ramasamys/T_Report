@@ -202,6 +202,11 @@ $delete = "delete from inbound_route where id = '$id'";
 
     }
 
+public function followme_count() 
+			{
+				return $this->db->count_all("followme");
+			}
+			
 function followmeInsert() {
 
 $insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
@@ -229,12 +234,24 @@ $remove = "delete from followme where id = '$id'";
 
     }
     
-function followmeList() {
+function followmeList($limit, $start) 
+{
 
-$select = "select * from followme";
-
-   $selectfollow = $this->db->query($select);
-   return $selectfollow->result_array();
+	/*$select = "select * from followme";
+	$selectfollow = $this->db->query($select);
+	return $selectfollow->result_array();*/
+	
+		$this->db->limit($limit, $start);
+		$query = $this->db->get("followme");
+			if ($query->num_rows() > 0) 
+				{
+					foreach ($query->result() as $row) 	
+						{
+							$data[] = $row;
+						}
+							return $data;
+				}
+							return false;
 
     }
     

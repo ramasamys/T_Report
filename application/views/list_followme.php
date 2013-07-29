@@ -43,7 +43,7 @@
      foreach($result as $value) : ?>
     <tr>
 		
-		<td><?php echo $value['f_name']; ?></td>
+		<td><?php echo $value->f_name; ?></td>
 		<td><a href="#">Edit</a>|<a href="#">Delete</a></td>
       
     </tr>
@@ -54,5 +54,6 @@
     </tr>
   <? } ?>
   </table>
+  <p><?php echo $links; ?></p>
 </div>
 <?php include "footer.php";?>

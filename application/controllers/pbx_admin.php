@@ -8,7 +8,8 @@ class Pbx_admin extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper(array('url', 'form'));
-        $this->load->model('pbxadmin', 'admin', TRUE);
+        $this->load->model('pbxadmin', 'pbxadmin', TRUE);
+		$this->load->model('global_pagination', 'global_pagination', TRUE);
         $this->load->library('form_validation');
     }
 
@@ -91,8 +92,21 @@ class Pbx_admin extends CI_Controller {
 
     function followme_list() {
         if ($this->session->userdata('logged_in')) {
-            $data['result'] = $this->pbxadmin->followmeList();
-            $this->load->view('followme_list', $data);
+           /* $data['result'] = $this->pbxadmin->followmeList();
+            $this->load->view('list_followme', $data);
+			*/
+			
+			
+			$page_url = base_url() . "index.php/pbx_admin/followme_list";
+            $total_users = $this->pbxadmin->followme_count();
+            $result_page = $this->global_pagination->index($page_url, $total_users);
+            $result_per_page = 10;
+            $data['result'] = $this->pbxadmin->followmeList($result_per_page, $result_page);
+            $data['links'] = $this->pagination->create_links();
+            //print_r($data);
+            $this->load->view('list_followme', $data);
+			            
+			
         } else {
             redirect('login/logout');
         }
