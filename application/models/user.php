@@ -20,6 +20,11 @@ Class User extends CI_Model {
     $query = $this->db->query($sql);
     return $query->result();
   } 
+   function getAllQueue($q) {
+    $sql = "SELECT distinct(queuename) from queue_log where queuename like '%$q%'";
+    $query = $this->db->query($sql);
+    return $query->result();
+  } 
   function agentQueue(){
     $sessionValues = $this->session->userdata('logged_in'); 
           $sessionId =  $sessionValues['sessionId'];	  

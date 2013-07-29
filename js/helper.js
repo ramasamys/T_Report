@@ -33,7 +33,13 @@
 		selectFirst: true
 
     });  
-    
+    $('.mailbox').live('click',function(){
+        if($(this).is(':checked')){   
+            $('.show-fields').show();
+        } else {
+            $('.show-fields').hide();
+        }
+    });
     //rakesh
     
         $("#enterqueue").click(function(){	
