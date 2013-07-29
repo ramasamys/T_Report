@@ -1,5 +1,6 @@
+ 
 <?php include "header.php";?>
-<label class="heading">Queue Summary</label>
+<label class="heading">Agent Summary</label>
 <hr>
 <div class="search-container">
   <table class="global-table-style">
@@ -33,35 +34,25 @@
 <div class="agent-summary-list">
   <table class="global-table-style">
     <tr>
-	
-      <th>Call Time</th>
-      <th>Caller ID</th>
-      <th>Queue</th>
-      <th>Wait Time</th>
+      <th>Destination</th>
       <th>Agent</th>
-      <th>Talk time</th>
-
+      <th>Time</th>
+      <th>Status</th>
+      <th>Reason</th>
     </tr>
-   <? if(!empty($queue_report)){ 
-     foreach($queue_report as $value) : ?>
+   <? if(!empty($ivr_report)){ 
+     foreach($ivr as $value) : ?>
     <tr>
+     
 
-	<td><?php echo $value['time'];?></td>
-	<td><?php echo $value['Callerid'];?></td>
-	<td><?php echo $value['queuename'];?></td>
-	<td><?php echo $value['Wait_Time'];?></td>
-	<td><?php echo $value['agent'];?></td>
-	<td><?php echo $value['Talk_Time'];?></td>
 	
-      
     </tr>
    <?php endforeach; ?>
    <? } else { ?>
     <tr>
-      <td colspan="6">No Records.</td>
+      <td colspan="5">No Records.</td>
     </tr>
   <? } ?>
   </table>
-  <p><?php echo $links; ?>
 </div>
 <?php include "footer.php";?>

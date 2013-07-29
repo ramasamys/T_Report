@@ -9,7 +9,7 @@
 		</li>
 		<li><a href="#">Reports</a>
 			<ul>
-				<li><a href="<? echo base_url().'index.php/report_content/'?>">IVR Report</a></li>
+				<li><a href="<? echo base_url().'index.php/report_content/ivr'?>">IVR Report</a></li>
 				<li><a href="<? echo base_url().'index.php/report_content/did'?>">DID Report</a></li>
 				<li><a href="<? echo base_url().'index.php/report_content/queue'?>">Queue Report</a></li>
 				<li><a href="<? echo base_url().'index.php/report_content/outbound'?>">Outbound Report</a></li>

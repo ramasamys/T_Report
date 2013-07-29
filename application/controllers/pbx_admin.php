@@ -27,6 +27,20 @@ class Pbx_admin extends CI_Controller {
             redirect('login/logout');
         }
     }
+	
+	function getExtension() {
+        $queryString = $this->input->get('q');
+		$follow_list = $this->pbxadmin->getAllExtension($queryString);
+        $items = array();
+        foreach ($follow_list as $values) {
+            array_push($items, $values->name);
+        }
+        if (count($items) == 0)
+            return;
+        for ($i = 0; $i < count($items); $i++) {
+            echo "$items[$i] \n";
+        }
+    }
 
     function createExtension() {
         if ($this->session->userdata('logged_in')) {

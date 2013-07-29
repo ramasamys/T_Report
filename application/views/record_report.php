@@ -62,5 +62,6 @@
     </tr>
   <? } ?>
   </table>
+  <p><?php echo $links; ?>
 </div>
 <?php include "footer.php";?>
