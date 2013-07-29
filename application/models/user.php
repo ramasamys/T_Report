@@ -20,6 +20,11 @@ Class User extends CI_Model {
     $query = $this->db->query($sql);
     return $query->result();
   } 
+   function getAllQueue($q) {
+    $sql = "SELECT distinct(queuename) from queue_log where queuename like '%$q%'";
+    $query = $this->db->query($sql);
+    return $query->result();
+  } 
   function agentQueue(){
     $sessionValues = $this->session->userdata('logged_in'); 
           $sessionId =  $sessionValues['sessionId'];	  
@@ -65,10 +70,37 @@ return $agentarray;
 function agentpausefun(){
     $sessionValues = $this->session->userdata('logged_in'); 
           $sessionId =  $sessionValues['sessionId'];
-          $agent=$sessionValues['username'];
+          $agent=$sessionValues['first_name'];
+          $flag=$_POST['flag'];
+         // echo $agent;
+         if($flag=="f3")
+         {
 $sql="update queue_member_table set paused='1' where membername='$agent'"; 
   $query=$this->db->query($sql);
+}
+else if($flag=="f4")
+{
+ $sql="update queue_member_table set paused='0' where membername='$agent'"; 
+  $query=$this->db->query($sql);
+	
+}
+}
 
+function pausestatus()
+{
+	$sessionValues = $this->session->userdata('logged_in'); 
+          $sessionId =  $sessionValues['sessionId'];
+          $agent=$sessionValues['first_name'];
+          
+	//$pcheck="select paused from queue_member_table where membername='$agent'";
+	$pcheck="SELECT count(*) AS CNT FROM `queue_member_table` WHERE membername='$agent' AND paused='1'";
+	
+	
+	$query=$this->db->query($pcheck);
+        return $query->result_array();
+	//$this->db->query($pcheck);
+	//return $query->row_array();
+	
 }
   
   

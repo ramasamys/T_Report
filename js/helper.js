@@ -174,10 +174,11 @@ console.log(data);
 			var dataString='agent='+usr+'&flag=f3';
 			$.ajax({
 					type:"POST",
-					url:"",
+					url:baseUrl+"index.php/login/agentpause",
 					data:dataString,
 					success:function(response){
-						
+					//$('#pause').style.background='gray';
+					 $("#pause").css("background-color","gray");
 					}
 			});
 	
@@ -190,10 +191,10 @@ console.log(data);
 			var dataString='agent='+usr+'&flag=f4';
 			$.ajax({
 					type:"POST",
-					url:"",
+					url:baseUrl+"index.php/login/agentpause",
 					data:dataString,
 					success:function(response){
-						
+					 $("#pause").css("background-color","#F15A29");	
 					}
 			});
 	

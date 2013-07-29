@@ -23,6 +23,12 @@ function extensionSelect($limit, $start) {
 
    }
 
+function getAllExtension($exten) {
+    $sql = "SELECT distinct(name) from sipusers where name like '%$exten%'";
+	$query = $this->db->query($sql);
+    return $query->result();
+  }   
+ 
 function extensionInsert() 
 	{
 	
