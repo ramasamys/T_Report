@@ -104,6 +104,21 @@ class Pbx_admin extends CI_Controller {
             redirect('login/logout');
         }
     }
+	 
+
+	function getFollow() {
+        $queryString = $this->input->get('q');
+		$follow_list = $this->pbxadmin->getAllFollowme($queryString);
+        $items = array();
+        foreach ($follow_list as $values) {
+            array_push($items, $values->f_name);
+        }
+        if (count($items) == 0)
+            return;
+        for ($i = 0; $i < count($items); $i++) {
+            echo "$items[$i] \n";
+        }
+    }
 
     function followme_insert() {
         if ($this->session->userdata('logged_in')) {
@@ -142,6 +157,20 @@ class Pbx_admin extends CI_Controller {
             $this->load->view('list_queue', $data);
         } else {
             redirect('login/logout');
+        }
+    }
+	
+	function getQueue() {
+        $queryString = $this->input->get('q');
+		$follow_list = $this->pbxadmin->getAllQueue($queryString);
+        $items = array();
+        foreach ($follow_list as $values) {
+            array_push($items, $values->name);
+        }
+        if (count($items) == 0)
+            return;
+        for ($i = 0; $i < count($items); $i++) {
+            echo "$items[$i] \n";
         }
     }
 
@@ -186,13 +215,31 @@ class Pbx_admin extends CI_Controller {
     }
 
     function inbound_list() {
-        $page_url = base_url() . "index.php/pbx_admin/queue_list";
-        $total_users = $this->pbxadmin->inbound_count();
-        $result_page = $this->global_pagination->index($page_url, $total_users);
-        $result_per_page = 10;
-        $data['result'] = $this->pbxadmin->inboundList($result_per_page, $result_page);
-        $data['links'] = $this->pagination->create_links();
-        $this->load->view('list_inbound', $data);
+	
+		    $page_url = base_url() . "index.php/pbx_admin/inbound_list";
+            $total_users = $this->pbxadmin->inbound_count();
+            $result_page = $this->global_pagination->index($page_url, $total_users);
+            $result_per_page = 10;
+            $data['result'] = $this->pbxadmin->inboundList($result_per_page, $result_page);
+            $data['links'] = $this->pagination->create_links();
+            $this->load->view('list_inbound', $data);
+			
+			
+	
+    }
+	
+	function getInbound() {
+        $queryString = $this->input->get('q');
+		$follow_list = $this->pbxadmin->getAllInbound($queryString);
+        $items = array();
+        foreach ($follow_list as $values) {
+            array_push($items, $values->did_num);
+        }
+        if (count($items) == 0)
+            return;
+        for ($i = 0; $i < count($items); $i++) {
+            echo "$items[$i] \n";
+        }
     }
 
 }

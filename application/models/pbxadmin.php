@@ -126,6 +126,12 @@ function followmeList($limit, $start)
 							return false;
 
   }
+ 
+function getAllFollowme($follow) {
+    $sql = "SELECT distinct(f_name) from followme where f_name like '%$follow%'";
+	$query = $this->db->query($sql);
+    return $query->result();
+  } 
 			
 function followmeInsert() {
 
@@ -177,7 +183,13 @@ function queueSelect($limit, $start) {
 						}
 							return false;
     }
-    
+
+	
+function getAllQueue($queue) {
+    $sql = "SELECT distinct(name) from queue_table where name like '%$queue%'";
+    $query = $this->db->query($sql);
+    return $query->result();
+  } 
     
     
 function queueInsert() {
@@ -248,7 +260,12 @@ function inboundList($limit, $start) {
 							return false;
 
     }
-    
+
+function getAllInbound($inbound) {
+    $sql = "SELECT distinct(did_num) from inbound_rout where did_num like '%$inbound%'";
+    $query = $this->db->query($sql);
+    return $query->result();
+  } 	
     
 function inboundInsert() {
 
