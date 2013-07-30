@@ -10,15 +10,16 @@ class Pbx_admin extends CI_Controller {
         $this->load->helper(array('url', 'form'));
         $this->load->model('pbxadmin', 'admin', TRUE);
         $this->load->library('form_validation');
+          $this->load->model('global_pagination', 'global_pagination', TRUE);
     }
 
     function list_extension() {
         if ($this->session->userdata('logged_in')) {
             $page_url = base_url() . "index.php/pbx_admin/list_extension";
-            $total_users = $this->pbxadmin->extension_count();
+            $total_users = $this->admin->extension_count();
             $result_page = $this->global_pagination->index($page_url, $total_users);
             $result_per_page = 10;
-            $data['result'] = $this->pbxadmin->extensionSelect($result_per_page, $result_page);
+            $data['result'] = $this->admin->extensionSelect($result_per_page, $result_page);
             $data['links'] = $this->pagination->create_links();
             //print_r($data);
             $this->load->view('list_extension', $data);
@@ -53,7 +54,7 @@ class Pbx_admin extends CI_Controller {
         } else {
             $this->load->model('pbxadmin');
             $myarray = array();
-            $myarray['id'] = $this->pbxadmin->extensionInsert();
+            $myarray['id'] = $this->admin->extensionInsert();
             $this->load->view('success', $myarray);
         }
     }
@@ -75,14 +76,14 @@ class Pbx_admin extends CI_Controller {
             $this->load->view('extension_view');
         } else {
 
-            $this->pbxadmin->extensionUpdate();
+            $this->admin->extensionUpdate();
             redirect('pbx_admin/extension_list');
         }
     }
 
     function delete_extension() {
         if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->extensionDelete();
+            $this->admin->extensionDelete();
             redirect('pbx_admin/extension_list');
         } else {
             redirect('login/logout');
@@ -91,7 +92,7 @@ class Pbx_admin extends CI_Controller {
 
     function followme_list() {
         if ($this->session->userdata('logged_in')) {
-            $data['result'] = $this->pbxadmin->followmeList();
+            $data['result'] = $this->admin->followmeList();
             $this->load->view('followme_list', $data);
         } else {
             redirect('login/logout');
@@ -111,7 +112,7 @@ class Pbx_admin extends CI_Controller {
 
     function followme_update() {
         if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->followmeUpdate();
+            $this->admin->followmeUpdate();
             redirect('pbx_admin/followme_list');
         } else {
             redirect('login/logout');
@@ -120,7 +121,7 @@ class Pbx_admin extends CI_Controller {
 
     function followme_delete() {
         if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->followmeDelete();
+            $this->admin->followmeDelete();
             redirect('pbx_admin/followme_list');
         } else {
             redirect('login/logout');
@@ -129,7 +130,7 @@ class Pbx_admin extends CI_Controller {
 
     function queue_list() {
         if ($this->session->userdata('logged_in')) {
-            $data['result'] = $this->pbxadmin->queueSelect();
+            $data['result'] = $this->admin->queueSelect();
             $this->load->view('queue_list', $data);
         } else {
             redirect('login/logout');
@@ -146,7 +147,7 @@ class Pbx_admin extends CI_Controller {
 
                 $this->load->view('add_queue');
             } else {
-                $this->pbxadmin->queueInsert();
+                $this->admin->queueInsert();
                 redirect('pbx_admin/queue_list');
             }
         } else {
@@ -156,7 +157,7 @@ class Pbx_admin extends CI_Controller {
 
     function queue_update() {
         if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->queueUpdate();
+            $this->admin->queueUpdate();
             redirect('pbx_admin/queue_list');
         } else {
             redirect('login/logout');
@@ -165,7 +166,7 @@ class Pbx_admin extends CI_Controller {
 
     function queue_delete() {
         if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->queueDelete();
+            $this->admin->queueDelete();
             redirect('pbx_admin/queue_list');
         } else {
             redirect('login/logout');
@@ -177,8 +178,16 @@ class Pbx_admin extends CI_Controller {
     }
 
     function inbound_list() {
-        $data['result'] = $this->pbxadmin->inboundList();
+        $data['result'] = $this->admin->inboundList();
         $this->load->view('list_inbound', $data);
     }
+
+    function depended_value(){
+    	$values = $this->admin->dependedValues();
+    	//print_r($values);
+    	return json_encode($values[0]);
+    	    
+    }
+	
 }
 ?>

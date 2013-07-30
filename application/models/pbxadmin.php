@@ -230,12 +230,34 @@ $remove = "delete from followme where id = '$id'";
     }
     
 function followmeList() {
-
+	
 $select = "select * from followme";
 
    $selectfollow = $this->db->query($select);
    return $selectfollow->result_array();
 
     }
+    
+function dependedValues(){
+   	
+     $value = $_POST['dst'];
+     
+     if($value == 'queue'){
+     
+$sqlSelect = "SELECT DISTINCT(name) FROM queue_table";	     
+     }
+     elseif($value == 'exten'){
+$sqlSelect = "SELECT DISTINCT(name) FROM sipusers";     	     
+     	     
+     }
+     else{
+     	     
+     }
+     $dropdown = $this->db->query($sqlSelect);
+     return $dropdown->result_array();	  
+	
+}
+    
+    
     
 }

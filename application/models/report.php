@@ -7,7 +7,7 @@ function didReport($limit, $start) {
 
 $this->db->limit($limit, $start);
 
-$sql = "select calldate,clid,src,dst,disposition,sec_to_time(duration) as b from cdr where uniqueid!='' and lastdata like '%SIP/%' order by calldate desc LIMIT " .$limit . ",10 ";
+$sql = "select calldate,clid,src,dst,disposition,sec_to_time(duration) as b from cdr where uniqueid!='' and lastdata like '%SIP/%' order by calldate desc LIMIT " .$limit. ",10 ";
 
    $query = $this->db->query($sql);
     return $query->result_array();
@@ -19,7 +19,7 @@ $sql = "select calldate,clid,src,dst,disposition,sec_to_time(duration) as b from
 
    $query = $this->db->query($sql);
  //  $num_rows = mysql_num_rows($query);
-   return 65;
+   return 30;
    
 }
 
