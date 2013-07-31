@@ -11,7 +11,7 @@ class Pbx_admin extends CI_Controller {
         $this->load->model('pbxadmin', 'pbxadmin', TRUE);
         $this->load->model('global_pagination', 'global_pagination', TRUE);
         $this->load->library('form_validation');
-          $this->load->model('global_pagination', 'global_pagination', TRUE);
+        $this->load->model('global_pagination', 'global_pagination', TRUE);
     }
 
     function viewExtension() {
@@ -44,7 +44,6 @@ class Pbx_admin extends CI_Controller {
 	
 				$srch 		= 	$this->input->get_post('search');
 				$searchterm = 	$this->pbxadmin->searchterm_handler($this->input->get_post('search'));
-				echo $searchterm;
 				$limit 		= 	($this->uri->segment(3) > 0)?$this->uri->segment(3):0;
 				
 				
@@ -326,7 +325,7 @@ $search = "";
             $result_page = $this->global_pagination->index($page_url, $total_users);
             $result_per_page = 10;
             $data['result'] = $this->pbxadmin->inboundList($result_per_page, $result_page);
-            $data['links'] = $this->pbxadmin->create_links();
+            $data['links'] = $this->pagination->create_links();
             $this->load->view('list_inbound', $data);
 			
 		} else {
@@ -342,7 +341,7 @@ $search = "";
     	    
     }
 	
-			
+	
 			
 			
 
@@ -386,7 +385,5 @@ $search = "";
     }
 
 }
-
-
 
 ?>

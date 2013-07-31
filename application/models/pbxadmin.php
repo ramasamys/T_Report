@@ -414,7 +414,7 @@ function inboundSearch($searchterm,$limit)
 
 function getAllInbound($inbound) {
     $sql = "SELECT distinct(did_num) from inbound_rout where did_num like '%$inbound%'";
-    $query = $this->db->query($sql);
+	$query = $this->db->query($sql);
     return $query->result();
   }
     
