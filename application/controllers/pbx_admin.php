@@ -11,7 +11,7 @@ class Pbx_admin extends CI_Controller {
         $this->load->model('pbxadmin', 'pbxadmin', TRUE);
         $this->load->model('global_pagination', 'global_pagination', TRUE);
         $this->load->library('form_validation');
-          $this->load->model('global_pagination', 'global_pagination', TRUE);
+        $this->load->model('global_pagination', 'global_pagination', TRUE);
     }
 
     function viewExtension() {
@@ -325,14 +325,14 @@ $search = "";
             $result_page = $this->global_pagination->index($page_url, $total_users);
             $result_per_page = 10;
             $data['result'] = $this->pbxadmin->inboundList($result_per_page, $result_page);
-            $data['links'] = $this->pbxadmin->create_links();
+            $data['links'] = $this->pagination->create_links();
             $this->load->view('list_inbound', $data);
 			
 		} else {
             redirect('login/logout');
         }	
 
-     
+     }
 
     function depended_value(){
     	$values = $this->pbxadmin->dependedValues();
@@ -341,7 +341,7 @@ $search = "";
     	    
     }
 	
-			
+	
 			
 			
 
@@ -384,6 +384,6 @@ $search = "";
         }
     }
 
-}
 
+}
 ?>
