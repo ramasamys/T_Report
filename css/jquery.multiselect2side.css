@@ -11,9 +11,10 @@
 }
 
 .ms2side__header {
-	color: #000088;
-	background-color: #43C6EE;
-	margin-left: 3px;
+
+	color: #FCF9F7;
+	background-color: #F0632B;
+	margin-left: 0px;
 	width: 400px;
 	height: 30px;
 }
@@ -68,7 +69,9 @@
 .ms2side__header input.wait {
 	width: 80px;
 	height: 12px;
-	background: #FFFFFF url(../img/loading.gif) no-repeat center right;
+
+	background: #FFFFFF url(../images/loading.gif) no-repeat center right;
+
 }
 
 .ms2side__header input.small {
@@ -100,11 +103,19 @@
 	text-align: center;
 	text-decoration: none;
 	border: 1px solid gray;
-	background: #FFFFFF url(../img/close.gif) no-repeat center center;
+
+	background: #FFFFFF url(../images/close.gif) no-repeat center center;
 	margin: 0 0 0 3px;
 }
 
 .ms2side__header a:hover {
 	background-color: #F0F0FF;
 	border-color: gray;
+
 }
+#div-1a {
+ position:absolute;
+ top:150px;
+ right:160px;
+ }
+
