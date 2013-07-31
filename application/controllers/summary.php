@@ -23,10 +23,18 @@ class Summary extends CI_Controller {
             redirect('login/logout');
         }
     }
+	function agentSearch(){
+	
+	
+	
+	}
 
     public function queue() {
         if ($this->session->userdata('logged_in')) {
-            $data['queue_summary'] = $this->agent->queueSummary();
+            $search['from'] = $this->input->post('from_date');
+            $search['to'] = $this->input->post('to_date');
+            $search['aname'] = $this->input->post('agent_name');            
+            $data['queue_summary'] = $this->agent->queueSummary($search);
             $this->load->view('queue_summary', $data);
         } else {
             redirect('login/logout');
@@ -38,7 +46,21 @@ class Summary extends CI_Controller {
         $agent_list = $this->user->getAllAgents($queryString);
         $items = array();
         foreach ($agent_list as $values) {
-            array_push($items, $values->username);
+            array_push($items, $values->agent);
+        }
+        if (count($items) == 0)
+            return;
+        for ($i = 0; $i < count($items); $i++) {
+            echo "$items[$i] \n";
+        }
+    }
+	
+    function getQueueList() {
+        $queryString = $this->input->get('q');
+        $queue_list = $this->user->getAllQueue($queryString);
+        $items = array();
+        foreach ($queue_list as $values) {
+            array_push($items, $values->queuename);
         }
         if (count($items) == 0)
             return;

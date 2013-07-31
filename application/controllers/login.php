@@ -48,7 +48,7 @@ class Login extends CI_Controller {
 
         if (!empty($result)) {
         $timestamp = sha1(uniqid(5));
-            $this->user->insertlogindetail($result[0]['username'], sha1(uniqid(5)));
+            $this->user->insertlogindetail($result[0]['username'], $timestamp);
             $user_details = array();
             foreach ($result as $row) :
                 $user_details = array(
@@ -102,12 +102,27 @@ class Login extends CI_Controller {
 
     function agentmaincontrol() {
         if ($this->session->userdata('logged_in')) {
-            $this->load->view('agentmain');
+         $data['pas']=$this->user->pausestatus();
+        // print_r($data);
+         
+            $this->load->view('agentmain',$data);
         } else {
             redirect('login/logout');
         }
     }
-
+    function agentpause(){
+       if ($this->session->userdata('logged_in')) {
+       	       
+            $this->user->agentpausefun();
+            
+        } else {
+        	
+            redirect('login/logout');
+            
+        }	    
+    	    
+	    
+    }
     public function logout() {
         $this->user->loggedout();
         $this->session->sess_destroy();

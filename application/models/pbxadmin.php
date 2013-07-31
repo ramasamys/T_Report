@@ -2,18 +2,46 @@
 
 Class Pbxadmin extends CI_Model {
 
-public function extension_count() 
+function searchterm_handler($searchterm)
 			{
-				return $this->db->count_all("sipusers");
+		
+				if($searchterm!="")
+					{
+						$this->session->set_userdata('search', $searchterm);
+						return $searchterm;
+					}
+				elseif($this->session->userdata('search'))
+					{
+						$searchterm = $this->session->userdata('search');
+						return $searchterm;
+					}
+				else
+					{
+						$searchterm ="";
+						return $searchterm;
+					}
+			}
+			
+			
+function extension_count($searchterm) 
+			{
+				if($searchterm!="" && $searchterm!=NULL)
+				{
+					$sql = "SELECT COUNT(*) As cnt FROM sipusers WHERE name LIKE '%" . $searchterm . "%'";
+					$result = $this->db->query($sql);
+					$row = $result->row(); 
+					return $row->cnt;
+				
+				}
+				else
+				{
+					return $this->db->count_all("sipusers");
+				}
 			}
 
+   
 function extensionSelect($limit, $start) {
 
-/*   $sql = "select * from sipusers";
-   $query = $this->db->query($sql);
-   return $query->result_array();
-   
-  */ 
    	$this->db->limit($limit, $start);
 				$query = $this->db->get("sipusers");
 					if ($query->num_rows() > 0) 
@@ -27,7 +55,32 @@ function extensionSelect($limit, $start) {
 							return false;
 
    }
+   
+function extensionSearch($searchterm,$limit)
+	{
+		$sql = "SELECT * FROM sipusers WHERE name LIKE '%" . $searchterm . "%' LIMIT " .$limit . ",10 ";
+		$sql_result = $this->db->query($sql);
+					if($sql_result->num_rows() > 0)
+						{
+							foreach($sql_result->result() as $row)
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+					else
+						{
+							return 0;
+						}
+	
+	}
 
+function getAllExtension($exten) {
+    $sql = "SELECT distinct(name) from sipusers where name like '%$exten%'";
+	$query = $this->db->query($sql);
+    return $query->result();
+  }   
+ 
 function extensionInsert() 
 	{
 	
@@ -100,23 +153,164 @@ $update_namesql = "update sipname set name='$name' where exten='$username'";
 
     }
 
-function extensionDelete() {
+function extensionDelete($id) {
 
-$deletesql = "delete from sipusers where id='$id'";
+    $sql = "delete from sipusers where id=?";
 
-   $deletequery = $this->db->query($deletesql);
-//   return $deletequery->result_array();
+   $query = $this->db->query($sql, array($id));
 
-    }    
+    }
 
-function queueSelect() {
+public function followme_count($searchterm) 
+			{
+					if($searchterm!="" && $searchterm!=NULL)
+				{
+					$sql = "SELECT COUNT(*) As cnt FROM followme WHERE f_name LIKE '%" . $searchterm . "%'";
+					$result = $this->db->query($sql);
+					$row = $result->row(); 
+					return $row->cnt;
+				
+				}
+				else
+				{
+					return $this->db->count_all("followme");
+				}
+			
+			
+			
+				
+			}
 
-	$selectsql = "select * from queue_table";
-	$selectquery = $this->db->query($selectsql);
-	return $selectquery->result_array();
+function followmeList($limit, $start) 
+{
+
+	
+		$this->db->limit($limit, $start);
+		$query = $this->db->get("followme");
+			if ($query->num_rows() > 0) 
+				{
+					foreach ($query->result() as $row) 	
+						{
+							$data[] = $row;
+						}
+							return $data;
+				}
+							return false;
+
+  }
+  
+  function followmeSearch($searchterm,$limit)
+	{
+		$sql = "SELECT * FROM followme WHERE f_name LIKE '%" . $searchterm . "%' LIMIT " .$limit . ",10 ";
+		$sql_result = $this->db->query($sql);
+					if($sql_result->num_rows() > 0)
+						{
+							foreach($sql_result->result() as $row)
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+					else
+						{
+							return 0;
+						}
+	
+	}
+ 
+function getAllFollowme($follow) {
+    $sql = "SELECT distinct(f_name) from followme where f_name like '%$follow%'";
+	$query = $this->db->query($sql);
+    return $query->result();
+  } 
+			
+function followmeInsert() {
+
+$insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
+
+   $insertfollow = $this->db->query($insert);
+//   return $insertfollow->result_array();
 
     }
     
+function followmeUpdate() {
+
+$edit = "update followme set folloename='$followname',ringtime='$ringtime',extlist='$extlist',setdst='$setdst',dst='$dst' where id='$id'";
+
+   $editfollow = $this->db->query($edit);
+//   return $editfollow->result_array();
+
+    }  
+    
+function followmeDelete() {
+
+$remove = "delete from followme where id = '$id'";
+
+   $removefollow = $this->db->query($remove);
+//   return $removefollow->result_array();
+
+    }
+    
+
+    
+
+public function queue_count($searchterm) 
+			{
+				if($searchterm!="" && $searchterm!=NULL)
+				{
+					$sql = "SELECT COUNT(*) As cnt FROM queue_table WHERE name LIKE '%" . $searchterm . "%'";
+					$result = $this->db->query($sql);
+					$row = $result->row(); 
+					return $row->cnt;
+				
+				}
+				else
+				{
+					return $this->db->count_all("queue_table");
+				}
+			
+			}
+			
+			
+function queueSelect($limit, $start) {
+
+	  	$this->db->limit($limit, $start);
+				$query = $this->db->get("queue_table");
+					if ($query->num_rows() > 0) 
+						{
+							foreach ($query->result() as $row) 	
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+							return false;
+    }
+	
+function queueSearch($searchterm,$limit)
+	{
+		$sql = "SELECT * FROM queue_table WHERE name LIKE '%" . $searchterm . "%' LIMIT " .$limit . ",10 ";
+		$sql_result = $this->db->query($sql);
+					if($sql_result->num_rows() > 0)
+						{
+							foreach($sql_result->result() as $row)
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+					else
+						{
+							return 0;
+						}
+	
+	}
+	
+function getAllQueue($queue) {
+    $sql = "SELECT distinct(name) from queue_table where name like '%$queue%'";
+    $query = $this->db->query($sql);
+    return $query->result();
+  } 
     
     
 function queueInsert() {
@@ -166,14 +360,64 @@ $removesql = "delete from queue_table where id='$id'";
 
     }
 
-function inboundList() {
-
-	$list = "select * from inbound_rout";
-	$listinbound = $this->db->query($list);
-	return $listinbound->result_array();
+	
+public function inbound_count($searchterm) 
+			{
+				if($searchterm!="" && $searchterm!=NULL)
+				{
+					$sql = "SELECT COUNT(*) As cnt FROM inbound_rout WHERE did_num LIKE '%" . $searchterm . "%'";
+					$result = $this->db->query($sql);
+					$row = $result->row(); 
+					return $row->cnt;
+				
+				}
+				else
+				{
+					return $this->db->count_all("inbound_rout");
+				}
+				
+			}
+			
+function inboundList($limit, $start) {
+	
+	  	$this->db->limit($limit, $start);
+				$query = $this->db->get("inbound_rout");
+					if ($query->num_rows() > 0) 
+						{
+							foreach ($query->result() as $row) 	
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+							return false;
 
     }
-    
+	
+function inboundSearch($searchterm,$limit)
+	{
+		$sql = "SELECT * FROM inbound_rout WHERE did_num LIKE '%" . $searchterm . "%' LIMIT " .$limit . ",10 ";
+		$sql_result = $this->db->query($sql);
+					if($sql_result->num_rows() > 0)
+						{
+							foreach($sql_result->result() as $row)
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+					else
+						{
+							return 0;
+						}
+	
+	}
+
+function getAllInbound($inbound) {
+    $sql = "SELECT distinct(did_num) from inbound_rout where did_num like '%$inbound%'";
+	$query = $this->db->query($sql);
+    return $query->result();
+  } 	
     
 function inboundInsert() {
 
@@ -202,57 +446,27 @@ $delete = "delete from inbound_route where id = '$id'";
 
     }
 
-public function followme_count() 
-			{
-				return $this->db->count_all("followme");
-			}
-			
-function followmeInsert() {
-
-$insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
-
-   $insertfollow = $this->db->query($insert);
-//   return $insertfollow->result_array();
-
-    }
     
-function followmeUpdate() {
-
-$edit = "update followme set folloename='$followname',ringtime='$ringtime',extlist='$extlist',setdst='$setdst',dst='$dst' where id='$id'";
-
-   $editfollow = $this->db->query($edit);
-//   return $editfollow->result_array();
-
-    }  
-    
-function followmeDelete() {
-
-$remove = "delete from followme where id = '$id'";
-
-   $removefollow = $this->db->query($remove);
-//   return $removefollow->result_array();
-
-    }
-    
-function followmeList($limit, $start) 
-{
-
-	/*$select = "select * from followme";
-	$selectfollow = $this->db->query($select);
-	return $selectfollow->result_array();*/
+function dependedValues(){
+   	
+     $value = $_POST['dst'];
+     
+     if($value == 'queue'){
+     
+$sqlSelect = "SELECT DISTINCT(name) FROM queue_table";	     
+     }
+     elseif($value == 'exten'){
+$sqlSelect = "SELECT DISTINCT(name) FROM sipusers";     	     
+     	     
+     }
+     else{
+     	     
+     }
+     $dropdown = $this->db->query($sqlSelect);
+     return $dropdown->result_array();	  
 	
-		$this->db->limit($limit, $start);
-		$query = $this->db->get("followme");
-			if ($query->num_rows() > 0) 
-				{
-					foreach ($query->result() as $row) 	
-						{
-							$data[] = $row;
-						}
-							return $data;
-				}
-							return false;
-
-    }
+}
+    
+    
     
 }
