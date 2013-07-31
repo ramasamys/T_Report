@@ -194,5 +194,9 @@ class Pbx_admin extends CI_Controller {
         $data['result'] = $this->pbxadmin->inboundList();
         $this->load->view('list_inbound', $data);
     }
+	function realtime()
+	{
+	$this->load->view('realtime_report');
+	}
 }
 ?>

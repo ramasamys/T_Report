@@ -28,7 +28,7 @@ body{
 -webkit-box-shadow: 0 0 8px #D0D0D0;
 background-color: #fff;
 margin: 0 auto;
-min-height: 500px;
+min-height: 700px;
 }
 .loginform {
     margin: auto;
@@ -195,6 +195,21 @@ top: -21px;
 	border: 1px solid #CCC;
 	border-collapse: collapse;
 }
+/**********
+
+************/
+.global-table {	
+	
+   border: 1px solid #CCC;
+	text-align: center;
+    font-weight: normal;
+	/*font-size:16px;*/
+    padding: 4px;
+    line-height: 24px;
+	
+	
+}
+
 .search-container table{
   margin:0 auto;
    clear: both;
