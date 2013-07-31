@@ -123,6 +123,23 @@ class Login extends CI_Controller {
     	    
 	    
     }
+    
+    function popup(){
+    	    
+    	       if ($this->session->userdata('logged_in')) {
+       	       
+        $this->user->agentpopup();
+           // $this->load->view('agentmain');
+            
+        } else {
+        	
+            redirect('login/logout');
+            
+        }	
+   
+    
+    }
+    
     public function logout() {
         $this->user->loggedout();
         $this->session->sess_destroy();
