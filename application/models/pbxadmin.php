@@ -446,5 +446,62 @@ $delete = "delete from inbound_route where id = '$id'";
 
     }
 
+function followmeInsert() {
+
+$insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
+
+   $insertfollow = $this->db->query($insert);
+//   return $insertfollow->result_array();
+
+    }
+    
+function followmeUpdate() {
+
+$edit = "update followme set folloename='$followname',ringtime='$ringtime',extlist='$extlist',setdst='$setdst',dst='$dst' where id='$id'";
+
+   $editfollow = $this->db->query($edit);
+//   return $editfollow->result_array();
+
+    }  
+    
+function followmeDelete() {
+
+$remove = "delete from followme where id = '$id'";
+
+   $removefollow = $this->db->query($remove);
+//   return $removefollow->result_array();
+
+    }
+    
+function followmeList() {
+	
+$select = "select * from followme";
+
+   $selectfollow = $this->db->query($select);
+   return $selectfollow->result_array();
+
+    }
+    
+function dependedValues(){
+   	
+     $value = $_POST['dst'];
+     
+     if($value == 'queue'){
+     
+$sqlSelect = "SELECT DISTINCT(name) FROM queue_table";	     
+     }
+     elseif($value == 'exten'){
+$sqlSelect = "SELECT DISTINCT(name) FROM sipusers";     	     
+     	     
+     }
+     else{
+     	     
+     }
+     $dropdown = $this->db->query($sqlSelect);
+     return $dropdown->result_array();	  
+	
+}
+    
+    
     
 }

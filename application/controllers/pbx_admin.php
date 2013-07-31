@@ -11,6 +11,7 @@ class Pbx_admin extends CI_Controller {
         $this->load->model('pbxadmin', 'pbxadmin', TRUE);
         $this->load->model('global_pagination', 'global_pagination', TRUE);
         $this->load->library('form_validation');
+          $this->load->model('global_pagination', 'global_pagination', TRUE);
     }
 
     function viewExtension() {
@@ -130,6 +131,7 @@ class Pbx_admin extends CI_Controller {
 
     function deleteExtension() {
         if ($this->session->userdata('logged_in')) {
+
             $id = stripslashes($this->input->get('delete_id'));           
             $this->pbxadmin->extensionDelete($id);
             redirect('pbx_admin/extension_list');
@@ -142,8 +144,8 @@ class Pbx_admin extends CI_Controller {
 
     function followme_list() {
         if ($this->session->userdata('logged_in')) {
-			
-			$search = "";
+$search = "";
+
             $page_url = base_url() . "index.php/pbx_admin/followme_list";
             $total_users = $this->pbxadmin->followme_count($search);
             $result_page = $this->global_pagination->index($page_url, $total_users);
@@ -151,6 +153,7 @@ class Pbx_admin extends CI_Controller {
             $data['result'] = $this->pbxadmin->followmeList($result_per_page, $result_page);
             $data['links'] = $this->pagination->create_links();
             $this->load->view('list_followme', $data);
+
         } else {
             redirect('login/logout');
         }
@@ -221,7 +224,9 @@ class Pbx_admin extends CI_Controller {
 
     function queue_list() {
         if ($this->session->userdata('logged_in')) {
+
 			$search = "";
+
             $page_url = base_url() . "index.php/pbx_admin/queue_list";
             $total_users = $this->pbxadmin->queue_count($search);
             $result_page = $this->global_pagination->index($page_url, $total_users);
@@ -310,23 +315,36 @@ class Pbx_admin extends CI_Controller {
     }
 
     function inbound_list() {
+
 	if ($this->session->userdata('logged_in')) {
 			
 			$search = "";
 		    $page_url = base_url() . "index.php/pbx_admin/inbound_list";
             $total_users = $this->pbxadmin->inbound_count($search);
+
             $result_page = $this->global_pagination->index($page_url, $total_users);
             $result_per_page = 10;
             $data['result'] = $this->pbxadmin->inboundList($result_per_page, $result_page);
-            $data['links'] = $this->pagination->create_links();
+            $data['links'] = $this->pbxadmin->create_links();
             $this->load->view('list_inbound', $data);
 			
 		} else {
             redirect('login/logout');
         }	
-	
+
+     
+
+    function depended_value(){
+    	$values = $this->pbxadmin->dependedValues();
+    	//print_r($values);
+    	return json_encode($values[0]);
+    	    
     }
 	
+			
+			
+			
+
 	
 	function inbound_search()
 	{
@@ -356,9 +374,9 @@ class Pbx_admin extends CI_Controller {
         $queryString = $this->input->get('q');
 		$follow_list = $this->pbxadmin->getAllInbound($queryString);
         $items = array();
-        foreach ($follow_list as $values) {
+        foreach ($follow_list as $values) { 
             array_push($items, $values->did_num);
-        }
+        } 
         if (count($items) == 0)
             return;
         for ($i = 0; $i < count($items); $i++) {
