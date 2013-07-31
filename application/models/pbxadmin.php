@@ -369,7 +369,6 @@ public function inbound_count($searchterm)
 					$result = $this->db->query($sql);
 					$row = $result->row(); 
 					return $row->cnt;
-				
 				}
 				else
 				{
@@ -417,7 +416,7 @@ function getAllInbound($inbound) {
     $sql = "SELECT distinct(did_num) from inbound_rout where did_num like '%$inbound%'";
     $query = $this->db->query($sql);
     return $query->result();
-  } 	
+  }
     
 function inboundInsert() {
 
@@ -446,42 +445,6 @@ $delete = "delete from inbound_route where id = '$id'";
 
     }
 
-function followmeInsert() {
-
-$insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
-
-   $insertfollow = $this->db->query($insert);
-//   return $insertfollow->result_array();
-
-    }
-    
-function followmeUpdate() {
-
-$edit = "update followme set folloename='$followname',ringtime='$ringtime',extlist='$extlist',setdst='$setdst',dst='$dst' where id='$id'";
-
-   $editfollow = $this->db->query($edit);
-//   return $editfollow->result_array();
-
-    }  
-    
-function followmeDelete() {
-
-$remove = "delete from followme where id = '$id'";
-
-   $removefollow = $this->db->query($remove);
-//   return $removefollow->result_array();
-
-    }
-    
-function followmeList() {
-	
-$select = "select * from followme";
-
-   $selectfollow = $this->db->query($select);
-   return $selectfollow->result_array();
-
-    }
-    
 function dependedValues(){
    	
      $value = $_POST['dst'];
@@ -498,10 +461,7 @@ $sqlSelect = "SELECT DISTINCT(name) FROM sipusers";
      	     
      }
      $dropdown = $this->db->query($sqlSelect);
-     return $dropdown->result_array();	  
-	
-}
-    
-    
+     return $dropdown->result_array();
+  }    
     
 }

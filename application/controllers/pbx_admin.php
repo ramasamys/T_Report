@@ -333,12 +333,12 @@ $search = "";
             redirect('login/logout');
         }	
 
-     
+     }
 
     function depended_value(){
     	$values = $this->pbxadmin->dependedValues();
-    	//print_r($values);
-    	return json_encode($values[0]);
+    //	print_r($values);
+    	echo $values[0]['name'];
     	    
     }
 	
@@ -386,5 +386,7 @@ $search = "";
     }
 
 }
+
+
 
 ?>

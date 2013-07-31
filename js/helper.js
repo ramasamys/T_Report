@@ -200,11 +200,22 @@ console.log(data);
 	
  });	 
     
-    
-    
-    
-    
-    
- });
- 
-  
+    //Arulprakash
+        $("#followmedst").change(function () {
+	    var dst=$(this).val();
+    //  alert(dst);
+	 
+	 var dataString = 'dst='+ dst;
+	  $.ajax({
+         type: "POST", 
+	//	 dataType: "html", 
+		 url: baseUrl+"index.php/pbx_admin/depended_value", 
+		 data: dataString,
+		 success: function(response){
+            alert(response);
+			//$('#destination').html(response);
+            }
+        });
+   });
+		
+});
