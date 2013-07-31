@@ -43,7 +43,6 @@ class Pbx_admin extends CI_Controller {
 	
 				$srch 		= 	$this->input->get_post('search');
 				$searchterm = 	$this->pbxadmin->searchterm_handler($this->input->get_post('search'));
-				echo $searchterm;
 				$limit 		= 	($this->uri->segment(3) > 0)?$this->uri->segment(3):0;
 				
 				
