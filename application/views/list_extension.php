@@ -33,21 +33,28 @@
 </form>  
 </div>
 </div>
-<input type="button" name="add-new-extension" class="create-extension" value="Create Extension"/>
+<div class="new-extension-creation">
+    <input type="button" name="add-new-extension" class="create-extension button-color" value="Create Extension"/>
+</div>
 <div class="agent-summary-list">
   <table class="global-table-style">
     <tr>
-	
+	     
+      <th>Display Name</th>
       <th>Extensions</th>
+      <th>Mailbox</th>
+      <th>Caller Id</th>
       <th>Actions</th>
      
 
     </tr>
-   <? if(!empty($result)){        
+   <? if(!empty($result)){      
      foreach($result as $value) : ?>
     <tr style="text-align: center">
-		
+        <td><? echo $name = isset($value->callerid) ? $value->callerid : '-'; ?></td>
 		<td><?php echo $value->name; ?></td>
+                <td><? echo $mailbox = @($value->mailbox) ? $value->mailbox : '-' ; ?></td>
+                <td><? echo $cid = isset($value->callerid) ? $value->callerid : '-' ; ?></td>
                 <td><a href="#" class="">Edit</a> &nbsp;|&nbsp;<a href="#" class="delete-extension" deleteid="<?php echo $value->id; ?>" >Delete</a></td>
       
     </tr>
@@ -58,7 +65,7 @@
     </tr>
   <? } ?>
   </table>
-  <p><?php echo $links; ?></p>
+    <div class="pagination-style"><p><?php echo $links; ?></p></div>
 </div>
 <div class="display-type create-new-extension">
      <?php
