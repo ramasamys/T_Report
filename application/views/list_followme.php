@@ -20,7 +20,7 @@
   <table class="global-table-style" style="line-height: 40px;">
     <tr style="text-align: center;">
       <td>
-      Followme : &nbsp; <input type="text" name="followme"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/summary/getAgentList' ; ?>" />
+      Followme : &nbsp; <input type="text" name="followme"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/pbx_admin/getFollow' ; ?>" />
       </td>
       </tr><tr>
       <td style="text-align: center;" ><input type="submit" name="submit_data" value="Search" class="button-color" />
@@ -43,7 +43,7 @@
      foreach($result as $value) : ?>
     <tr>
 		
-		<td><?php echo $value['f_name']; ?></td>
+		<td><?php echo $value->f_name; ?></td>
 		<td><a href="#">Edit</a>|<a href="#">Delete</a></td>
       
     </tr>
@@ -54,5 +54,6 @@
     </tr>
   <? } ?>
   </table>
+  <p><?php echo $links; ?></p>
 </div>
 <?php include "footer.php";?>

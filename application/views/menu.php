@@ -9,7 +9,7 @@
 		</li>
 		<li><a href="#">Reports</a>
 			<ul>
-				<li><a href="<? echo base_url().'index.php/report_content/'?>">IVR Report</a></li>
+				<li><a href="<? echo base_url().'index.php/report_content/ivr'?>">IVR Report</a></li>
 				<li><a href="<? echo base_url().'index.php/report_content/did'?>">DID Report</a></li>
 				<li><a href="<? echo base_url().'index.php/report_content/queue'?>">Queue Report</a></li>
 				<li><a href="<? echo base_url().'index.php/report_content/outbound'?>">Outbound Report</a></li>
@@ -21,23 +21,23 @@
 			<ul>
 				<li><a href="#">Extensions</a>
 					<ul>
-							<li><a href="<? echo base_url().'index.php/pbx_admin/add_extension'?>">Add </a></li>
-							<li><a href="<? echo base_url().'index.php/pbx_admin/list_extension'?>">View</a></li>
+							<li><a href="<? echo base_url().'index.php/pbx_admin/createExtension'?>">Add </a></li>
+							<li><a href="<? echo base_url().'index.php/pbx_admin/viewExtension'?>">View</a></li>
 					</ul>
 				</li>
-				<li><a href="<? echo base_url().'index.php/pbx_admin/follow_me'?>">Follow Me</a>
+				<li><a href="#">Follow Me</a>
 					<ul>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/followme_insert'?>">Add</a></li>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/followme_list'?>">View</a></li>
 					</ul>
 				</li>
-				<li><a href="<? echo base_url().'index.php/pbx_admin/queue'?>">Queues</a>
+				<li><a href="#">Queues</a>
 					<ul>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/queue_insert'?>">Add </a></li>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/queue_list'?>">View </a></li>
 					</ul>
 				</li>
-				<li><a href="<? echo base_url().'index.php/pbx_admin/inbound'?>">Inbound</a>
+				<li><a href="#">Inbound</a>
 					<ul>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/inbound_insert'?>">Add </a></li>
 							<li><a href="<? echo base_url().'index.php/pbx_admin/inbound_list'?>">View </a></li>

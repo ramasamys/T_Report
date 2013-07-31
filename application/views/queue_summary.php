@@ -20,7 +20,7 @@
     <tr style="text-align: center;">
       <td colspan="3">From &nbsp;<input type="text" name="from_date" class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
       To &nbsp;<input type="text" name="to_date"  class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
-      Queue &nbsp;<input type="text" name="queue"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/summary/getAgentList' ; ?>" />
+      Queue &nbsp;<input type="text" name="queue"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/summary/getQueueList' ; ?>" />
       </td>
       </tr><tr>
       <td colspan="3" style="text-align: center;" ><input type="submit" name="submit_data" value="Search" class="button-color" />
