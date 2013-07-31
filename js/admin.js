@@ -67,5 +67,19 @@ $(document).ready(function() {
             $("#pbx-new-extensions").submit();
         }
     });
+    
+     $('.edit-extension-div').dialog({
+        width: 500,
+        height: 400,
+        modal: true,
+        title: "Edit Extension",
+        resizable: false,
+        autoOpen: false
+    });
+
+    $('.edit-extension').live('click', function() {
+        $('label.error').remove();
+        $('.edit-extension-div').dialog('open');
+    });
 });
 
