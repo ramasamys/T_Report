@@ -40,6 +40,24 @@
             $('.show-fields').hide();
         }
     });
+     $('.delete-extension').live('click',function(){ 
+	var delete_id = $(this).attr('deleteid');
+	var confirmationvalues = confirm("Are you sure you want to delete this Extension? Click Yes to continue or No to cancel");
+	if(confirmationvalues == true){
+	if(delete_id !=''){
+	  $(this).parents('tr').remove();
+	      var post_data = {delete_id:delete_id};
+	      $.ajax({
+		      type:'POST',
+		      url: baseUrl + "index.php/pbx_admin/deleteExtension",
+		      data:post_data,
+		      success: function(data) {
+console.log(data);
+		      }
+	      });
+	}
+      }
+      });    
     //rakesh
     
         $("#enterqueue").click(function(){	
@@ -156,10 +174,11 @@
 			var dataString='agent='+usr+'&flag=f3';
 			$.ajax({
 					type:"POST",
-					url:"",
+					url:baseUrl+"index.php/login/agentpause",
 					data:dataString,
 					success:function(response){
-						
+					//$('#pause').style.background='gray';
+					 $("#pause").css("background-color","gray");
 					}
 			});
 	
@@ -172,10 +191,10 @@
 			var dataString='agent='+usr+'&flag=f4';
 			$.ajax({
 					type:"POST",
-					url:"",
+					url:baseUrl+"index.php/login/agentpause",
 					data:dataString,
 					success:function(response){
-						
+					 $("#pause").css("background-color","#F15A29");	
 					}
 			});
 	

@@ -102,7 +102,10 @@ class Login extends CI_Controller {
 
     function agentmaincontrol() {
         if ($this->session->userdata('logged_in')) {
-            $this->load->view('agentmain');
+         $data['pas']=$this->user->pausestatus();
+        // print_r($data);
+         
+            $this->load->view('agentmain',$data);
         } else {
             redirect('login/logout');
         }
