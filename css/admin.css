@@ -4,3 +4,12 @@
 .global-table-style a:hover{
     color:#f15a29;
 }
+.global-table-style td {
+    text-align: center;
+}
+.display-type{
+    display:none;
+}
+.error_cell{
+    color:#ff0000;
+}
