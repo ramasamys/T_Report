@@ -12,7 +12,7 @@
   </table> 
 <div  class="slide-up-key" style="display: none;">
 <?php
-	$controller_name = "";
+	$controller_name = "pbx_admin/inbound_search";
 	$attributes = array('class' => '',
 			'id' => '', 'name' => '');
 	echo form_open($controller_name, $attributes);
@@ -20,7 +20,7 @@
   <table class="global-table-style" style="line-height: 40px;">
     <tr style="text-align: center;">
       <td>
-      Inbound  : &nbsp; <input type="text" name="inbound"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/pbx_admin/getInbound' ; ?>" />
+      Inbound  : &nbsp; <input type="text" name="search"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/pbx_admin/getInbound' ; ?>" />
       </td>
       </tr><tr>
       <td style="text-align: center;" ><input type="submit" name="submit_data" value="Search" class="button-color" />

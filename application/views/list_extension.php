@@ -12,18 +12,21 @@
   </table> 
 <div  class="slide-up-key" style="display: none;">
 <?php
-	$controller_name = "";
+	$controller_name = "pbx_admin/searchExtension";
 	$attributes = array('class' => '',
 			'id' => '', 'name' => '');
 	echo form_open($controller_name, $attributes);
 ?>
   <table class="global-table-style" style="line-height: 40px;">
-    <tr>
-      <td style="text-align: center;" >Extension  : &nbsp; 
-          <input type="text" name="ext"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/pbx_admin/getExtensionList' ; ?>" />
-      </td><td>
-          <input type="submit" name="submit_data" value="Search" class="button-color" /></td>
-      <td><input type="button" name="export_data" value="Export" class="button-color" /></td>
+
+    <tr style="text-align: center;">
+      <td>
+      Extension  : &nbsp; <input type="text" name="search"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/pbx_admin/getExtension' ; ?>" />
+      </td>
+      </tr><tr>
+      <td style="text-align: center;" ><input type="submit" name="submit_data" value="Search" class="button-color" />
+      <input type="button" name="export_data" value="Export" class="button-color" /></td>
+
     </tr>
   </table>
 </form>  
