@@ -40,7 +40,26 @@
             $('.show-fields').hide();
         }
     });
-    
+
+     $('.delete-extension').live('click',function(){ 
+	var delete_id = $(this).attr('deleteid');
+	var confirmationvalues = confirm("Are you sure you want to delete this Extension? Click Yes to continue or No to cancel");
+	if(confirmationvalues == true){
+	if(delete_id !=''){
+	  $(this).parents('tr').remove();
+	      var post_data = {delete_id:delete_id};
+	      $.ajax({
+		      type:'POST',
+		      url: baseUrl + "index.php/pbx_admin/deleteExtension",
+		      data:post_data,
+		      success: function(data) {
+console.log(data);
+		      }
+	      });
+	}
+      }
+      });    
+
     //rakesh
     
         $("#enterqueue").click(function(){	

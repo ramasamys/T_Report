@@ -2,11 +2,44 @@
 
 Class Pbxadmin extends CI_Model {
 
-public function extension_count() 
+function searchterm_handler($searchterm)
 			{
-				return $this->db->count_all("sipusers");
+		
+				if($searchterm!="")
+					{
+						$this->session->set_userdata('search', $searchterm);
+						return $searchterm;
+					}
+				elseif($this->session->userdata('search'))
+					{
+						$searchterm = $this->session->userdata('search');
+						return $searchterm;
+					}
+				else
+					{
+						$searchterm ="";
+						return $searchterm;
+					}
+			}
+			
+			
+function extension_count($searchterm) 
+			{
+				if($searchterm!="" && $searchterm!=NULL)
+				{
+					$sql = "SELECT COUNT(*) As cnt FROM sipusers WHERE name LIKE '%" . $searchterm . "%'";
+					$result = $this->db->query($sql);
+					$row = $result->row(); 
+					return $row->cnt;
+				
+				}
+				else
+				{
+					return $this->db->count_all("sipusers");
+				}
 			}
 
+   
 function extensionSelect($limit, $start) {
 
    	$this->db->limit($limit, $start);
@@ -22,6 +55,25 @@ function extensionSelect($limit, $start) {
 							return false;
 
    }
+   
+function extensionSearch($searchterm,$limit)
+	{
+		$sql = "SELECT * FROM sipusers WHERE name LIKE '%" . $searchterm . "%' LIMIT " .$limit . ",10 ";
+		$sql_result = $this->db->query($sql);
+					if($sql_result->num_rows() > 0)
+						{
+							foreach($sql_result->result() as $row)
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+					else
+						{
+							return 0;
+						}
+	
+	}
 
 function getAllExtension($exten) {
     $sql = "SELECT distinct(name) from sipusers where name like '%$exten%'";
@@ -101,18 +153,32 @@ $update_namesql = "update sipname set name='$name' where exten='$username'";
 
     }
 
-function extensionDelete() {
+function extensionDelete($id) {
 
-$deletesql = "delete from sipusers where id='$id'";
+    $sql = "delete from sipusers where id=?";
 
-   $deletequery = $this->db->query($deletesql);
-//   return $deletequery->result_array();
+   $query = $this->db->query($sql, array($id));
 
     }
 
-public function followme_count() 
+public function followme_count($searchterm) 
 			{
-				return $this->db->count_all("followme");
+					if($searchterm!="" && $searchterm!=NULL)
+				{
+					$sql = "SELECT COUNT(*) As cnt FROM followme WHERE f_name LIKE '%" . $searchterm . "%'";
+					$result = $this->db->query($sql);
+					$row = $result->row(); 
+					return $row->cnt;
+				
+				}
+				else
+				{
+					return $this->db->count_all("followme");
+				}
+			
+			
+			
+				
 			}
 
 function followmeList($limit, $start) 
@@ -132,6 +198,25 @@ function followmeList($limit, $start)
 							return false;
 
   }
+  
+  function followmeSearch($searchterm,$limit)
+	{
+		$sql = "SELECT * FROM followme WHERE f_name LIKE '%" . $searchterm . "%' LIMIT " .$limit . ",10 ";
+		$sql_result = $this->db->query($sql);
+					if($sql_result->num_rows() > 0)
+						{
+							foreach($sql_result->result() as $row)
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+					else
+						{
+							return 0;
+						}
+	
+	}
  
 function getAllFollowme($follow) {
     $sql = "SELECT distinct(f_name) from followme where f_name like '%$follow%'";
@@ -169,9 +254,21 @@ $remove = "delete from followme where id = '$id'";
 
     
 
-public function queue_count() 
+public function queue_count($searchterm) 
 			{
-				return $this->db->count_all("queue_table");
+				if($searchterm!="" && $searchterm!=NULL)
+				{
+					$sql = "SELECT COUNT(*) As cnt FROM queue_table WHERE name LIKE '%" . $searchterm . "%'";
+					$result = $this->db->query($sql);
+					$row = $result->row(); 
+					return $row->cnt;
+				
+				}
+				else
+				{
+					return $this->db->count_all("queue_table");
+				}
+			
 			}
 			
 			
@@ -189,7 +286,25 @@ function queueSelect($limit, $start) {
 						}
 							return false;
     }
-
+	
+function queueSearch($searchterm,$limit)
+	{
+		$sql = "SELECT * FROM queue_table WHERE name LIKE '%" . $searchterm . "%' LIMIT " .$limit . ",10 ";
+		$sql_result = $this->db->query($sql);
+					if($sql_result->num_rows() > 0)
+						{
+							foreach($sql_result->result() as $row)
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+					else
+						{
+							return 0;
+						}
+	
+	}
 	
 function getAllQueue($queue) {
     $sql = "SELECT distinct(name) from queue_table where name like '%$queue%'";
@@ -246,9 +361,21 @@ $removesql = "delete from queue_table where id='$id'";
     }
 
 	
-public function inbound_count() 
+public function inbound_count($searchterm) 
 			{
-				return $this->db->count_all("inbound_rout");
+				if($searchterm!="" && $searchterm!=NULL)
+				{
+					$sql = "SELECT COUNT(*) As cnt FROM inbound_rout WHERE did_num LIKE '%" . $searchterm . "%'";
+					$result = $this->db->query($sql);
+					$row = $result->row(); 
+					return $row->cnt;
+				
+				}
+				else
+				{
+					return $this->db->count_all("inbound_rout");
+				}
+				
 			}
 			
 function inboundList($limit, $start) {
@@ -266,10 +393,29 @@ function inboundList($limit, $start) {
 							return false;
 
     }
+	
+function inboundSearch($searchterm,$limit)
+	{
+		$sql = "SELECT * FROM inbound_rout WHERE did_num LIKE '%" . $searchterm . "%' LIMIT " .$limit . ",10 ";
+		$sql_result = $this->db->query($sql);
+					if($sql_result->num_rows() > 0)
+						{
+							foreach($sql_result->result() as $row)
+								{
+									$data[] = $row;
+								}
+									return $data;
+						}
+					else
+						{
+							return 0;
+						}
+	
+	}
 
 function getAllInbound($inbound) {
     $sql = "SELECT distinct(did_num) from inbound_rout where did_num like '%$inbound%'";
-    $query = $this->db->query($sql);
+	$query = $this->db->query($sql);
     return $query->result();
   } 	
     
@@ -300,5 +446,27 @@ $delete = "delete from inbound_route where id = '$id'";
 
     }
 
+    
+function dependedValues(){
+   	
+     $value = $_POST['dst'];
+     
+     if($value == 'queue'){
+     
+$sqlSelect = "SELECT DISTINCT(name) FROM queue_table";	     
+     }
+     elseif($value == 'exten'){
+$sqlSelect = "SELECT DISTINCT(name) FROM sipusers";     	     
+     	     
+     }
+     else{
+     	     
+     }
+     $dropdown = $this->db->query($sqlSelect);
+     return $dropdown->result_array();	  
+	
+}
+    
+    
     
 }

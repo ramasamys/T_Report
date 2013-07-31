@@ -1,0 +1,6 @@
+.global-table-style a{
+    text-decoration: none;    
+}
+.global-table-style a:hover{
+    color:#f15a29;
+}

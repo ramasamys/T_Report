@@ -11,7 +11,7 @@
   </table> 
 <div  class="slide-up-key" style="display: none;">
 <?php
-	$controller_name = "summary/agent";
+	$controller_name = "summary/agentSearch";
 	$attributes = array('class' => 'agent-summary-search',
 			'id' => 'agent-summary-search', 'name' => 'agent_summary_search');
 	echo form_open($controller_name, $attributes);
@@ -20,7 +20,7 @@
     <tr style="text-align: center;">
       <td colspan="3">From &nbsp;<input type="text" name="from_date" class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
       To &nbsp;<input type="text" name="to_date"  class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
-      Agent &nbsp;<input type="text" name="agent_name"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/summary/getAgentList' ; ?>" />
+      Agent &nbsp;<input type="text" name="search"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/summary/getAgentList' ; ?>" />
       </td>
       </tr><tr>
       <td colspan="3" style="text-align: center;" ><input type="submit" name="submit_data" value="Search" class="button-color" />

@@ -9,6 +9,7 @@ $this->db->limit($limit, $start);
 
 $sql = "select calldate,clid,src,dst,disposition,sec_to_time(duration) as b from cdr where uniqueid!='' and lastdata like '%SIP/%' order by calldate desc LIMIT " .$start . ", ".$limit;
 
+
    $query = $this->db->query($sql);
     return $query->result_array();
 }
@@ -19,8 +20,7 @@ $sql = "select calldate,clid,src,dst,disposition,sec_to_time(duration) as b from
 
    $result = $this->db->query($sql);
    return $result->num_rows();
-  
-   
+     
 }
 
 function outboundReport($limit, $start){

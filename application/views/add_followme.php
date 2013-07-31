@@ -1,4 +1,5 @@
 <?php include "header.php";?>
+
 <label class="heading">Add followme</label>
 <hr>
 <div class="search-container">
@@ -36,12 +37,13 @@
 	</select> </td></tr>
 	
 	<tr><td>Set Destination :</td><td>
-    <select name="destination" id="destination">
+    <select name="followmedst" id="followmedst">
 			<option value="">Select</option>
-			<option value="Queue">Queue</option> 
+			<option value="queue">Queue</option>
+			<option value="exten">Extension</option>
 	</select></td><td>
 	<div id="id"></div>
-	<select name="sid" id="sid">
+	<select name="destination" id="destination">
 			<option value="">Select</option>
 	</select></td></tr>
 	
