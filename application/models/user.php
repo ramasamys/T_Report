@@ -9,7 +9,7 @@ Class User extends CI_Model {
    $sql = "SELECT id,first_name,username,role FROM users WHERE username=? AND password=?";
    $query = $this->db->query($sql, array($username,md5($password)));  
    return $query->result_array();
- }
+ } 
  function getUserInformation($id){
    $sql = "SELECT * FROM users WHERE id=?";
    $query = $this->db->query($sql, array($id));
