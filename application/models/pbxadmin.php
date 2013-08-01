@@ -350,7 +350,6 @@ public function inbound_count($searchterm)
 					$result = $this->db->query($sql);
 					$row = $result->row(); 
 					return $row->cnt;
-				
 				}
 				else
 				{
@@ -398,7 +397,7 @@ function getAllInbound($inbound) {
     $sql = "SELECT distinct(did_num) from inbound_rout where did_num like '%$inbound%'";
 	$query = $this->db->query($sql);
     return $query->result();
-  } 	
+  }
     
 function inboundInsert() {
 
@@ -427,7 +426,6 @@ $delete = "delete from inbound_route where id = '$id'";
 
     }
 
-    
 function dependedValues(){
    	
      $value = $_POST['dst'];
@@ -444,10 +442,7 @@ $sqlSelect = "SELECT DISTINCT(name) FROM sipusers";
      	     
      }
      $dropdown = $this->db->query($sqlSelect);
-     return $dropdown->result_array();	  
-	
-}
-    
-    
+     return $dropdown->result();
+  }    
     
 }

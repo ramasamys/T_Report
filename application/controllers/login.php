@@ -12,13 +12,13 @@ class Login extends CI_Controller {
         $this->load->model('user', 'user', TRUE);
     }
 
-    public function index() {
+    public function index() { 
         $this->load->view('login_form');
     }
 
     function verifyLogin() {
 
-        $this->form_validation->set_rules('tv_username', 'Username', 'trim|required|min_length[4]|max_length[12]|xss_clean');
+		$this->form_validation->set_rules('tv_username', 'Username', 'trim|required|min_length[4]|max_length[12]|xss_clean');
         $this->form_validation->set_rules('tv_password', 'Password', 'trim|required|xss_clean|callback_check_database');
 
         if ($this->form_validation->run() == FALSE) {
@@ -29,12 +29,21 @@ class Login extends CI_Controller {
     }
 
     function checkSession() {
+	$this->load->helper('cookie');
         $sessionValues = $this->session->userdata('logged_in');
+		
+		if( $this->input->post("rememberme") == 'on')
+           {
+		      setcookie("username", $sessionValues['username'], time() + 360000, "/");
+			  setcookie("password", $sessionValues['password'], time() + 360000, "/");
+		   }
+		   
         if (!empty($sessionValues) && $sessionValues['role'] == 'Administrator') {
             $this->load->view('admin_settings');
         }
         if (!empty($sessionValues) && $sessionValues['role'] == 'Agent') {
-            $this->load->view('agent');
+            $queueList['queue'] = $this->user->queues();
+			$this->load->view('agent',$queueList);
         }
         if (empty($sessionValues)) {
             $this->logout();
@@ -45,7 +54,7 @@ class Login extends CI_Controller {
 
         $username = $this->input->post('username');
         $result = $this->user->checkLogin($username, $password);
-
+		
         if (!empty($result)) {
             $timestamp = sha1(uniqid(5));
             $this->user->insertlogindetail($result[0]['username'], $timestamp);
@@ -55,6 +64,7 @@ class Login extends CI_Controller {
                     'id' => $row['id'],
                     'first_name' => $row['first_name'],
                     'username' => $row['username'],
+					'password' => $password,
                     'role' => $row['role'],
                     'sessionId' => $timestamp
                 );

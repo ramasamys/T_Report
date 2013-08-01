@@ -9,7 +9,7 @@ Class User extends CI_Model {
    $sql = "SELECT id,first_name,username,role FROM users WHERE username=? AND password=?";
    $query = $this->db->query($sql, array($username,md5($password)));  
    return $query->result_array();
- }
+ } 
  function getUserInformation($id){
    $sql = "SELECT * FROM users WHERE id=?";
    $query = $this->db->query($sql, array($id));
@@ -68,7 +68,7 @@ return $agentarray;
   	  
   }
 function agentpausefun(){
-    $sessionValues = $this->session->userdata('logged_in'); 
+    $sessionValues = $this->session->userdata('logged_in');
           $sessionId =  $sessionValues['sessionId'];
           $agent=$sessionValues['first_name'];
           $flag=$_POST['flag'];
@@ -160,7 +160,13 @@ else
 
 }
   
-  
+function queues(){
+
+$queuesql = "select name from queue_table";
+$queuequery=$this->db->query($queuesql);
+return $queuequery->result_array();
+
+}
   
   
 }
