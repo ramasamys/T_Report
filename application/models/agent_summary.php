@@ -19,7 +19,7 @@ $sql3="";
               }
            } 
 
-$sql = "SELECT callid,date( time ) AS date1, queuename, agent,(select count(event) from queue_log where event='RINGNOANSWER' and data1!='0' and agent=t1.agent $sql3) as no, sec_to_time(sum( data2 )) AS totaltime, count(*) as tot,(select sec_to_time(sum(timediff(end,start))) from qpause where membername= t1.agent $sql2) as pause,(select name from sipname where exten=(select substring(t1.agent,5))) as name FROM queue_log as t1 WHERE t1.event = 'COMPLETECALLER' or t1.event = 'COMPLETEAGENT' $sql3 $sql2 GROUP BY agent";
+$sql = "SELECT callid,DATE_FORMAT(time,'%d-%m-%Y') as date1, queuename, agent,(select count(event) from queue_log where event='RINGNOANSWER' and data1!='0' and agent=t1.agent $sql3) as no, sec_to_time(sum( data2 )) AS totaltime, count(*) as tot,(select sec_to_time(sum(timediff(end,start))) from qpause where membername= t1.agent $sql2) as pause,(select name from sipname where exten=(select substring(t1.agent,5))) as name FROM queue_log as t1 WHERE t1.event = 'COMPLETECALLER' or t1.event = 'COMPLETEAGENT' $sql3 $sql2 GROUP BY agent";
 
    $query = $this->db->query($sql);
    return $query->result_array();

@@ -9,7 +9,9 @@
             <script src="<?php echo base_url() ?>js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
             <script  src="<?php echo base_url(); ?>js/jquery.multiselect2side.js" type="text/javascript" ></script>
             <script src="<?php echo base_url() ?>js/autocomplete-jquery.js" type="text/javascript"></script>
+            <script src="<?php echo base_url() ?>js/jquery.validate.js" type="text/javascript"></script>
             <script src="<?php echo base_url() ?>js/helper.js" type="text/javascript"></script>
+            <script src="<?php echo base_url() ?>js/admin.js" type="text/javascript"></script>
 
             
             <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" type="text/css" />

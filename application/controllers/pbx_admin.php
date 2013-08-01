@@ -384,6 +384,10 @@ $search = "";
         }
     }
 
+	function realtime()
+	{
+	$this->load->view('realtime_report');
+	}
 
 }
 ?>

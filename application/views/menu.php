@@ -25,7 +25,9 @@
 				<li><a href="<? echo base_url().'index.php/pbx_admin/inbound_list'?>">Inbound</a></li>
 			</ul>
 		</li>
-		<li><a href="#">Real Time Report</a></li>
+		<li><a href="<? echo base_url().'index.php/pbx_admin/realtime'?>">Real Time Report</a>
+		
+		</li>
 	</ul>
 </nav>
 </div>
