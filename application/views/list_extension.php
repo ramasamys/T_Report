@@ -109,16 +109,42 @@
     <tr>
         <td></td>
               <td class="error_cell"> <label id="call-pickup-error"></label></td>
-    </tr>        
+    </tr>  
+
+	<tr>
+	<td>Context</td> <td><input type="text" name="context" class="textbox-style1 extension-context" value=""></td>
+    </tr>
+    <tr>
+        <td></td>
+              <td class="error_cell"> <label id="context-error"></label></td>
+    </tr> 
+	
+	<tr>
+	<td> Host</td> <td><input type="text" name="extension_host" class="textbox-style1 extension-host" value=""></td>
+    </tr>
+    <tr>
+        <td></td>
+              <td class="error_cell"> <label id="extension-host-error"></label></td>
+    </tr> 
+
+	
     <tr>
 	<td>Mailbox</td> <td><input  type="checkbox" name="mail" class="mailbox" value=""/>Enable</td>
     </tr>
     <tr style="display:none;" class="show-fields">
 	<td>Email id</td> <td><input type="text" name="mailid" id="mailid" class="textbox-style1 email-id" value="" ></td>
     </tr>	
+	<tr>
+        <td></td>
+              <td class="error_cell"> <label id="mailid-error"></label></td>
+    </tr>  
 	<tr style="display:none;" class="show-fields" >
 	<td>Password</td> <td><input type="text" name="password_ext" id="password" class="textbox-style1 password-ext"  value=""></td>
     </tr>
+	<tr>
+        <td></td>
+              <td class="error_cell"> <label id="mail-password-error"></label></td>
+    </tr>  
     <tr>
         <td></td>
         <td><input type="submit" name="insert" value="Save" class="button-color">&nbsp;<input type="reset" name="reset" value="Reset" class="button-color"></td>

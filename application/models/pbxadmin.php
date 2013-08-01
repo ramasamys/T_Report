@@ -81,47 +81,49 @@ function getAllExtension($exten) {
     return $query->result();
   }   
  
-function extensionInsert() 
+function extensionInsert($extension_for_sipusers,$extension_for_sipname,$extension_for_voiceboxes) 
 	{
-	
-		$call_group		=	"";
-		$pickup_group	=	"";
-		$mailid			=	NULL;
-		$password		=	NULL;
-		$ext			=	$_POST['ext'];
-		$name			=	$_POST['name'];
-		$secret			=	$_POST['secret'];
-		$call_group		=	$_POST['call_group'];
-		$pickup_group	=	$_POST['pickup_group'];
-		if (isset($_POST['mail']))
-				{
-					$mailid			=	$_POST['mailid'];
-					$password		=	$_POST['password'];
-				}
-
-		$insertsql = "insert into sipusers(name,host,context,fromuser,mailbox,username,sippasswd,callgroup,pickupgroup)values('$ext','dynamic','default','$ext','$mailid','$ext','$secret','$call_group','$pickup_group')";
 		
-		$insertnamesql = "insert into sipname(exten,name) values('$ext','$name')";
+		$sipusers_insert	=	$this->db->insert('sipusers', $extension_for_sipusers);
+		$userid				=	0;
+		$userid				=	$this->db->insert_id();
 		
-		$insertvoicesql = "INSERT INTO voiceboxes(customer_id, mailbox,password,email,context) values('$ext','$ext','$password','$mailid','default')";
+		$sipname_insert		=	$this->db->insert('sipname', $extension_for_sipname);
+		$nameid				=	0;
+		$nameid				=	$this->db->insert_id();
 		
-		$insertquery = $this->db->query($insertsql);
-		$userid =	0;
-		$userid	=	mysql_insert_id();	
+		$voiceboxes_insert	=	$this->db->insert('voiceboxes', $extension_for_voiceboxes);
+		$voiceid			=	0;
+		$voiceid			=	$this->db->insert_id();
 		
-		$insertnamequery = $this->db->query($insertnamesql);
-		$nameid	=	0;
-		$nameid	=	mysql_insert_id();
-		
-		$insertvoicequery = $this->db->query($insertvoicesql);
-		$voiceid =	0;
-		$voiceid =	mysql_insert_id();
 		
 		$id = array();
 		$id = array("$userid","$nameid","$voiceid");
 		return $id;		
 		
    }
+   
+   function extension_insert_fail($sipuser_id,$sipname_id,$voiceboxes_id)
+	{
+		if($sipuser_id =="" || $sipuser_id == 0)
+		{
+			$sipuser_query	= 	"DELETE FROM sipusers WHERE id='$sipuser_id'";
+			$sipuser_result	= 	$this->db->query($sipuser_query);
+		
+		}
+		if($sipname_id == "" || $sipname_id == 0){
+		
+			$sipname_query	= 	"DELETE FROM sipname WHERE id='$sipname_id'";
+			$sipname_result	= 	$this->db->query($sipname_query);
+		
+		}
+		if($voiceboxes_id == "" || $voiceboxes_id == 0)
+		{
+			$voiceboxes_query	= 	"DELETE FROM voiceboxes WHERE uniqueid='$voiceboxes_id'";
+			$voiceboxes_result	= 	$this->db->query($voiceboxes_query);
+		
+		}
+	}
    
 function extensionUpdate() {
 
@@ -313,32 +315,11 @@ function getAllQueue($queue) {
   } 
     
     
-function queueInsert() {
+function queueInsert($data_for_queue) {
 
-$qname					=	$_POST['qname'];
-$timeout				=	$_POST['time_out'];
-$queue_callswaiting		=	$_POST['qwait'];
-$queue_reporthold		=	$_POST['hold_time'];
-$announce_frequency		=	$_POST['frequency'];
-$announce_holdtime		=	$_POST['hold'];
-$retry					=	$_POST['retry'];
-$wrapuptime				=	$_POST['wrap_time'];
-$maxlen					=	$_POST['max_wait'];
-$servicelevel			=	$_POST['service_level'];
-$strategy				=	$_POST['ring_statergy'];
-$joinempty				=	$_POST['join_empty'];
-$leavewhenempty			=	$_POST['leave_empty'];
-$eventmemberstatus		=	$_POST['member_status'];
-$eventwhencalled		=	$_POST['when_called'];
-$memberdelay			=	$_POST['member_delay'];
-$weight					=	$_POST['weight'];
-$timeoutrestart			=	$_POST['restart'];
-$ringinuse				=	$_POST['ring_use'];
 
-$addsql = "insert into queue_table(`name`,`timeout`, `queue_callswaiting`, `queue_reporthold`, `announce_frequency`,`announce_holdtime`, `retry`, `wrapuptime`, `maxlen`, `servicelevel`, `strategy`, `joinempty`, `leavewhenempty`, `eventmemberstatus`, `eventwhencalled`, `memberdelay`, `weight`, `timeoutrestart`,  `ringinuse`)value('$qname','$timeout','$queue_callswaiting','$queue_reporthold','$announce_frequency','$announce_holdtime','$retry','$wrapuptime','$maxlen','$servicelevel','$strategy','$joinempty','$leavewhenempty','$eventmemberstatus','$eventwhencalled','$memberdelay','$weight','$timeoutrestart','$ringinuse')";
-
-   $addquery = $this->db->query($addsql);
-//   return $addquery->result_array();
+   $queue_insert = $this->db->insert('queue_table', $data_for_queue);
+   return $this->db->insert_id();
 
     }
     
