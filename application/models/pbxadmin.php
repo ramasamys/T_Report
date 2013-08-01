@@ -461,7 +461,7 @@ $sqlSelect = "SELECT DISTINCT(name) FROM sipusers";
      	     
      }
      $dropdown = $this->db->query($sqlSelect);
-     return $dropdown->result_array();
+     return $dropdown->result();
   }    
     
 }

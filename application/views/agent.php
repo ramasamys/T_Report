@@ -4,11 +4,23 @@
 <table>
 <tr><td colspan="3">
 <select name="searchable[]" id='searchable' multiple='multiple' >
-					<option value='1'>Option strawberry 1 - India</option>
-					<option value='2'>Option apricot 2 - Italy</option>
-					<option value='3'>Option cherry 3 - USA</option>
-					<option value='4'>Option pineapple 4 - Holland</option>
-					</select>
+   <? if(!empty($queue)){ 
+     foreach($queue as $name) : ?>
+	   
+
+					<option value='<?php echo $name['name'];?>'><?php echo $name['name'];?> </option>
+
+				
+   <?php endforeach; ?>
+   <? } else { ?>
+    <tr>
+      <td colspan="5">...</td>
+    </tr>
+  <? } ?>
+	</select>
+
+
+
 </td></tr>
 <tr><td>
 <input type="hidden" value="<? echo $sessionValues['first_name']; ?>" id="agentname" />

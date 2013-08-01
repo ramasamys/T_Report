@@ -68,7 +68,7 @@ return $agentarray;
   	  
   }
 function agentpausefun(){
-    $sessionValues = $this->session->userdata('logged_in'); 
+    $sessionValues = $this->session->userdata('logged_in');
           $sessionId =  $sessionValues['sessionId'];
           $agent=$sessionValues['first_name'];
           $flag=$_POST['flag'];
@@ -160,7 +160,13 @@ else
 
 }
   
-  
+function queues(){
+
+$queuesql = "select name from queue_table";
+$queuequery=$this->db->query($queuesql);
+return $queuequery->result_array();
+
+}
   
   
 }
