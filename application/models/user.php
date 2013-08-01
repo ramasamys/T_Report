@@ -9,7 +9,7 @@ Class User extends CI_Model {
    $sql = "SELECT id,first_name,username,role FROM users WHERE username=? AND password=?";
    $query = $this->db->query($sql, array($username,md5($password)));  
    return $query->result_array();
- }
+ } 
  function getUserInformation($id){
    $sql = "SELECT * FROM users WHERE id=?";
    $query = $this->db->query($sql, array($id));
@@ -101,6 +101,63 @@ function pausestatus()
 	//$this->db->query($pcheck);
 	//return $query->row_array();
 	
+}
+
+function agentpopup()
+{
+	$sessionValues = $this->session->userdata('logged_in'); 
+          $sessionId =  $sessionValues['sessionId'];
+          $agent=$sessionValues['first_name'];
+ 
+$check="select * from pop where flag='0' and name='$agent' order by id desc limit 1";
+$query=$this->db->query($check);
+$result=$query->result_array();
+$num=$query->num_rows();
+
+if($num >0)
+{
+$name=$result[0]['name'];
+$idd=$result[0]['id'];
+$phon=$result[0]['phone'];
+
+$updatepop="update pop set flag='1' where id='$idd'";
+$updatequery=$this->db->query($updatepop);
+
+$checkuserdb="select name,phone from pop_user where phone='$phon'";
+$checkquery=$this->db->query($checkuserdb);
+$checkresult=$checkquery->result_array();
+
+$checknum=$checkquery->num_rows();
+if($checknum > 0)
+{
+$nameuser=$checkresult[0]['name'];
+$phonuser=$checkresult[0]['phone'];
+$response = array();
+	$response['phone']=$phonuser;
+	$response['name'] = $nameuser;
+	$response['check']="done";
+	echo json_encode($response);
+}
+else
+{
+	$response = array();
+	$response['phone']=$phon;
+        $response['check']="not";
+	echo json_encode($response);
+		
+}
+	
+}
+else
+{
+	$response = array();
+	$response['phone']="";
+	$response['name'] = "";
+        $response['check'] ="false";
+	echo json_encode($response);
+	
+}
+
 }
   
   

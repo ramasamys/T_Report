@@ -23,12 +23,6 @@ class Summary extends CI_Controller {
             redirect('login/logout');
         }
     }
-	function agentSearch(){
-	
-	
-	
-	}
-
     public function queue() {
         if ($this->session->userdata('logged_in')) {
             $search['from'] = $this->input->post('from_date');
