@@ -33,7 +33,7 @@
 <div class="agent-summary-list">
   <table class="global-table-style">
     <tr>
-	  <th>Date</th>
+	  <th>Date {DD-MM-YYYY}</th>
       <th>Agent</th>
       <th>Answered</th>
       <th>Not Answered</th>

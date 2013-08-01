@@ -383,6 +383,11 @@ $search = "";
             echo "$items[$i] \n";
         }
     }
+	
+	function realtime()
+	{
+	$this->load->view('realtime_report');
+	}
 
 }
 

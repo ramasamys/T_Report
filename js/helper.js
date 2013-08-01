@@ -40,6 +40,7 @@
             $('.show-fields').hide();
         }
     });
+
      $('.delete-extension').live('click',function(){ 
 	var delete_id = $(this).attr('deleteid');
 	var confirmationvalues = confirm("Are you sure you want to delete this Extension? Click Yes to continue or No to cancel");
@@ -58,6 +59,7 @@ console.log(data);
 	}
       }
       });    
+
     //rakesh
     
         $("#enterqueue").click(function(){	
@@ -70,18 +72,10 @@ console.log(data);
 	else{	
 		vall=$('#searchable').val();
 		var agent=$('#agentname').val();
-//alert("HELLO WORLD!");
-
-//alert(vall);
-
 
         var dataString = 'team='+vall+'&q='+agent ;
-        //var dataString = 'name='+ name + '&email=' + email + '&phone=' + phone;  
          $.ajax({
-        // alert("sdfsdf");
   type: "POST", 
-  //dataType: "html", url: baseUrl + "controller/function",
-  
  url: baseUrl+"index.php/login/queue_login", 
   data: dataString,
   success: function(response){
@@ -103,14 +97,7 @@ console.log(data);
 });
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+
     			$('#searchable').multiselect2side({
 				search: "Search: "
 			});
@@ -199,7 +186,8 @@ console.log(data);
 			});
 	
  });	 
-    
+//call popup div
+
     //Arulprakash
         $("#followmedst").change(function () {
 	    var dst=$(this).val();
@@ -219,3 +207,117 @@ console.log(data);
    });
 		
 });
+
+
+ 
+ //ajax popup div 
+ function openpopup(id){ 
+popup1.style.visibility = "visible";
+//Calculate Page width and height 
+var pageWidth = window.innerWidth; 
+var pageHeight = window.innerHeight; 
+if (typeof pageWidth != "number"){ 
+if (document.compatMode == "CSS1Compat"){ 
+pageWidth = document.documentElement.clientWidth; 
+pageHeight = document.documentElement.clientHeight; 
+} else { 
+pageWidth = document.body.clientWidth; 
+pageHeight = document.body.clientHeight; 
+} 
+}
+//Make the background div tag visible... 
+var divbg = document.getElementById('bg'); 
+ divbg.style.visibility = "visible"; 
+
+var divobj = document.getElementById(id); 
+divobj.style.visibility = "visible"; 
+//divobj.style.left="330px !important";
+//divobj.style.top="25px !important";
+if (navigator.appName=="Microsoft Internet Explorer") 
+computedStyle = divobj.currentStyle; 
+else computedStyle = document.defaultView.getComputedStyle(divobj, null); 
+//Get Div width and height from StyleSheet 
+var divWidth = computedStyle.width.replace('px', ''); 
+var divHeight = computedStyle.height.replace('px', ''); 
+var divLeft = (pageWidth - divWidth) / 2; 
+var divTop = (pageHeight - divHeight) / 2; 
+//Set Left and top coordinates for the div tag 
+divobj.style.left = (divLeft + 130) + "px"; 
+divobj.style.top = (divTop +20) + "px"; 
+//console.log(divLeft);
+//console.log(divTop);
+//Put a Close button for closing the popped up Div tag 
+if(divobj.innerHTML.indexOf("closepopup('" + id +"')") < 0 ) 
+divobj.innerHTML = "<a href=\"#\" onclick=\"closepopup('" + id +"')\"><span class=\"close_button\">X</span></a>" + divobj.innerHTML; 
+	//var t=setTimeout(function(){ popup1.style.visibility = "hidden";
+	//bg.style.visibility = "hidden";},7000);
+	 // setTimeout();
+	 //iframerefresh();
+} 
+function closepopup(id){ 
+var divbg = document.getElementById('bg'); 
+divbg.style.visibility = "hidden"; 
+var divobj = document.getElementById(id); 
+divobj.style.visibility = "hidden"; 
+}
+
+$(function(){
+cometpopup();		
+});
+
+
+
+function cometpopup(){
+
+var agentnumber=$('#agent').val();
+$.ajax({
+type:'Get',
+url:baseUrl+"index.php/login/popup",
+async:true,
+success:function(data){
+	var json=eval('(' + data + ')');
+	console.log(json);
+	var phon=json.phone;
+	
+	console.log(phon);
+	if(phon!='')
+	{
+           var ccc=json.check;
+	
+	if(ccc=="done")
+	{
+		alert("you hv tht number");
+				$('#popup1').html("<center>user data is there in database</center>");
+		openpopup('popup1');
+		var t=setTimeout(function(){ popup1.style.visibility = "hidden";
+	  bg.style.visibility = "hidden";},7000);
+		
+	}
+	else
+	{
+		alert("no such tht number");
+		$('#popup1').html("<center>No data found</center>");
+		openpopup('popup1');
+		var t=setTimeout(function(){ popup1.style.visibility = "hidden";
+	  bg.style.visibility = "hidden";},7000);
+		
+	}
+		
+	}
+	else
+	{
+
+	}
+		setTimeout('cometpopup()', 1000);
+		},
+	error : function(XMLHttpRequest, textstatus, error) { 
+					//alert(error);
+					$('#send').html('ERROR');
+					setTimeout('cometpopup()', 1000);
+		
+}
+	
+});
+}
+ 
+

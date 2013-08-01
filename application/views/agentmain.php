@@ -43,5 +43,15 @@ else
 <input type="hidden" id="agent" value="<?php  echo $sessionValues['first_name'];  ?>" />
 </tr></table>
 </div>
+<form>
+<input type="button" name="AgentStatus" id="status" value="AgentStatus"onclick="openpopup('popup1')" class='button-color'/>
+</form>
+
+<div id="popup1" class="popup" style="border-style:outset;"> 
+
+</div>
+
+
+<div id="bg" class="popup_bg"></div> 
 
 <?php include "footer.php";?>

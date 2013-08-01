@@ -4,3 +4,29 @@
 .global-table-style a:hover{
     color:#f15a29;
 }
+.global-table-style td {
+    text-align: center;
+}
+.display-type{
+    display:none;
+}
+.error_cell{
+    color:#ff0000;
+}
+.new-extension-creation{
+    float: right;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 4em;    
+}
+.pagination-style p{
+    float: right;
+margin-right: 6em;
+font-size: 14px;
+}
+.pagination-style p a{
+    color:#f15a29;
+}
+.global-table-style a{
+    color:#58595b;
+}

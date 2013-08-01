@@ -19,33 +19,15 @@
 		</li>
 		<li><a href="#">PBX Admin</a>
 			<ul>
-				<li><a href="#">Extensions</a>
-					<ul>
-							<li><a href="<? echo base_url().'index.php/pbx_admin/createExtension'?>">Add </a></li>
-							<li><a href="<? echo base_url().'index.php/pbx_admin/viewExtension'?>">View</a></li>
-					</ul>
-				</li>
-				<li><a href="#">Follow Me</a>
-					<ul>
-							<li><a href="<? echo base_url().'index.php/pbx_admin/followme_insert'?>">Add</a></li>
-							<li><a href="<? echo base_url().'index.php/pbx_admin/followme_list'?>">View</a></li>
-					</ul>
-				</li>
-				<li><a href="#">Queues</a>
-					<ul>
-							<li><a href="<? echo base_url().'index.php/pbx_admin/queue_insert'?>">Add </a></li>
-							<li><a href="<? echo base_url().'index.php/pbx_admin/queue_list'?>">View </a></li>
-					</ul>
-				</li>
-				<li><a href="#">Inbound</a>
-					<ul>
-							<li><a href="<? echo base_url().'index.php/pbx_admin/inbound_insert'?>">Add </a></li>
-							<li><a href="<? echo base_url().'index.php/pbx_admin/inbound_list'?>">View </a></li>
-					</ul>
-				</li>
+				<li><a href="<? echo base_url().'index.php/pbx_admin/viewExtension'?>">Extensions</a></li>
+				<li><a href="<? echo base_url().'index.php/pbx_admin/followme_list'?>">Follow Me</a></li>
+				<li><a href="<? echo base_url().'index.php/pbx_admin/queue_list'?>">Queues</a></li>
+				<li><a href="<? echo base_url().'index.php/pbx_admin/inbound_list'?>">Inbound</a></li>
 			</ul>
 		</li>
-		<li><a href="#">Real Time Report</a></li>
+		<li><a href="<? echo base_url().'index.php/pbx_admin/realtime'?>">Real Time Report</a>
+		
+		</li>
 	</ul>
 </nav>
 </div>
