@@ -169,7 +169,7 @@ class Pbx_admin extends CI_Controller {
 	
 
 
-    function followme_list() {
+    function followme() {
         if ($this->session->userdata('logged_in')) {
 $search = "";
 
@@ -249,7 +249,7 @@ $search = "";
         }
     }
 
-    function queue_list() {
+    function queue() {
         if ($this->session->userdata('logged_in')) {
 
 			$search = "";
