@@ -411,9 +411,14 @@ $search = "";
 	 
 	 function inbound_dependent()
 	 {
-		$dependent	=	$this->input->post('set_destination');
-		return $this->pbxadmin->dependentValues($dependent);
-	 }
+             if ($this->session->userdata('logged_in')) {
+            $dependent = $this->input->post('destination'); 
+             $dvalues = $this->pbxadmin->dependent_values($dependent); 
+             echo json_encode($dvalues);
+        } else {
+            redirect('login/logout');
+        }
+    }
 
     function depended_value(){
     	$values = $this->pbxadmin->dependedValues();

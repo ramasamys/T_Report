@@ -62,8 +62,9 @@
     $attributes = array('class' => 'pbx-new-inbound',
         'id' => 'pbx-new-inbound', 'name' => 'new_inbound');
     echo form_open($controller_name, $attributes);
+    $destination = array('Select' => 'Select','Extension'=> 'Extension','Queue'=>'Queue','Terminate Call'=>'Terminate Call','Follow Me'=>'Follow Me');
     ?>
-    <table>
+    <table width="100%">
         <tr>
             <td>DID name <sup>*</sup></td> <td><input type="text" name="did_name" class="textbox-style1 did-name" value=""></td><td></td>
         </tr>
@@ -80,26 +81,17 @@
         </tr>        
 
         <tr>
-            <td>Set destination</td> <td><select name="set_destination" id="set_destination"> 
-                    <option value="">Select</option>
-                    <option value="Extension">Extension</option>
-                    <option value="Queue">Queue</option> 
-                    <option value="Terminate Call">Terminate Call</option> 
-                    <option value="Follow Me">Follow Me</option>
-                </select></td>
+            <td>Set destination</td> 
+            <td>
+                <select name="set_destination" id="set_destination"> 
+                    <? foreach($destination as $des) { ?>
+                    <option value="<? echo $des; ?>"><? echo $des; ?></option>
+                    <? } ?>
+                   </select>
+            </td>
 
             <td>
-            <!--<select name="dependent_destination" id="" class="" > 
-                   <option value="">Select</option>
-                   <option value="Extension">Extension</option>
-                   <option value="Queue">Queue</option> 
-                   <option value="Terminate Call">Terminate Call</option> 
-                   <option value="Follow Me">Follow Me</option>
-         </select>
-                -->
                 <select name="dependent_destination" id="dependent_destination">
-                    <option value="">Select</option>
-                    <option selected="selected">-</option>
                 </select>
             </td>
         </tr>

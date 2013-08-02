@@ -425,63 +425,28 @@ $delete = "delete from inbound_route where id = '$id'";
 
     }
 
-function dependentValues($selected_value){
-   	
-	
-	
-	if($selected_value=="Extension")
-		{
+function dependent_values($values){ 	
 
-			$sipusers	=	"select distinct(username) from sipusers";
-			$sipusers_query = $this->db->query($sipusers);
-			$sipusers_array = $sipusers_query->result();
-			echo json_encode($sipusers_array);
-
+	if($values == "Extension"){
+			$sql = "select distinct(username) as list from sipusers";
+			$query = $this->db->query($sql);
+                        return $query->result_array($query);
 		}
-	else if($selected_value=="Queue")
-		{
-		     $queue_table	=	"select distinct(name) from queue_table";
-			 $queue_table_query = $this->db->query($queue_table);
-			 $queue_table_array	=	$queue_table_query->result();
-			 echo json_encode($queue_table_array);
+	else if($values == "Queue") {
+		     $sql = "select distinct(name) as list from queue_table";
+                     $query = $this->db->query($sql);
+                     return $query->result_array($query);
 		}
-	else if($selected_value=="Terminate Call")
-		{
-			echo "Hangup";
+	else if($values == "Terminate Call"){
+                        return array('list'=> "Hangup");
 		}	
-	else if($selected_value=="Follow Me")
-		{
-			$followme	=	"select distinct(f_name) from followme";
-			$followme_query = $this->db->query($followme);
-			$followme_array = $followme_query->result();
-			echo json_encode($followme_array);
-
+	else if($values == "Follow Me")	{
+			$sql = "select distinct(f_name) as list from followme";
+			$query = $this->db->query($sql);
+                        return $query->result_array($query);
 		}
 }
-	
-	
-	
-	
-	
-	
-     /*if($selected_value == "Extension")
-{
-}
-     
-     if($value == 'queue'){
-     
-$sqlSelect = "SELECT DISTINCT(name) FROM queue_table";	     
-     }
-     elseif($value == 'exten'){
-$sqlSelect = "SELECT DISTINCT(name) FROM sipusers";     	     
-     	     
-     }
-     else{
-     	     
-     }
-     $dropdown = $this->db->query($sqlSelect);
-     return $dropdown->result();
-	 */
-  }    
+
+}    
     
 
