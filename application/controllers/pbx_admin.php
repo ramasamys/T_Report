@@ -370,8 +370,23 @@ $search = "";
         }
     }
 
-    function inbound_insert() {
-        $this->load->view('add_inbound');
+    function insert_inbound() {
+        if ($this->session->userdata('logged_in')) {
+		
+         $inbound_for_insertion = array(   
+			'did_num'	=>	stripslashes($this->input->post('did_number')),
+			'did_name'	=>	stripslashes($this->input->post('did_name')),
+			'setdst'	=>	stripslashes($this->input->post('set_destination')),	
+			'dst'		=>	stripslashes($this->input->post('dependent_destination')),	
+			
+			);
+				                
+				$this->pbxadmin->inboundInsert($inbound_for_insertion);
+				redirect('pbx_admin/inbound_list');
+            
+        } else {
+            redirect('login/logout');
+        }
     }
 
     function inbound_list() {
@@ -393,6 +408,12 @@ $search = "";
         }	
 
      }
+	 
+	 function inbound_dependent()
+	 {
+		$dependent	=	$this->input->post('set_destination');
+		return $this->pbxadmin->dependentValues($dependent);
+	 }
 
     function depended_value(){
     	$values = $this->pbxadmin->dependedValues();

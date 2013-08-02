@@ -399,13 +399,12 @@ function getAllInbound($inbound) {
     return $query->result();
   }
     
-function inboundInsert() {
+function inboundInsert($inbound_for_insertion) {
 
-$add = "insert into inbound_route(did_num,did_name,setdst,dst)values('$did_num','$did_name','$setdst','$dst')";
-
-   $addinbound = $this->db->query($add);
-//   return $addinbound->result_array();
-
+		$inbound_insert		=	$this->db->insert('inbound_rout', $inbound_for_insertion);
+		
+		return $this->db->insert_id();
+		
     }
 
 function inboundUpdate() {
@@ -426,9 +425,48 @@ $delete = "delete from inbound_route where id = '$id'";
 
     }
 
-function dependedValues(){
+function dependentValues($selected_value){
    	
-     $value = $_POST['dst'];
+	
+	
+	if($selected_value=="Extension")
+		{
+
+			$sipusers	=	"select distinct(username) from sipusers";
+			$sipusers_query = $this->db->query($sipusers);
+			$sipusers_array = $sipusers_query->result();
+			echo json_encode($sipusers_array);
+
+		}
+	else if($selected_value=="Queue")
+		{
+		     $queue_table	=	"select distinct(name) from queue_table";
+			 $queue_table_query = $this->db->query($queue_table);
+			 $queue_table_array	=	$queue_table_query->result();
+			 echo json_encode($queue_table_array);
+		}
+	else if($selected_value=="Terminate Call")
+		{
+			echo "Hangup";
+		}	
+	else if($selected_value=="Follow Me")
+		{
+			$followme	=	"select distinct(f_name) from followme";
+			$followme_query = $this->db->query($followme);
+			$followme_array = $followme_query->result();
+			echo json_encode($followme_array);
+
+		}
+}
+	
+	
+	
+	
+	
+	
+     /*if($selected_value == "Extension")
+{
+}
      
      if($value == 'queue'){
      
@@ -443,6 +481,7 @@ $sqlSelect = "SELECT DISTINCT(name) FROM sipusers";
      }
      $dropdown = $this->db->query($sqlSelect);
      return $dropdown->result();
+	 */
   }    
     
-}
+
