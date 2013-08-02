@@ -3,32 +3,32 @@
 <label class="heading">Followme list</label>
 <hr>
 <div class="search-container">
-  <table class="global-table-style">
-  <tr>
-                    <th colspan="2" style="text-align:left;">
-                        <span>Search</span><a href="#" class="show-div">Show</a><a href="#" class="hide-div" id="hidediv">Hide</a>
-                    </th>
-  </tr>
-  </table> 
-<div  class="slide-up-key" style="display: none;">
 <?php
 	$controller_name = "pbx_admin/followme_search";
 	$attributes = array('class' => '',
 			'id' => '', 'name' => '');
 	echo form_open($controller_name, $attributes);
-?>
-  <table class="global-table-style" style="line-height: 40px;">
-    <tr style="text-align: center;">
-      <td>
-      Followme : &nbsp; <input type="text" name="search"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/pbx_admin/getFollow' ; ?>" />
-      </td>
-      </tr><tr>
-      <td style="text-align: center;" ><input type="submit" name="submit_data" value="Search" class="button-color" />
+?>    
+  <table class="global-table-style" style="line-height: 50px;" >
+  <tr>
+                    <th colspan="4" style="text-align:left;">
+                        <span>Search</span>
+                    </th>
+  </tr>
+    <tr>
+        <td style="width:20%;"> Followme :</td>
+      <td style="width:20%;">
+        <input type="text" name="search"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/pbx_admin/getFollow' ; ?>" />
+      </td>      
+      <td style="width:30%;"><input type="submit" name="submit_data" value="Search" class="button-color" /></td>
+      <td style="width:30%;">
       <input type="button" name="export_data" value="Export" class="button-color" /></td>
-    </tr>
-  </table>
-</form>  
+    </tr>  
+  </table> 
+</form>     
 </div>
+<div class="new-extension-creation">
+    <input type="button" name="add-new-extension" class="create-extension button-color" value="Create Extension"/>
 </div>
 <div class="agent-summary-list">
   <table class="global-table-style">
