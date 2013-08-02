@@ -249,7 +249,7 @@ $search = "";
         }
     }
 
-    function queue_list() {
+    function queue() {
         if ($this->session->userdata('logged_in')) {
 
 			$search = "";

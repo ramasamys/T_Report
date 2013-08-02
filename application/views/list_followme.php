@@ -1,7 +1,5 @@
  
 <?php include "header.php";?>
-<label class="heading">Followme list</label>
-<hr>
 <div class="search-container">
 <?php
 	$controller_name = "pbx_admin/followme_search";
@@ -11,7 +9,7 @@
 ?>    
   <table class="global-table-style" style="line-height: 50px;" >
   <tr>
-                    <th colspan="4" style="text-align:left;">
+                    <th colspan="4">
                         <span>Search</span>
                     </th>
   </tr>

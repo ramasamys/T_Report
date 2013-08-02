@@ -67,7 +67,7 @@
         'id' => 'pbx-new-extensions', 'name' => 'new_extensions');
     echo form_open($controller_name, $attributes);
     ?>
-    <table>
+    <table width="100%">
         <tr>
             <td>SIP Extension <sup>*</sup></td> <td><input type="text" name="sip_extension" class="textbox-style1 sip-extension" value=""></td>
         </tr>
