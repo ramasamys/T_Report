@@ -6,9 +6,9 @@
         'id' => '', 'name' => '');
     echo form_open($controller_name, $attributes);
     ?>    
-    <table class="global-table-style" style="line-height: 40px;">
+    <table class="global-table-style" style="line-height: 50px;">
         <tr>
-            <th colspan="4">
+            <th colspan="4" style="text-align:left;">
                 <span>Search</span>
             </th>
         </tr>
@@ -32,7 +32,7 @@
         <tr>
 
             <th>Queue</th>
-            <th>Delete</th>
+            <th>Actions</th>
 
 
         </tr>
@@ -41,7 +41,7 @@
                 ?>
                 <tr>
                     <td><?php echo $value->name; ?></td>
-                    <td><a href="#">Edit</a>|<a href="#">Delete</a></td>
+                    <td><a href="#">Edit</a>&nbsp;|&nbsp;<a href="#">Delete</a></td>
 
                 </tr>
             <?php endforeach; ?>

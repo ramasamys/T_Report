@@ -389,7 +389,7 @@ $search = "";
         }
     }
 
-    function inbound_list() {
+    function inbound() {
 
 	if ($this->session->userdata('logged_in')) {
 			
