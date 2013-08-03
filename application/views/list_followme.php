@@ -9,7 +9,7 @@
 ?>    
   <table class="global-table-style" style="line-height: 50px;" >
   <tr>
-                    <th colspan="4">
+                    <th colspan="4" style="text-align:left;">
                         <span>Search</span>
                     </th>
   </tr>
@@ -33,7 +33,7 @@
     <tr>
 	
       <th>Followme</th>
-      <th>Alter</th>
+      <th>Actions</th>
      
 
     </tr>
@@ -42,7 +42,7 @@
     <tr>
 		
 		<td><?php echo $value->f_name; ?></td>
-		<td><a href="#">Edit</a>|<a href="#">Delete</a></td>
+		<td><a href="#">Edit</a>&nbsp;|&nbsp;<a href="#">Delete</a></td>
       
     </tr>
    <?php endforeach; ?>

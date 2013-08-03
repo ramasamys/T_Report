@@ -2,6 +2,10 @@ body{
   font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;  
   color:#58595b;
 }
+body select{
+    border: 1px solid #ccc;
+    background: #fff;    
+}
 .overall-container{
   margin: 0 auto;
   width: 100%;

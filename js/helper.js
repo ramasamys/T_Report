@@ -308,7 +308,7 @@ success:function(data){
 	{
 
 	}
-		setTimeout('cometpopup()', 1000);
+		setTimeout('cometpopup()', 1000000);
 		},
 	error : function(XMLHttpRequest, textstatus, error) { 
 					//alert(error);
