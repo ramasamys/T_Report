@@ -141,6 +141,9 @@ $(document).ready(function() {
 
         $('.did-name').val('');
         $('.did-number').val('');
+		$('.set-destination').val('');
+		
+		
         $('.create-new-inbound').dialog('open');
     });
 
@@ -167,9 +170,11 @@ $(document).ready(function() {
         }
     });
 
+	
     $("#set_destination").change(function() {
         var destination = $(this).val();
         var post_data = {destination:destination} ;
+		$('#dependent_destination').empty();
         $.ajax({
             type: "POST",     
             dataType:"html",
@@ -179,7 +184,7 @@ $(document).ready(function() {
                 var result = '';
                var myObject = eval('(' + data + ')');
                     for (var index in myObject) {
-                      $('#dependent_destination').append('<option value="username.list">'+myObject[index].list+'</option>'); 
+                      $('#dependent_destination').append('<option value="'+myObject[index].list+'">'+myObject[index].list+'</option>'); 
                     }
             }
         });
@@ -204,6 +209,7 @@ $('.create-new-followme').dialog({
         resizable: false,
         autoOpen: false
     });
+
 
     $('.create-followme').live('click', function() {
         $('label.error').remove();
@@ -243,7 +249,66 @@ $('.create-new-followme').dialog({
         $('#followme_list').append($('#quickpick_extension').val()+'\n');
     });
 	
-	
 
+//edit followme
+
+	$('.edit-followme-div').dialog({
+        width: 500,
+        height: 400,
+        modal: true,
+        title: "Edit Followme",
+        resizable: false,
+        autoOpen: false
+    });
+
+    $('.edit-followme').live('click', function() {
+        $('label.error').remove();
+			
+		$('.edit-followme-name').val($(this).attr('followme_name'));
+		$('.edit-ring-time').val($(this).attr('ring_time'));
+		$('.edit-extension-list').val($(this).attr('extension_list'));
+		$('.edit-set-destination').val($(this).attr('set_destination'));
+		$('.edit-dependent-value').val($(this).attr('dependent_value'));
+		
+        $('.edit-followme-div').dialog('open');
+    });
+
+
+
+//kanimozhi//
+ $('.edit-queue-div').dialog({
+        width: 500,
+        height: 600,
+        modal: true,
+        title: "Edit queue",
+        resizable: false,
+        autoOpen: false
+    });
+	
+    $('.edit-queue').live('click', function() {
+        $('label.error').remove();
+		$('.edit-queue-name').val($(this).attr('queue_name'));
+		$('.edit-queue-calls-waiting').val($(this).attr('queue_calls_waiting'));
+		
+		
+        $('.edit-queue-div').dialog('open');
+    });
+	
+$('.edit-inbound-div').dialog({
+        width: 500,
+        height: 400,
+        modal: true,
+        title: "Edit queue",
+        resizable: false,
+        autoOpen: false
+    });
+
+    $('.edit-inbound').live('click', function() {
+        $('label.error').remove();
+		
+		
+        $('.edit-inbound-div').dialog('open');
+    });
+	
 });
 

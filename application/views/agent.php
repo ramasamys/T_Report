@@ -1,4 +1,19 @@
-<?php include "header.php";?>
+<?php include "header.php";
+
+
+ <? if(!empty($loggedin)){ 
+echo "<div align='right'>You have already logged in ";
+     foreach($loggedin as $qname) : 
+     
+	echo $qname['queue_name'];
+			
+    endforeach; 
+    <?
+    echo "</div>";} else { }?>
+    
+    
+
+?>
 
 <div id="div-1a">
 <table>

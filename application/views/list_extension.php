@@ -1,5 +1,6 @@
  
 <?php include "header.php"; ?>
+
 <div class="search-container">
     <?php
     $controller_name = "pbx_admin/searchExtension";
