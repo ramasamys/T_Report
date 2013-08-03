@@ -288,6 +288,10 @@ $('.create-new-followme').dialog({
 	
     $('.edit-queue').live('click', function() {
         $('label.error').remove();
+		$('.edit-queue-name').val($(this).attr('queue_name'));
+		$('.edit-queue-calls-waiting').val($(this).attr('queue_calls_waiting'));
+		
+		
         $('.edit-queue-div').dialog('open');
     });
 	
@@ -302,6 +306,8 @@ $('.edit-inbound-div').dialog({
 
     $('.edit-inbound').live('click', function() {
         $('label.error').remove();
+		
+		
         $('.edit-inbound-div').dialog('open');
     });
 	
