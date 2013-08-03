@@ -194,8 +194,59 @@ $('.create-new-inbound').dialog({
 	
 	
 
+	
+	
+////followme////
 
 
+$('.create-new-followme').dialog({
+        width: 650,
+        height: 400,
+        modal: true,
+        title: "Create Followme",
+        resizable: false,
+        autoOpen: false
+    });
+
+    $('.create-followme').live('click', function() {
+        $('label.error').remove();
+       
+        $('.followme-name').val('');
+        $('.followme-list').html('');
+        $('.create-new-followme').dialog('open');
+    });
+
+    $("#pbx-new-followme").validate({
+        rules: {
+           
+		   followme_name: "required",
+               
+			   },
+        errorPlacement: function(error, element) {
+            if (element.attr('name') == 'followme_name') {
+                error.insertAfter('#followme-name-error');
+            }
+            
+           
+        },
+        messages: {
+            
+			followme_name: "Please enter followme name.",
+            
+			},
+        submitHandler: function(form) {
+            $("#pbx-new-followme").submit();
+        }
+    });
+
+
+	
+	$('#quickpick_extension').change(function() {
+        // update input box with the currently selected value
+        $('#followme_list').append($('#quickpick_extension').val()+'\n');
+    });
+	
+	
 
 });
 

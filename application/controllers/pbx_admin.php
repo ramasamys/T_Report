@@ -173,12 +173,13 @@ class Pbx_admin extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
 $search = "";
 
-            $page_url = base_url() . "index.php/pbx_admin/followme_list";
+            $page_url = base_url() . "index.php/pbx_admin/followme";
             $total_users = $this->pbxadmin->followme_count($search);
             $result_page = $this->global_pagination->index($page_url, $total_users);
             $result_per_page = 10;
             $data['result'] = $this->pbxadmin->followmeList($result_per_page, $result_page);
             $data['links'] = $this->pagination->create_links();
+			$data['extension_list']	= 	$this->pbxadmin->getExtension();
             $this->load->view('list_followme', $data);
 
         } else {
@@ -201,6 +202,8 @@ $search = "";
 								
 				$search_data['result']	= 	$this->pbxadmin->followmeSearch($searchterm,$limit);
 				$search_data['links']	= 	$this->pagination->create_links();
+				
+				
 				$data['searchterm'] 	= 	$searchterm;
 				$this->load->view('list_followme',$search_data);
 	} else {
@@ -225,7 +228,22 @@ $search = "";
 
     function followme_insert() {
         if ($this->session->userdata('logged_in')) {
-            $this->load->view('add_followme');
+            
+						
+         $followme_for_insertion = array(   
+			'f_id'		=>	'',
+			'f_name'	=>	stripslashes($this->input->post('followme_name')),
+			'ringtime'	=>	stripslashes($this->input->post('ring_time')),	
+			'extlist'	=>	stripslashes($this->input->post('followme_list')),	
+			'setdst'	=>	stripslashes($this->input->post('set_destination')),
+			'dst'		=>	stripslashes($this->input->post('dependent_destination')),
+			);
+				                
+				$this->pbxadmin->followmeInsert($followme_for_insertion);
+				redirect('pbx_admin/followme');
+			
+			
+			//$this->load->view('add_followme');
         } else {
             redirect('login/logout');
         }

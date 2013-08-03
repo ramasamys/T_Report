@@ -81,6 +81,15 @@ function getAllExtension($exten) {
     return $query->result();
   }   
  
+ 
+ function getExtension() {
+    $extension_list = "SELECT distinct(name) from sipusers";
+	$extension_query = $this->db->query($extension_list);
+    return $extension_query->result_array();
+	//print_r($result);
+	//exit;
+  }  
+ 
 function extensionInsert($extension_for_sipusers,$extension_for_sipname,$extension_for_voiceboxes) 
 	{
 		
@@ -226,13 +235,16 @@ function getAllFollowme($follow) {
     return $query->result();
   } 
 			
-function followmeInsert() {
+function followmeInsert($followme_for_insertion) {
 
-$insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
+		$followme_insert		=	$this->db->insert('followme', $followme_for_insertion);
+		
+		return $this->db->insert_id();
+/*$insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
 
    $insertfollow = $this->db->query($insert);
 //   return $insertfollow->result_array();
-
+*/
     }
     
 function followmeUpdate() {
