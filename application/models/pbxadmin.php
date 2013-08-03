@@ -210,6 +210,8 @@ function followmeList($limit, $start)
 
   }
   
+
+  
   function followmeSearch($searchterm,$limit)
 	{
 		$sql = "SELECT * FROM followme WHERE f_name LIKE '%" . $searchterm . "%' LIMIT " .$limit . ",10 ";

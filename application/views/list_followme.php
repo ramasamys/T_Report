@@ -25,7 +25,7 @@
   </table> 
 </form>     
 </div>
-<div class="new-followme-creation">
+<div class="new-extension-creation">
     <input type="button" name="add-new-followme" class="create-followme button-color" value="Create Followme"/>
 </div>
 <div class="agent-summary-list">
@@ -41,8 +41,10 @@
      foreach($result as $value) : ?>
     <tr>
 		
+
 		<td><?php echo $value->f_name; ?></td>
-		<td><a href="#">Edit</a>&nbsp;|&nbsp;<a href="#">Delete</a></td>
+		<td><a href="#" 
+		followme_id="<?php echo $value->f_id; ?>" followme_name="<?php echo $value->f_name; ?>" ring_time="<?php echo $value->ringtime; ?>"extension_list="<?php echo $value->extlist; ?>" set_destination="<?php echo $value->setdst; ?>" dependent_value="<?php echo $value->dst; ?>" class="edit-followme">Edit</a>&nbsp;|&nbsp;<a href="#">Delete</a></td>
       
     </tr>
    <?php endforeach; ?>
@@ -74,7 +76,8 @@
               <td class="error_cell"> <label id="followme-name-error"></label></td>
     </tr>    
     <tr>
-	<td>Ring Time</td> <td><select type="text" name="ring_time" id="ring_time">
+	<td>Ring Time</td> <td><select type="text" name="ring_time" id="ring_time"class="ring-time">
+	
 	<?php
 						for ($i=0; $i <= 60; $i++) {
 							echo '<option value="'.$i.'">'.$i.'</option>';
@@ -131,11 +134,7 @@
 	 <td>
 	 
 		<select name="dependent_destination" id="dependent_destination">
-			<option value="">Select</option>
-			<option value="erte">dfgdf</option>
-			<option value="dfgdf">dfgfdg</option>
-			<option value="fdgdfg">ertret</option>
-			<!--<option selected="selected">-</option>-->
+			<option selected="selected">-</option>
 		</select>
 	  </td>
     </tr>
@@ -151,27 +150,86 @@
   </table>
 </form>
 </div>
-<div class="display-type edit-extension-div" >
+<div class="display-type edit-followme-div" >
     <table>
 
-  <tr><td >Extension</td><td > <input type = "text"  name = "ext" id = "ext" value = " " class="textbox-style1" > </td></tr>
-  <tr><td>Host</td><td><input type = "text"  name = "host" id = "host" value = " " class="textbox-style1" > </td></tr>
- <tr><td>Name</td><td><input type = "text"  name = "name" id = "name" value = " " class="textbox-style1" > </td></tr>
- <tr><td>Nat</td><td><input type = "text"  name = "nat" id = "nat" value = " " class="textbox-style1" > </td></tr>
-  <tr><td>Type</td><td><input type = "text"  name = "type" id = "type" value = " " class="textbox-style1" > </td></tr>
-  <tr><td>Context</td><td><input type = "text"  name = "context" id = "context" value = " " class="textbox-style1" > </td></tr>
-  <tr><td> From-user</td><td><input type = "text"  name = "fromuser" id = "fromuser" value = " " class="textbox-style1" > </td></tr>
-  <tr><td> Mailbox</td><td><input type = "text"  name = "mailbox" id = "mailbox" value = " " class="textbox-style1"> </td></tr>
-  <tr><td>Secret</td><td><input type = "text"  name = "sippasswd" id = "sippasswd" value = " " class="textbox-style1"> </td></tr>
-  <tr><td>CallerId</td><td><input type = "text"  name = "callerid" id = "callerid" value = " " class="textbox-style1" > </td></tr>
-  <tr><td>Cancallforward</td><td><input type = "text"  name = "cancallforward" id = "cancallforward" value = " " class="textbox-style1" > </td></tr>
-  <tr><td>Canreinvite </td><td><input type = "text"  name = "canreinvite" id = "canreinvite" value = " " class="textbox-style1" > </td></tr>
-  <tr><td>Mask </td><td><input type = "text"  name = "mask" id = "mask" value = " "class="textbox-style1" > </td></tr>
-  <tr><td>Musiconhold </td><td><input type = "text"  name = "musiconhold" id = "musiconhold" value = " " class="textbox-style1" > </td></tr>
-  <tr><td>Port </td><td><input type = "text"  name = "port" id = "port" value = " "class="textbox-style1" > </td></tr>
-  <tr><td>Regseconds</td><td><input type = "text"  name = "regseconds" id = "regseconds" value = " " class="textbox-style1" > </td></tr>
-  <tr><td>Lastms</td><td><input type = "text"  name = "lastms" id = "lastms" value = " " class="textbox-style1" > </td></tr>	  
-  <tr>
+   <tr>
+
+        <td>Followme name <sup>*</sup></td> <td><input type="text" name="edit_followme_name" class="textbox-style1 edit-followme-name" value=""></td><td></td>
+    </tr>
+    <tr>
+        <td></td>
+              <td class="error_cell"> <label id="edit-followme-name-error"></label></td>
+    </tr>    
+    <tr>
+	<td>Ring Time</td> <td><select type="text" name="edit_ring_time" id="edit_ring_time">
+	
+	<?php
+						for ($i=0; $i <= 60; $i++) {
+							echo '<option value="'.$i.'">'.$i.'</option>';
+						}
+					?>
+	</select>
+	</td><td></td>
+    </tr>
+    <tr>
+        <td></td>
+              <td class="error_cell"> <label id="edit-ring-time-error"></label></td>
+    </tr>        
+    
+	<tr>
+	<td>Quick Pick Extenstion</td> <td>
+	<select name="edit_quickpick_extension" id="edit_quickpick_extension">
+	
+	
+	 <? if(!empty($extension_list)){ 
+     foreach($extension_list as $extensions) : ?>
+ 		
+		<?php echo '<option value="'.$extensions['name'].'">'.$extensions['name'].'</option>' ?>
+		
+   <?php endforeach; ?>
+   <? } else { ?>
+   <option value="">No extensions</option>
+   <? }?>
+	
+	
+	
+	
+	
+	</select></td><td></td>
+    </tr>
+    <tr>
+        <td></td>
+              <td class="error_cell"> <label id="edit-quickpick-extension-error"></label></td>
+    </tr>
+	
+	 <tr>
+	<td>FollowMe List</td> <td><textarea name="edit_followme_list" id="edit_followme_list" class="edit-followme-list" value="" cols="40" rows="4" ></textarea></td><td></td>
+    </tr>
+    <tr>
+        <td></td>
+              <td class="error_cell"> <label id="edit-followme-list-error"></label></td>
+    </tr>  
+	
+	<tr>
+	<td>Set destination</td> <td><select name="edit_set_destination" id="edit_set_destination"> 
+		<option value="">Select</option>
+		<option value="Queue">Queue</option> 
+	    </select></td>
+	  
+	 <td>
+	 
+		<select name="edit_dependent_destination" id="edit_dependent_destination">
+			<option selected="selected">-</option>
+		</select>
+	  </td>
+    </tr>
+    <tr>
+        <td></td>
+              <td class="error_cell"> <label id="edit-set-destination-error"></label></td>
+    </tr>        
+     
+    <tr>  <tr>
       <td></td>
       <td><input type="submit" name="" value="Update" class="button-color"/></td>
   </tr>

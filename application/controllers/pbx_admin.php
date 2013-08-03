@@ -211,6 +211,8 @@ $search = "";
         }
 		
 	}
+	
+	
 
 	function getFollow() {
         $queryString = $this->input->get('q');
@@ -272,7 +274,7 @@ $search = "";
 
 			$search = "";
 
-            $page_url = base_url() . "index.php/pbx_admin/queue_list";
+            $page_url = base_url() . "index.php/pbx_admin/queue";
             $total_users = $this->pbxadmin->queue_count($search);
             $result_page = $this->global_pagination->index($page_url, $total_users);
             $result_per_page = 10;
@@ -400,7 +402,7 @@ $search = "";
 			);
 				                
 				$this->pbxadmin->inboundInsert($inbound_for_insertion);
-				redirect('pbx_admin/inbound_list');
+				redirect('pbx_admin/inbound');
             
         } else {
             redirect('login/logout');
@@ -412,7 +414,7 @@ $search = "";
 	if ($this->session->userdata('logged_in')) {
 			
 			$search = "";
-		    $page_url = base_url() . "index.php/pbx_admin/inbound_list";
+		    $page_url = base_url() . "index.php/pbx_admin/inbound";
             $total_users = $this->pbxadmin->inbound_count($search);
 
             $result_page = $this->global_pagination->index($page_url, $total_users);

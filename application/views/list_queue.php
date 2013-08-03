@@ -51,7 +51,7 @@
             </tr>
 <? } ?>
     </table>
-    <p><?php echo $links; ?></p>
+     <div class="pagination-style"><p><?php echo $links; ?></p></div>
 </div>
 
 

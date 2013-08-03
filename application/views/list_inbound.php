@@ -21,6 +21,7 @@
 
             <td style="width:30%;"><input type="submit" name="submit_data" value="Search" class="button-color" /></td>
             <td style="width:30%;"><input type="button" name="export_data" value="Export" class="button-color" /></td>
+			<!--<td style="width:30%;"><button name="export_data"> <img src="<?php echo base_url() . 'css/images/find-icon.png'; ?>"></button></td>-->
         </tr>  
     </table> 
 </form>      
@@ -92,7 +93,8 @@
 
             <td>
                 <select name="dependent_destination" id="dependent_destination">
-                </select>
+                <option selected="selected">-</option>
+				</select>
             </td>
         </tr>
         <tr>
