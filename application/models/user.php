@@ -2,9 +2,6 @@
 
 Class User extends CI_Model {
 
-	
-
-
  function checkLogin($username,$password) {
    $sql = "SELECT id,first_name,username,role FROM users WHERE username=? AND password=?";
    $query = $this->db->query($sql, array($username,md5($password)));  
@@ -28,7 +25,7 @@ Class User extends CI_Model {
   function agentQueue(){
     $sessionValues = $this->session->userdata('logged_in'); 
           $sessionId =  $sessionValues['sessionId'];	  
-  	  
+
   $agent=$_POST['q'];
   $que=$_POST['team'];
   $sql="update logindetail set queue='$que' where sessionId='$sessionId'";
@@ -144,9 +141,7 @@ else
 	$response['phone']=$phon;
         $response['check']="not";
 	echo json_encode($response);
-		
 }
-	
 }
 else
 {
@@ -155,11 +150,10 @@ else
 	$response['name'] = "";
         $response['check'] ="false";
 	echo json_encode($response);
-	
 }
 
 }
-  
+
 function queues(){
 
 $queuesql = "select name from queue_table";
@@ -167,8 +161,16 @@ $queuequery=$this->db->query($queuesql);
 return $queuequery->result_array();
 
 }
+
+function checkQueue(){
+$sessionValues = $this->session->userdata('logged_in');
+$loggedagent = $sessionValues['first_name'];
+
+$checkqueuesql = "select queue_name from queue_member_table where membername='$loggedagent'";
+$checkqueuequery=$this->db->query($checkqueuesql);
+return $checkqueuequery->result_array();
+}
   
   
 }
 ?>
-

@@ -33,9 +33,9 @@ class Login extends CI_Controller {
         $sessionValues = $this->session->userdata('logged_in');
 		
 		if( $this->input->post("rememberme") == 'on')
-           {
+                  {
 		      setcookie("username", $sessionValues['username'], time() + 360000, "/");
-			  setcookie("password", $sessionValues['password'], time() + 360000, "/");
+		      setcookie("password", $sessionValues['password'], time() + 360000, "/");
 		   }
 		   
         if (!empty($sessionValues) && $sessionValues['role'] == 'Administrator') {
@@ -43,7 +43,8 @@ class Login extends CI_Controller {
         }
         if (!empty($sessionValues) && $sessionValues['role'] == 'Agent') {
             $queueList['queue'] = $this->user->queues();
-			$this->load->view('agent',$queueList);
+            $queueList['loggedin'] = $this->user->checkQueue();
+	    $this->load->view('agent',$queueList);
         }
         if (empty($sessionValues)) {
             $this->logout();
