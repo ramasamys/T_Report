@@ -206,6 +206,7 @@ $('.create-new-followme').dialog({
         autoOpen: false
     });
 
+
     $('.create-followme').live('click', function() {
         $('label.error').remove();
        
@@ -245,6 +246,7 @@ $('.create-new-followme').dialog({
     });
 	
 	
+
 
 });
 

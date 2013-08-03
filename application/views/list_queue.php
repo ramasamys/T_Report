@@ -28,6 +28,7 @@
     <input type="button" name="add-new-queue" class="create-queue button-color" value="Create Queue"/>
 </div>
 <div class="agent-summary-list">
+
     <table class="global-table-style">
         <tr>
 
@@ -52,13 +53,9 @@
 <? } ?>
     </table>
     <p><?php echo $links; ?></p>
+
+
 </div>
-
-
-
-
-
-
 
 
 
@@ -307,37 +304,21 @@
     </table>
 </form>
 </div>
-<div class="display-type edit-extension-div" >
+<div class="display-type edit-queue-div" >
     <table>
 
-        <tr><td >Extension</td><td > <input type = "text"  name = "ext" id = "ext" value = " " class="textbox-style1" > </td></tr>
-        <tr><td>Host</td><td><input type = "text"  name = "host" id = "host" value = " " class="textbox-style1" > </td></tr>
-        <tr><td>Name</td><td><input type = "text"  name = "name" id = "name" value = " " class="textbox-style1" > </td></tr>
-        <tr><td>Nat</td><td><input type = "text"  name = "nat" id = "nat" value = " " class="textbox-style1" > </td></tr>
-        <tr><td>Type</td><td><input type = "text"  name = "type" id = "type" value = " " class="textbox-style1" > </td></tr>
-        <tr><td>Context</td><td><input type = "text"  name = "context" id = "context" value = " " class="textbox-style1" > </td></tr>
-        <tr><td> From-user</td><td><input type = "text"  name = "fromuser" id = "fromuser" value = " " class="textbox-style1" > </td></tr>
-        <tr><td> Mailbox</td><td><input type = "text"  name = "mailbox" id = "mailbox" value = " " class="textbox-style1"> </td></tr>
-        <tr><td>Secret</td><td><input type = "text"  name = "sippasswd" id = "sippasswd" value = " " class="textbox-style1"> </td></tr>
-        <tr><td>CallerId</td><td><input type = "text"  name = "callerid" id = "callerid" value = " " class="textbox-style1" > </td></tr>
-        <tr><td>Cancallforward</td><td><input type = "text"  name = "cancallforward" id = "cancallforward" value = " " class="textbox-style1" > </td></tr>
-        <tr><td>Canreinvite </td><td><input type = "text"  name = "canreinvite" id = "canreinvite" value = " " class="textbox-style1" > </td></tr>
-        <tr><td>Mask </td><td><input type = "text"  name = "mask" id = "mask" value = " "class="textbox-style1" > </td></tr>
-        <tr><td>Musiconhold </td><td><input type = "text"  name = "musiconhold" id = "musiconhold" value = " " class="textbox-style1" > </td></tr>
-        <tr><td>Port </td><td><input type = "text"  name = "port" id = "port" value = " "class="textbox-style1" > </td></tr>
-        <tr><td>Regseconds</td><td><input type = "text"  name = "regseconds" id = "regseconds" value = " " class="textbox-style1" > </td></tr>
-        <tr><td>Lastms</td><td><input type = "text"  name = "lastms" id = "lastms" value = " " class="textbox-style1" > </td></tr>	  
-        <tr>
-            <td></td>
-            <td><input type="submit" name="" value="Update" class="button-color"/></td>
-        </tr>
+  <tr><td >Billing</td><td > <input type = "text"  name = "billing" id = "ext" value = " " class="textbox-style1" > </td></tr>
+  <tr><td>Technical</td><td><input type = "text"  name = "techincal" id = "host" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Testing</td><td><input type = "text"  name = "testing" id = "name" value = " " class="textbox-style1" > </td></tr>
+  <tr>
+      <td></td>
+      <td><input type="submit" name="" value="Update" class="button-color"/></td>
+  </tr>
+
     </table>
 </div>
 
 
 
-
-
-
-
 <?php include "footer.php"; ?>
+
