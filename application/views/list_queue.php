@@ -42,7 +42,7 @@
                 ?>
                 <tr>
                     <td><?php echo $value->name; ?></td>
-                    <td><a href="#">Edit</a>&nbsp;|&nbsp;<a href="#">Delete</a></td>
+                    <td><a href="#" class="edit-queue">Edit</a>&nbsp;|&nbsp;<a href="#">Delete</a></td>
 
                 </tr>
             <?php endforeach; ?>
@@ -307,9 +307,29 @@
 <div class="display-type edit-queue-div" >
     <table>
 
-  <tr><td >Billing</td><td > <input type = "text"  name = "billing" id = "ext" value = " " class="textbox-style1" > </td></tr>
-  <tr><td>Technical</td><td><input type = "text"  name = "techincal" id = "host" value = " " class="textbox-style1" > </td></tr>
- <tr><td>Testing</td><td><input type = "text"  name = "testing" id = "name" value = " " class="textbox-style1" > </td></tr>
+  <tr><td >Queue Name</td><td > <input type = "text"  name = "queue" id = "ext" value = " " class="textbox-style1" > </td></tr>
+  <tr><td>Announce-Frequency</td><td><input type = "text"  name = "Announce_frequency" id = "host" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Announce-Holdtime</td><td><input type = "text"  name = "holdtime" id = "name" value = " " class="textbox-style1" > </td></tr>
+ 
+ <tr><td>Announce-Position</td><td><input type = "text"  name = "holdtime" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Autofill</td><td><input type = "text"  name = "autofill" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Event Member Status</td><td><input type = "text"  name = "member ststus" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Event When Called</td><td><input type = "text"  name = "event when called" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Joinempty</td><td><input type = "text"  name = "joinempty" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Leave When Empty</td><td><input type = "text"  name = "holdtime" id = "leave when empty" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Maximum wait time</td><td><input type = "text"  name = "maximum wait time" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Member Delay</td><td><input type = "text"  name = "member delay" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Penalty members limit</td><td><input type = "text"  name = "penalty_member_limit" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Queue-calls waiting</td><td><input type = "text"  name = "Queue-calls waiting" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Report hold time</td><td><input type = "text"  name = "hold time" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Retry</td><td><input type = "text"  name = "retry" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Ring In Use</td><td><input type = "text"  name = "ring in use" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Service Level</td><td><input type = "text"  name = "servicelevel" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Ring Strategy</td><td><input type = "text"  name = "ring strategy" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Timeout</td><td><input type = "text"  name = "timeout" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Timeout Restart</td><td><input type = "text"  name = "timeout restart" id = "name" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Queue Weight</td><td><input type = "text"  name = "timeout" id = "queue weight" value = " " class="textbox-style1" > </td></tr>
+ <tr><td>Wrapuptime</td><td><input type = "text"  name = "wrapuptime" id = "name" value = " " class="textbox-style1" > </td></tr>
   <tr>
       <td></td>
       <td><input type="submit" name="" value="Update" class="button-color"/></td>

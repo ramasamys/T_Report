@@ -246,7 +246,34 @@ $('.create-new-followme').dialog({
     });
 	
 	
+//kanimozhi//
+ $('.edit-queue-div').dialog({
+        width: 500,
+        height: 600,
+        modal: true,
+        title: "Edit queue",
+        resizable: false,
+        autoOpen: false
+    });
 
+    $('.edit-queue').live('click', function() {
+        $('label.error').remove();
+        $('.edit-queue-div').dialog('open');
+    });
+	
+$('.edit-inbound-div').dialog({
+        width: 500,
+        height: 400,
+        modal: true,
+        title: "Edit queue",
+        resizable: false,
+        autoOpen: false
+    });
 
+    $('.edit-inbound').live('click', function() {
+        $('label.error').remove();
+        $('.edit-inbound-div').dialog('open');
+    });
+	
 });
 
