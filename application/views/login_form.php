@@ -21,7 +21,7 @@
 			    </p>
 				<p>
 					<label for="user_pass">Password <br>
-					<input type="password" name="tv_password" value="<?php if(!empty($cookiepassword)){ echo $cookiepassword;} else { echo set_value('tv_username'); }; ?>" placeholder="password"  />
+					<input type="password" name="tv_password" value="<?php if(!empty($cookiepassword)){ echo $cookiepassword;} else { echo set_value('tv_password'); }; ?>" placeholder="password"  />
 				</p>
 <p class="forgetmenot">
 <label for="rememberme">

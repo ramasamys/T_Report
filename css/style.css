@@ -2,6 +2,10 @@ body{
   font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;  
   color:#58595b;
 }
+body select{
+    border: 1px solid #ccc;
+    background: #fff;    
+}
 .overall-container{
   margin: 0 auto;
   width: 100%;
@@ -121,8 +125,10 @@ margin-left: 20px;
     cursor: pointer;
     white-space: nowrap;
 }
-.button-color:hover{
-  font-weight:bold;
+.button-color:hover{  
+  background: #58595b ;
+  border: 1px solid #58595b ;
+  color: #fff;
 }
 .agent-summary-list{
   margin-top: 20px;
@@ -191,15 +197,6 @@ top: -21px;
     line-height: 24px;
 
 }
-#hidediv {
-     color: #FFFFFF;
-     display: none;
-     float: right;
-}
-.show-div {
-     color: #FFFFFF;
-     float: right;
-}
 .global-table-style {	
 	margin:0 auto;
 	width:90%;
@@ -212,7 +209,7 @@ top: -21px;
 
 .search-container table{
   margin:0 auto;
-   clear: both;
+  clear: both;
   /*margin-top:20px;*/
 }
 .footer-container{
