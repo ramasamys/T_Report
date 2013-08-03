@@ -20,9 +20,9 @@
 		<li><a href="#">PBX Admin</a>
 			<ul>
 				<li><a href="<? echo base_url().'index.php/pbx_admin/viewExtension'?>">Extensions</a></li>
-				<li><a href="<? echo base_url().'index.php/pbx_admin/followme_list'?>">Follow Me</a></li>
-				<li><a href="<? echo base_url().'index.php/pbx_admin/queue_list'?>">Queues</a></li>
-				<li><a href="<? echo base_url().'index.php/pbx_admin/inbound_list'?>">Inbound</a></li>
+				<li><a href="<? echo base_url().'index.php/pbx_admin/followme'?>">Follow Me</a></li>
+				<li><a href="<? echo base_url().'index.php/pbx_admin/queue'?>">Queues</a></li>
+				<li><a href="<? echo base_url().'index.php/pbx_admin/inbound'?>">Inbound</a></li>
 			</ul>
 		</li>
 		<li><a href="<? echo base_url().'index.php/pbx_admin/realtime'?>">Real Time Report</a>

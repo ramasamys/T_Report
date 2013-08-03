@@ -86,25 +86,52 @@ class Pbx_admin extends CI_Controller {
 
     function insert_extension() {
 
-        $this->form_validation->set_rules('ext', 'Extension', 'trim|required|numeric|xss_clean');
-        $this->form_validation->set_rules('name', 'Displayname', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('secret', 'Secret', 'trim|required|alphanumeric|xss_clean');
+			$extension_for_sipusers = array(   
+			'name'						=>	stripslashes($this->input->post('sip_extension')),
+			'host'						=>	stripslashes($this->input->post('extension_host')),
+			'context'					=>	stripslashes($this->input->post('context')),
+			'fromuser'					=>	stripslashes($this->input->post('sip_extension')),
+			'mailbox'					=>	stripslashes($this->input->post('mailid')),
+			'username'					=>	stripslashes($this->input->post('sip_extension')),
+			'sippasswd'					=>	stripslashes($this->input->post('password_ext')),
+			'callgroup'					=>	stripslashes($this->input->post('call_group')),
+			'pickupgroup'				=>	stripslashes($this->input->post('pickup_group')),
+			);
+			
+			$extension_for_sipname = array(   
+			'exten'						=>	stripslashes($this->input->post('sip_extension')),
+			'name'						=>	stripslashes($this->input->post('display_name')),
+			);
+			
+			$extension_for_voiceboxes = array(   
+			'customer_id'				=>	stripslashes($this->input->post('sip_extension')),
+			'mailbox'					=>	stripslashes($this->input->post('sip_extension')),				  	  	      	  	  	
+			'password'					=>	stripslashes($this->input->post('password_ext')),	  	  	      	  	  	
+			'email'						=>	stripslashes($this->input->post('mailid')),
+			'context'					=>	stripslashes($this->input->post('context')),
+			);
 
-        if (isset($_POST['mail'])) {
-
-            $this->form_validation->set_rules('mailid', 'Email', 'trim|required|valid_email|xss_clean');
-            $this->form_validation->set_rules('password', 'Password', 'trim|required|numeric|xss_clean');
-        }
-
-        if ($this->form_validation->run() == FALSE) {
-
-            $this->load->view('extension_view');
-        } else {
-            $this->load->model('pbxadmin');
-            $myarray = array();
-            $myarray['id'] = $this->pbxadmin->extensionInsert();
-            $this->load->view('success', $myarray);
-        }
+          
+			$insertid_array		=	array();
+			$insertid_array		=	$this->pbxadmin->extensionInsert($extension_for_sipusers,$extension_for_sipname,$extension_for_voiceboxes);
+			
+			$sipuser_id		=	$insertid_array[0];
+			$sipname_id		=	$insertid_array[1];
+			$voiceboxes_id	=	$insertid_array[2];
+			
+			if($sipuser_id!="" || $sipuser_id!=0 || $sipname_id!="" || $sipname_id!=0 || $voiceboxes_id!="" || $voiceboxes_id!=0)
+				{
+					
+					redirect('pbx_admin/viewExtension');
+			
+				}
+			else
+				{	
+					$this->pbxadmin->extension_insert_fail($sipuser_id,$sipname_id,$voiceboxes_id);
+					redirect('pbx_admin/viewExtension');
+				
+				}
+		    
     }
 
     function edit_extension() {
@@ -142,16 +169,17 @@ class Pbx_admin extends CI_Controller {
 	
 
 
-    function followme_list() {
+    function followme() {
         if ($this->session->userdata('logged_in')) {
 $search = "";
 
-            $page_url = base_url() . "index.php/pbx_admin/followme_list";
+            $page_url = base_url() . "index.php/pbx_admin/followme";
             $total_users = $this->pbxadmin->followme_count($search);
             $result_page = $this->global_pagination->index($page_url, $total_users);
             $result_per_page = 10;
             $data['result'] = $this->pbxadmin->followmeList($result_per_page, $result_page);
             $data['links'] = $this->pagination->create_links();
+			$data['extension_list']	= 	$this->pbxadmin->getExtension();
             $this->load->view('list_followme', $data);
 
         } else {
@@ -174,6 +202,8 @@ $search = "";
 								
 				$search_data['result']	= 	$this->pbxadmin->followmeSearch($searchterm,$limit);
 				$search_data['links']	= 	$this->pagination->create_links();
+				
+				
 				$data['searchterm'] 	= 	$searchterm;
 				$this->load->view('list_followme',$search_data);
 	} else {
@@ -181,6 +211,8 @@ $search = "";
         }
 		
 	}
+	
+	
 
 	function getFollow() {
         $queryString = $this->input->get('q');
@@ -198,7 +230,22 @@ $search = "";
 
     function followme_insert() {
         if ($this->session->userdata('logged_in')) {
-            $this->load->view('add_followme');
+            
+						
+         $followme_for_insertion = array(   
+			'f_id'		=>	'',
+			'f_name'	=>	stripslashes($this->input->post('followme_name')),
+			'ringtime'	=>	stripslashes($this->input->post('ring_time')),	
+			'extlist'	=>	stripslashes($this->input->post('followme_list')),	
+			'setdst'	=>	stripslashes($this->input->post('set_destination')),
+			'dst'		=>	stripslashes($this->input->post('dependent_destination')),
+			);
+				                
+				$this->pbxadmin->followmeInsert($followme_for_insertion);
+				redirect('pbx_admin/followme');
+			
+			
+			//$this->load->view('add_followme');
         } else {
             redirect('login/logout');
         }
@@ -222,12 +269,12 @@ $search = "";
         }
     }
 
-    function queue_list() {
+    function queue() {
         if ($this->session->userdata('logged_in')) {
 
 			$search = "";
 
-            $page_url = base_url() . "index.php/pbx_admin/queue_list";
+            $page_url = base_url() . "index.php/pbx_admin/queue";
             $total_users = $this->pbxadmin->queue_count($search);
             $result_page = $this->global_pagination->index($page_url, $total_users);
             $result_per_page = 10;
@@ -276,17 +323,50 @@ $search = "";
 
     function queue_insert() {
         if ($this->session->userdata('logged_in')) {
-            $this->form_validation->set_rules('qname', 'Queue_name', 'trim|required|alphanumeric|xss_clean');
-
-            $this->form_validation->set_rules('qwait', 'Queue_call_waiting', 'trim|required|alphanumeric|xss_clean');
-
-            if ($this->form_validation->run() == FALSE) {
-
-                $this->load->view('add_queue');
-            } else {
-                $this->pbxadmin->queueInsert();
-                redirect('pbx_admin/queue_list');
-            }
+		
+			
+         $queue_for_insertion = array(   
+			'name'						=>	stripslashes($this->input->post('queue_name')),
+			'musiconhold'				=>	'NULL',					  	  	      	  	  	
+			'announce'					=>	'NULL',	  	  	      	  	  	
+			'context'					=>	'NULL',	  	  	      	  	  	
+			'timeout'					=>	stripslashes($this->input->post('time_out')),
+			'monitor_join'  			=>	'NULL',
+			'monitor_format'			=>	'NULL',			  	  	      	  	  	
+			'queue_youarenext'			=>	'NULL',			  	  	      	  	  	
+			'queue_thereare'			=>	'NULL',			  	  	      	  	  	
+			'queue_callswaiting'		=>	stripslashes($this->input->post('queue_call_wait')),	
+			'queue_holdtime'			=>	'NULL',
+			'queue_minutes'				=>	'NULL',		  	  	      	  	  	
+			'queue_seconds'				=>	'NULL',		  	  	      	  	  	
+			'queue_lessthan'			=>	'NULL',		  	  	      	  	  	
+			'queue_thankyou'			=>	'NULL',		  	  	      	  	  	
+			'queue_reporthold'			=>	'NULL',			  	  	      	  	  	
+			'announce_frequency'		=>	stripslashes($this->input->post('announce_frequency')),	
+			'announce_round_seconds'	=>	'NULL',
+			'announce_holdtime'			=>	stripslashes($this->input->post('announce_holdtime')),
+			'retry'						=>	stripslashes($this->input->post('retry')),      	  	  	
+			'wrapuptime'				=>	stripslashes($this->input->post('wrapup_time')),
+			'maxlen'					=>	stripslashes($this->input->post('max_wait_time')),
+			'servicelevel'				=>	stripslashes($this->input->post('service_level')),
+			'strategy'					=>	stripslashes($this->input->post('ring_statergy')),
+			'joinempty'					=>	stripslashes($this->input->post('join_empty')),
+			'leavewhenempty'			=>	stripslashes($this->input->post('leave_when_empty')),
+			'eventmemberstatus'			=>	stripslashes($this->input->post('event_member_status')),
+			'eventwhencalled'			=>	stripslashes($this->input->post('event_when_called')),
+			'reportholdtime'			=>	stripslashes($this->input->post('report_hold_time')),
+			'memberdelay'				=>	stripslashes($this->input->post('member_delay')),
+			'weight'					=>	stripslashes($this->input->post('queue_weight')),	  	  	      	  	  	
+			'timeoutrestart'			=>	stripslashes($this->input->post('timeout_restart')),
+			'periodic_announce'			=>	'NULL',
+			'periodic_announce_frequency'=>	'NULL',
+			'ringinuse'					=>	stripslashes($this->input->post('ring_in_use')),  	  	      	  	  	
+			'setinterfacevar'			=>	'NULL',
+				);
+				                
+				$this->pbxadmin->queueInsert($queue_for_insertion);
+				redirect('pbx_admin/queue_list');
+            
         } else {
             redirect('login/logout');
         }
@@ -310,16 +390,31 @@ $search = "";
         }
     }
 
-    function inbound_insert() {
-        $this->load->view('add_inbound');
+    function insert_inbound() {
+        if ($this->session->userdata('logged_in')) {
+		
+         $inbound_for_insertion = array(   
+			'did_num'	=>	stripslashes($this->input->post('did_number')),
+			'did_name'	=>	stripslashes($this->input->post('did_name')),
+			'setdst'	=>	stripslashes($this->input->post('set_destination')),	
+			'dst'		=>	stripslashes($this->input->post('dependent_destination')),	
+			
+			);
+				                
+				$this->pbxadmin->inboundInsert($inbound_for_insertion);
+				redirect('pbx_admin/inbound');
+            
+        } else {
+            redirect('login/logout');
+        }
     }
 
-    function inbound_list() {
+    function inbound() {
 
 	if ($this->session->userdata('logged_in')) {
 			
 			$search = "";
-		    $page_url = base_url() . "index.php/pbx_admin/inbound_list";
+		    $page_url = base_url() . "index.php/pbx_admin/inbound";
             $total_users = $this->pbxadmin->inbound_count($search);
 
             $result_page = $this->global_pagination->index($page_url, $total_users);
@@ -333,6 +428,17 @@ $search = "";
         }	
 
      }
+	 
+	 function inbound_dependent()
+	 {
+             if ($this->session->userdata('logged_in')) {
+            $dependent = $this->input->post('destination'); 
+             $dvalues = $this->pbxadmin->dependent_values($dependent); 
+             echo json_encode($dvalues);
+        } else {
+            redirect('login/logout');
+        }
+    }
 
     function depended_value(){
     	$values = $this->pbxadmin->dependedValues();

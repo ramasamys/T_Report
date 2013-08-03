@@ -59,6 +59,6 @@
     </tr>
   <? } ?>
   </table>
-  <?php echo $links;?>
+  <div class="pagination-style"><p><?php echo $links; ?></p></div>
 </div>
 <?php include "footer.php";?>
