@@ -1,17 +1,14 @@
 <?php include "header.php";
 
-
- <? if(!empty($loggedin)){ 
+ if(!empty($loggedin)){ 
 echo "<div align='right'>You have already logged in ";
      foreach($loggedin as $qname) : 
      
 	echo $qname['queue_name'];
 			
     endforeach; 
-    <?
-    echo "</div>";} else { }?>
-    
-    
+
+    echo "</div>";} else { }    
 
 ?>
 
