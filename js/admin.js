@@ -21,16 +21,15 @@ $(document).ready(function() {
         $('.create-new-extension').dialog('open');
     });
 
-    //$("#pbx-new-extensions").validate({ignore:":not(:visible)"});
-    $("#pbx-new-extensions").validate({
+      $("#pbx-new-extensions").validate({
         rules: {
             sip_extension: {required: true, digits: true},
             display_name: "required",
             secret: "required",
             call_group: "required",
             pickup_group: "required",
-            mailid: {required: true, email: true},
-            password_ext: {required: true, digits: true},
+            mailid: {required: '#mailbox:checked', email: true,},
+            password_ext: {required: '#mailbox:checked', digits: true},
         },
         errorPlacement: function(error, element) {
             if (element.attr('name') == 'sip_extension') {

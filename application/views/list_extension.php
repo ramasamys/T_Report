@@ -123,7 +123,7 @@
 
 
         <tr>
-            <td>Mailbox</td> <td><input  type="checkbox" name="mail" class="mailbox" value=""/>Enable</td>
+            <td>Mailbox</td> <td><input  type="checkbox" name="mail" id="mailbox" class="mailbox" value=""/>Enable</td>
         </tr>
         <tr style="display:none;" class="show-fields">
             <td>Email id</td> <td><input type="text" name="mailid" id="mailid" class="textbox-style1 email-id" value="" ></td>
