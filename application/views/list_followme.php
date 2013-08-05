@@ -34,6 +34,8 @@
 	
       <th>Followme id</th>
 	  <th>Followme name</th>
+	  <th>Ring time</th>
+	  <th>Extension list</th>
       <th>Actions</th>
      
 
@@ -44,6 +46,8 @@
 		
 		<td><?php echo $value->f_id; ?></td>
 		<td><?php echo $value->f_name; ?></td>
+		<td><? echo $ringtime = isset($value->ringtime) ? $value->ringtime : '-'; ?></td>
+		<td><? echo $extlist = isset($value->extlist) ? $value->extlist : '-'; ?></td>
 		<td><a href="#" 
 		followme_id="<?php echo $value->f_id; ?>" followme_name="<?php echo $value->f_name; ?>" ring_time="<?php echo $value->ringtime; ?>"extension_list="<?php echo $value->extlist; ?>" set_destination="<?php echo $value->setdst; ?>" dependent_value="<?php echo $value->dst; ?>" class="edit-followme">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-followme" deleteid="<?php echo $value->f_id; ?>">Delete</a></td>
       

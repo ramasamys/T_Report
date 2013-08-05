@@ -36,6 +36,8 @@
 
             <th>DID number</th>
 			<th>DID name</th>
+			<th>Set destination</th>
+			<th>Destination</th>
             <th>Actions</th>
 
 
@@ -46,6 +48,8 @@
                 <tr>
                     <td><?php echo $value->did_num; ?></td>
 					<td><?php echo $value->did_name; ?></td>
+					<td><? echo $setdst = isset($value->setdst) ? $value->setdst : '-'; ?></td>
+					<td><? echo $dst = isset($value->dst) ? $value->dst : '-'; ?></td>
                     <td><a href="#" did_name="<?php echo $value->did_name;?>" did_number="<?php echo $value->did_num;?>" class="edit-inbound">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-inbound" deleteid="<?php echo $value->did_num; ?>">Delete</a></td>
                 </tr>
             <?php endforeach; ?>

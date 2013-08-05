@@ -33,7 +33,7 @@
 <div class="agent-summary-list">
   <table class="global-table-style">
     <tr>
-      <th>Date</th>
+      <th>Date(DD-MM-YYYY)</th>
       <th>Queue</th>
       <th>Total calls</th>
       <th>Answered calls</th>
