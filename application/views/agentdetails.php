@@ -10,8 +10,8 @@
 <div  class="slide-up-key" style="display: none;">
 <?php
 	$controller_name = "useragent";
-	$attributes = array('username' => '',
-			 'role' => '');
+	$attributes = array('class' => '',
+        'id' => '', 'name' => '');
 	echo form_open($controller_name, $attributes);
 ?>
   <table class="global-table-style" style="line-height: 40px;">
@@ -32,7 +32,7 @@
 </div>
 </div>
 <div class="new-user-creation">
-    <input type="button" name="add-new-user"  class="create-user button-color" value="Create User"/>
+    <input type="button" name="add-new-user"  class="create-user button-color" value="Create "/>
 	
 </div>
 

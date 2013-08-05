@@ -309,6 +309,64 @@ $('.edit-inbound-div').dialog({
 		
         $('.edit-inbound-div').dialog('open');
     });
-	
-});
+	//settings
+	$('.create-new-user').dialog({
+        width: 500,
+        height: 400,
+        modal: true,
+        title: "Create User",
+        resizable: false,
+        autoOpen: false
+    });
 
+    $('.create-user').live('click', function() {
+        $('label.error').remove();
+        $('.username').val('');
+        $('.role').val('');
+        $('.firstname').val('');
+        $('.lastname').val('');
+        $('.call-pickup').val('');
+        $('.email-id').val('');
+        $('.password-ext').val('');
+        $('.create-new-user').dialog('open');
+    });
+
+    $("#new-user").validate({
+        rules: {
+            username: "required",
+            role: "required",
+            firstname: "required",
+            lastname: "required",
+           
+        },
+        errorPlacement: function(error, element) {
+            if (element.attr('name') == 'username') {
+                error.insertAfter('#username-error');
+            }
+            if (element.attr('name') == 'role') {
+                error.insertAfter('#role-error');
+            }
+            if (element.attr('name') == 'firstname') {
+                error.insertAfter('#firstname-error');
+            }
+            if (element.attr('name') == 'lastname') {
+                error.insertAfter('#lastname-error');
+            }
+            if (element.attr('name') == 'pickup_group') {
+                error.insertAfter('#call-pickup-error');
+            }
+            if (element.attr('name') == 'mailid') {
+                error.insertAfter('#password-error');
+            }
+            if (element.attr('name') == 'password_ext') {
+                error.insertAfter('#password-error');
+            }
+        },
+        messages: {
+            username: "Please enter Username",
+            role: "Please enter Role",
+            firstname: "Please enter Firstname",
+            lastname: "Please enter Lastname",
+           
+});
+});

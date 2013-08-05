@@ -26,13 +26,7 @@ function settings()
 			$data['links'] = $this->pagination->create_links();
             $this->load->view('agentdetails', $data );
    }
-   function createnewuser() {
-        if ($this->session->userdata('logged_in')) {
-            $this->load->view('agentdetails');
-        } else {
-            redirect('login/logout');
-        }
-    }
+ 
 
     function insert() {
 
@@ -56,43 +50,11 @@ function settings()
         } else {
             $this->load->model('agent');
             $myarray = array();
-            $myarray['id'] = $this->pbxadmin->extensionInsert();
+            $myarray['id'] = $this->agentdetails->insert();
             $this->load->view('success', $myarray);
         }
     }
 
-    function edit_extension() {
-
-        $this->form_validation->set_rules('ext', 'Extension', 'trim|required|numeric|xss_clean');
-        $this->form_validation->set_rules('name', 'Displayname', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('secret', 'Secret', 'trim|required|alphanumeric|xss_clean');
-
-        if (isset($_POST['mail'])) {
-
-            $this->form_validation->set_rules('mailid', 'Email', 'trim|required|valid_email|xss_clean');
-            $this->form_validation->set_rules('password', 'Password', 'trim|required|numeric|xss_clean');
-        }
-
-        if ($this->form_validation->run() == FALSE) {
-
-            $this->load->view('extension_view');
-        } else {
-
-            $this->pbxadmin->extensionUpdate();
-            redirect('pbx_admin/extension_list');
-        }
-    }
-
-    function deleteExtension() {
-        if ($this->session->userdata('logged_in')) {
-
-            $id = stripslashes($this->input->get('delete_id'));           
-            $this->pbxadmin->extensionDelete($id);
-            redirect('pbx_admin/extension_list');
-        } else {
-            redirect('login/logout');
-        }
-    
-   }
+  
    }
    ?>
