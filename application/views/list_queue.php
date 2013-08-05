@@ -33,6 +33,8 @@
         <tr>
 
             <th>Queue</th>
+			<th>Context</th>
+			<th>time out</th>
             <th>Actions</th>
 
 
@@ -42,7 +44,9 @@
                 ?>
                 <tr>
                     <td><?php echo $value->name; ?></td>
-                    <td><a href="#" queue_name="<?php echo $value->name;?>" queue_calls_waiting="<?php echo $value->queue_callswaiting;?>" class="edit-queue">Edit</a>&nbsp;|&nbsp;<a href="#">Delete</a></td>
+					<td><? echo $context = isset($value->context) ? $value->context : '-'; ?></td>
+					<td><? echo $timeout = isset($value->timeout) ? $value->timeout : '-'; ?></td>
+                    <td><a href="#" queue_name="<?php echo $value->name;?>" queue_calls_waiting="<?php echo $value->queue_callswaiting;?>" class="edit-queue">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-queue" deleteid="<?php echo $value->name; ?>">Delete</a></td>
 
                 </tr>
             <?php endforeach; ?>

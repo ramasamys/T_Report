@@ -80,7 +80,7 @@ $(document).ready(function() {
 
 
 
-/////////////////kumutha////////////////////////
+/////////////////queue////////////////////////
 
 
     $('.create-new-queue').dialog({
@@ -123,8 +123,49 @@ $(document).ready(function() {
         }
     });
 
+	//////edit queue//////
+	
+ $('.edit-queue-div').dialog({
+        width: 500,
+        height: 600,
+        modal: true,
+        title: "Edit queue",
+        resizable: false,
+        autoOpen: false
+    });
+	
+    $('.edit-queue').live('click', function() {
+        $('label.error').remove();
+		$('.edit-queue-name').val($(this).attr('queue_name'));
+		$('.edit-queue-calls-waiting').val($(this).attr('queue_calls_waiting'));
+		
+		
+        $('.edit-queue-div').dialog('open');
+    });
 
-/////inbound//////	
+	/////////////delete queue//////////
+	
+	     $('.delete-queue').live('click',function(){ 
+	var queue_delete_id = $(this).attr('deleteid');
+	var confirmationvalues = confirm("Are you sure you want to delete this queue "+queue_delete_id+"? Click Yes to continue or No to cancel");
+	if(confirmationvalues == true){
+	if(queue_delete_id !=''){
+	  $(this).parents('tr').remove();
+	      var post_data = {queue_delete_id:queue_delete_id};
+		    $.ajax({
+		      type:'POST',
+		      url: baseUrl + "index.php/pbx_admin/queue_delete",
+		      data:post_data,
+		      success: function(data) {
+console.log(data);
+		      }
+	      });
+	}
+      }
+      });   
+
+
+	/////inbound//////	
 
 
     $('.create-new-inbound').dialog({
@@ -192,10 +233,49 @@ $(document).ready(function() {
 
 
     });
+	
+	
+/////////edit inbound//////////
+	
+$('.edit-inbound-div').dialog({
+        width: 500,
+        height: 400,
+        modal: true,
+        title: "Edit queue",
+        resizable: false,
+        autoOpen: false
+    });
+
+    $('.edit-inbound').live('click', function() {
+        $('label.error').remove();
+		
+		
+        $('.edit-inbound-div').dialog('open');
+    });
 
 
 
-
+	
+/////////////delete inbound//////////
+	
+	     $('.delete-inbound').live('click',function(){ 
+	var inbound_delete_id = $(this).attr('deleteid');
+	var confirmationvalues = confirm("Are you sure you want to delete this inbound route "+inbound_delete_id+"? Click Yes to continue or No to cancel");
+	if(confirmationvalues == true){
+	if(inbound_delete_id !=''){
+	  $(this).parents('tr').remove();
+	      var post_data = {inbound_delete_id:inbound_delete_id};
+		    $.ajax({
+		      type:'POST',
+		      url: baseUrl + "index.php/pbx_admin/inbound_delete",
+		      data:post_data,
+		      success: function(data) {
+console.log(data);
+		      }
+	      });
+	}
+      }
+      });   
 	
 	
 ////followme////
@@ -275,40 +355,26 @@ $('.create-new-followme').dialog({
 
 
 
-//kanimozhi//
- $('.edit-queue-div').dialog({
-        width: 500,
-        height: 600,
-        modal: true,
-        title: "Edit queue",
-        resizable: false,
-        autoOpen: false
-    });
+/////////////delete followme//////////
 	
-    $('.edit-queue').live('click', function() {
-        $('label.error').remove();
-		$('.edit-queue-name').val($(this).attr('queue_name'));
-		$('.edit-queue-calls-waiting').val($(this).attr('queue_calls_waiting'));
-		
-		
-        $('.edit-queue-div').dialog('open');
-    });
-	
-$('.edit-inbound-div').dialog({
-        width: 500,
-        height: 400,
-        modal: true,
-        title: "Edit queue",
-        resizable: false,
-        autoOpen: false
-    });
-
-    $('.edit-inbound').live('click', function() {
-        $('label.error').remove();
-		
-		
-        $('.edit-inbound-div').dialog('open');
-    });
+	     $('.delete-followme').live('click',function(){ 
+	var followme_delete_id = $(this).attr('deleteid');
+	var confirmationvalues = confirm("Are you sure you want to delete this followme "+followme_delete_id+"? Click Yes to continue or No to cancel");
+	if(confirmationvalues == true){
+	if(followme_delete_id !=''){
+	  $(this).parents('tr').remove();
+	      var post_data = {followme_delete_id:followme_delete_id};
+		    $.ajax({
+		      type:'POST',
+		      url: baseUrl + "index.php/pbx_admin/followme_delete",
+		      data:post_data,
+		      success: function(data) {
+console.log(data);
+		      }
+	      });
+	}
+      }
+      });
 	
 });
 

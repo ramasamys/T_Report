@@ -159,8 +159,8 @@ class Pbx_admin extends CI_Controller {
     function deleteExtension() {
         if ($this->session->userdata('logged_in')) {
 
-            $id = stripslashes($this->input->get('delete_id'));           
-            $this->pbxadmin->extensionDelete($id);
+		    $id = $this->input->post('delete_id');   
+			$this->pbxadmin->extensionDelete($id);
             redirect('pbx_admin/extension_list');
         } else {
             redirect('login/logout');
@@ -262,8 +262,10 @@ $search = "";
 
     function followme_delete() {
         if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->followmeDelete();
-            redirect('pbx_admin/followme_list');
+		
+			$followme_delete_id = $this->input->post('followme_delete_id');   
+			$this->pbxadmin->followmeDelete($followme_delete_id);
+            redirect('pbx_admin/followme');
         } else {
             redirect('login/logout');
         }
@@ -383,8 +385,10 @@ $search = "";
 
     function queue_delete() {
         if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->queueDelete();
-            redirect('pbx_admin/queue_list');
+            
+			$queue_delete_id = $this->input->post('queue_delete_id');   
+			$this->pbxadmin->queueDelete($queue_delete_id);
+            redirect('pbx_admin/queue');
         } else {
             redirect('login/logout');
         }
@@ -489,6 +493,20 @@ $search = "";
             echo "$items[$i] \n";
         }
     }
+	
+	
+	 function inbound_delete() {
+        if ($this->session->userdata('logged_in')) {
+            
+			$inbound_delete_id = $this->input->post('inbound_delete_id');   
+			$this->pbxadmin->inboundDelete($inbound_delete_id);
+            redirect('pbx_admin/inbound');
+        } else {
+            redirect('login/logout');
+        }
+    }
+
+	
 	
 	function realtime()
 	{

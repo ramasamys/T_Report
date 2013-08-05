@@ -49,7 +49,7 @@
                     <td><?php echo $value->name; ?></td>
                     <td><? echo $mailbox = @($value->mailbox) ? $value->mailbox : '-'; ?></td>
                     <td><? echo $cid = isset($value->callerid) ? $value->callerid : '-'; ?></td>
-                    <td><a href="#" class="edit-extension">Edit</a> &nbsp;|&nbsp;<a href="#" class="delete-extension" deleteid="<?php echo $value->id; ?>" >Delete</a></td>
+                    <td><a href="#" class="edit-extension">Edit</a> &nbsp;|&nbsp;<a href="#" class="delete-extension" deleteid="<?php echo $value->name; ?>" >Delete</a></td>
 
                 </tr>
             <?php endforeach; ?>

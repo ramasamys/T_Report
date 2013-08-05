@@ -32,7 +32,8 @@
   <table class="global-table-style">
     <tr>
 	
-      <th>Followme</th>
+      <th>Followme id</th>
+	  <th>Followme name</th>
       <th>Actions</th>
      
 
@@ -41,10 +42,10 @@
      foreach($result as $value) : ?>
     <tr>
 		
-
+		<td><?php echo $value->f_id; ?></td>
 		<td><?php echo $value->f_name; ?></td>
 		<td><a href="#" 
-		followme_id="<?php echo $value->f_id; ?>" followme_name="<?php echo $value->f_name; ?>" ring_time="<?php echo $value->ringtime; ?>"extension_list="<?php echo $value->extlist; ?>" set_destination="<?php echo $value->setdst; ?>" dependent_value="<?php echo $value->dst; ?>" class="edit-followme">Edit</a>&nbsp;|&nbsp;<a href="#">Delete</a></td>
+		followme_id="<?php echo $value->f_id; ?>" followme_name="<?php echo $value->f_name; ?>" ring_time="<?php echo $value->ringtime; ?>"extension_list="<?php echo $value->extlist; ?>" set_destination="<?php echo $value->setdst; ?>" dependent_value="<?php echo $value->dst; ?>" class="edit-followme">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-followme" deleteid="<?php echo $value->f_id; ?>">Delete</a></td>
       
     </tr>
    <?php endforeach; ?>
@@ -69,10 +70,10 @@
 
   <table>
     <tr>
-        <td>Followme name <sup>*</sup></td> <td><input type="text" name="followme_name" class="textbox-style1 followme-name" value=""></td><td></td>
+        <td>Followme name <sup>*</sup></td> <td><input type="text" name="followme_name" class="textbox-style1 followme-name" value=""></td>
     </tr>
     <tr>
-        <td></td>
+        
               <td class="error_cell"> <label id="followme-name-error"></label></td>
     </tr>    
     <tr>
@@ -84,19 +85,18 @@
 						}
 					?>
 	</select>
-	</td><td></td>
+	</td>
     </tr>
     <tr>
-        <td></td>
+        
               <td class="error_cell"> <label id="ring-time-error"></label></td>
     </tr>        
          
 	 <tr>
-	<td>FollowMe List</td> <td><textarea name="followme_list" id="followme_list" class="followme-list" value="" cols="40" rows="4" ></textarea></td><td></td>
+	<td>FollowMe List</td> <td><textarea name="followme_list" id="followme_list" class="followme-list" value="" cols="40" rows="4" ></textarea></td>
     </tr>
     <tr>
-        <td></td>
-              <td class="error_cell"> <label id="followme-list-error"></label></td>
+               <td class="error_cell"> <label id="followme-list-error"></label></td>
     </tr>  
 	
 	<tr>
@@ -118,10 +118,10 @@
 	
 	
 	
-	</select></td><td></td>
+	</select></td>
     </tr>
     <tr>
-        <td></td>
+        
               <td class="error_cell"> <label id="quickpick-extension-error"></label></td>
     </tr>
 	
@@ -129,9 +129,7 @@
 	<td>Set destination</td> <td><select name="set_destination" id="set_destination"> 
 		<option value="">Select</option>
 		<option value="Queue">Queue</option> 
-	    </select></td>
-	  
-	 <td>
+	    </select>
 	 
 		<select name="dependent_destination" id="dependent_destination">
 			<option selected="selected">-</option>
@@ -139,12 +137,12 @@
 	  </td>
     </tr>
     <tr>
-        <td></td>
+        
               <td class="error_cell"> <label id="set-destination-error"></label></td>
     </tr>        
      
     <tr>
-        <td></td>
+        
         <td><input type="submit" name="insert" value="Save" class="button-color">&nbsp;<input type="reset" name="reset" value="Reset" class="button-color"></td>
     </tr>
   </table>
@@ -155,10 +153,10 @@
 
    <tr>
 
-        <td>Followme name <sup>*</sup></td> <td><input type="text" name="edit_followme_name" class="textbox-style1 edit-followme-name" value=""></td><td></td>
+        <td>Followme name <sup>*</sup></td> <td><input type="text" name="edit_followme_name" class="textbox-style1 edit-followme-name" value=""></td>
     </tr>
     <tr>
-        <td></td>
+        
               <td class="error_cell"> <label id="edit-followme-name-error"></label></td>
     </tr>    
     <tr>
@@ -170,10 +168,10 @@
 						}
 					?>
 	</select>
-	</td><td></td>
+	</td>
     </tr>
     <tr>
-        <td></td>
+        
               <td class="error_cell"> <label id="edit-ring-time-error"></label></td>
     </tr>        
     
@@ -196,10 +194,10 @@
 	
 	
 	
-	</select></td><td></td>
+	</select></td>
     </tr>
     <tr>
-        <td></td>
+        
               <td class="error_cell"> <label id="edit-quickpick-extension-error"></label></td>
     </tr>
 	
@@ -207,7 +205,7 @@
 	<td>FollowMe List</td> <td><textarea name="edit_followme_list" id="edit_followme_list" class="edit-followme-list" value="" cols="40" rows="4" ></textarea></td><td></td>
     </tr>
     <tr>
-        <td></td>
+        
               <td class="error_cell"> <label id="edit-followme-list-error"></label></td>
     </tr>  
 	
@@ -215,9 +213,7 @@
 	<td>Set destination</td> <td><select name="edit_set_destination" id="edit_set_destination"> 
 		<option value="">Select</option>
 		<option value="Queue">Queue</option> 
-	    </select></td>
-	  
-	 <td>
+	    </select>
 	 
 		<select name="edit_dependent_destination" id="edit_dependent_destination">
 			<option selected="selected">-</option>

@@ -34,7 +34,8 @@
     <table class="global-table-style">
         <tr>
 
-            <th>Inbound</th>
+            <th>DID number</th>
+			<th>DID name</th>
             <th>Actions</th>
 
 
@@ -44,7 +45,8 @@
                 ?>
                 <tr>
                     <td><?php echo $value->did_num; ?></td>
-                    <td><a href="#"class="edit-inbound">Edit</a>&nbsp;|&nbsp;<a href="#">Delete</a></td>
+					<td><?php echo $value->did_name; ?></td>
+                    <td><a href="#" did_name="<?php echo $value->did_name;?>" did_number="<?php echo $value->did_num;?>" class="edit-inbound">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-inbound" deleteid="<?php echo $value->did_num; ?>">Delete</a></td>
                 </tr>
             <?php endforeach; ?>
 <? } else { ?>
@@ -112,8 +114,8 @@
 <div class="display-type edit-inbound-div" >
     <table>
 
-        <tr><td >DID name</td><td > <input type = "text"  name = "did_name" id = "ext" value = " " class="textbox-style1" > </td></tr>
-        <tr><td>DID number</td><td><input type = "text"  name = "did_number" id = "host" value = " " class="textbox-style1" > </td></tr>
+        <tr><td >DID name</td><td > <input type = "text"  name = "did_name" id = "did_name" value = "" class="textbox-style1" > </td></tr>
+        <tr><td>DID number</td><td><input type = "text"  name = "did_number" id = "did_number" value = "" class="textbox-style1" > </td></tr>
        <tr><td>Set destination</td>
 	   <td>
                 <select name="set_destination" id="set_destination"> 

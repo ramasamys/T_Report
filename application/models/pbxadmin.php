@@ -43,7 +43,11 @@ function extension_count($searchterm)
 function extensionSelect($limit, $start) {
 
    	$this->db->limit($limit, $start);
+				
+				$this->db->order_by("id", "DESC"); 
 				$query = $this->db->get("sipusers");
+				
+
 					if ($query->num_rows() > 0) 
 						{
 							foreach ($query->result() as $row) 	
@@ -166,9 +170,17 @@ $update_namesql = "update sipname set name='$name' where exten='$username'";
 
 function extensionDelete($id) {
 
-    $sql = "delete from sipusers where id=?";
+    $sipusers_sql	=	"DELETE FROM sipusers WHERE name=?";
+	$sipname_sql	=	"DELETE FROM sipname WHERE exten=?";
+	$voiceboxes_sql	=	"DELETE FROM voiceboxes WHERE customer_id=?";
+	
+	//$sql	=	"DELETE FROM sipusers WHERE name=?";
+	//echo $sql; exit;
 
-   $query = $this->db->query($sql, array($id));
+  // $query = $this->db->query($sql, array($id));
+	$sipusers_result	=	$this->db->query($sipusers_sql, array($id));
+	$sipname_result	=	$this->db->query($sipname_sql, array($id));
+	$voiceboxes_result=	$this->db->query($voiceboxes_sql, array($id));
 
     }
 
@@ -197,6 +209,7 @@ function followmeList($limit, $start)
 
 	
 		$this->db->limit($limit, $start);
+		$this->db->order_by("f_id", "DESC"); 
 		$query = $this->db->get("followme");
 			if ($query->num_rows() > 0) 
 				{
@@ -257,13 +270,12 @@ $edit = "update followme set folloename='$followname',ringtime='$ringtime',extli
 //   return $editfollow->result_array();
 
     }  
-    
-function followmeDelete() {
+  
+  
+function followmeDelete($followme_delete) {
 
-$remove = "delete from followme where id = '$id'";
-
-   $removefollow = $this->db->query($remove);
-//   return $removefollow->result_array();
+	$followme_sql = "DELETE FROM followme WHERE f_id = ?";
+	$followme_result = $this->db->query($followme_sql, array($followme_delete));
 
     }
     
@@ -291,6 +303,7 @@ public function queue_count($searchterm)
 function queueSelect($limit, $start) {
 
 	  	$this->db->limit($limit, $start);
+				$this->db->order_by("name", "DESC"); 
 				$query = $this->db->get("queue_table");
 					if ($query->num_rows() > 0) 
 						{
@@ -346,13 +359,10 @@ $editsql = "update queue_table set announce_frequency='$announce_frequency',anno
 
     }
     
-function queueDelete() {
+function queueDelete($queue_delete) {
 
-$removesql = "delete from queue_table where id='$id'";
-
-   $removequery = $this->db->query($removesql);
-//   return $removequery->result_array();
-
+	$queue_sql	=	"DELETE FROM queue_table WHERE name=?";
+	$queue_result = $this->db->query($queue_sql, array($queue_delete));
     }
 
 	
@@ -375,6 +385,8 @@ public function inbound_count($searchterm)
 function inboundList($limit, $start) {
 	
 	  	$this->db->limit($limit, $start);
+		
+				$this->db->order_by("id", "DESC"); 
 				$query = $this->db->get("inbound_rout");
 					if ($query->num_rows() > 0) 
 						{
@@ -430,14 +442,13 @@ $update = "update inbound set";
 
     }
 
-function inboundDelete() {
 
-$delete = "delete from inbound_route where id = '$id'";
+function inboundDelete($inbound_delete) {
 
-   $deleteinbound = $this->db->query($delete);
-//   return $deleteinbound->result_array();
+	$inbound_sql 	=	"DELETE FROM inbound_rout WHERE did_num = ?";
+	$inbound_result = 	$this->db->query($inbound_sql, array($inbound_delete));
 
-    }
+   }
 
 function dependent_values($values){ 	
 
