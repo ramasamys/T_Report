@@ -9,17 +9,6 @@
       changeYear: true
     });
     
-    $('.show-div').click( function(){
-      $('.show-div').hide();
-      $('.hide-div').show();
-      $('.slide-up-key').slideDown();
-    });
-    
-    $('.hide-div').click( function(){ 
-      $('.hide-div').hide();
-      $('.show-div').show();
-      $('.slide-up-key').slideUp();
-    });
     
     var url = "";
     url = $('#agent-name-autocomplete').attr('url');    
@@ -33,6 +22,22 @@
 		selectFirst: true
 
     });  
+	
+	
+	var new_url = "";
+    new_url = $('#new-agent-name-autocomplete').attr('new_url');    
+    $('#new-agent-name-autocomplete').autocomplete(new_url,{
+		delay:10,
+		minChars:1,
+		matchSubset:1,
+		matchContains:1,
+		cacheLength:10,
+		autoFill:true,
+		selectFirst: true
+
+    });  
+	
+	
     $('.mailbox').live('click',function(){
         if($(this).is(':checked')){   
             $('.show-fields').show();

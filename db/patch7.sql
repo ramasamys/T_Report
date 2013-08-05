@@ -1,3 +1,4 @@
- 
-	 
-	 ALTER TABLE queue_table DROP PRIMARY KEY;
+ALTER TABLE queue_table DROP PRIMARY KEY;
+
+ALTER TABLE  `queue_table` ADD  `id` INT NOT NULL AUTO_INCREMENT FIRST ,
+ADD PRIMARY KEY (  `id` )

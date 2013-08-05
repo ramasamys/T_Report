@@ -104,7 +104,32 @@ $sql = "";
    $query = $this->db->query($sql);
    return $query->result_array();
 
-} 
+}
+
+function getAgents($q) {
+    $sql = "SELECT distinct(dst) from cdr where dst like '%$q%'";
+    $query = $this->db->query($sql);
+    return $query->result();
+  }  
+  
+  function getPhone($q) {
+    $sql = "SELECT distinct(clid) from cdr where clid like '%$q%'";
+    $query = $this->db->query($sql);
+    return $query->result();
+  } 
+  
+  
+  function getPredictiveAgents($q) {
+    $sql = "SELECT distinct(agent) from predictive where agent like '%$q%'";
+    $query = $this->db->query($sql);
+    return $query->result();
+  }  
+  
+  function getPredictivePhone($q) {
+    $sql = "SELECT distinct(dest) from predictive where dest like '%$q%'";
+    $query = $this->db->query($sql);
+    return $query->result();
+  } 
 
 }
 

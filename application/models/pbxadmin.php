@@ -90,8 +90,7 @@ function getAllExtension($exten) {
     $extension_list = "SELECT distinct(name) from sipusers";
 	$extension_query = $this->db->query($extension_list);
     return $extension_query->result_array();
-	//print_r($result);
-	//exit;
+	
   }  
  
 function extensionInsert($extension_for_sipusers,$extension_for_sipname,$extension_for_voiceboxes) 
@@ -164,7 +163,7 @@ $update_namesql = "update sipname set name='$name' where exten='$username'";
 
    $updatequery = $this->db->query($updatesql);
    $update_namequery = $this->db->query($update_namesql);
-//   return $updatequery->result_array();
+
 
     }
 
@@ -174,10 +173,6 @@ function extensionDelete($id) {
 	$sipname_sql	=	"DELETE FROM sipname WHERE exten=?";
 	$voiceboxes_sql	=	"DELETE FROM voiceboxes WHERE customer_id=?";
 	
-	//$sql	=	"DELETE FROM sipusers WHERE name=?";
-	//echo $sql; exit;
-
-  // $query = $this->db->query($sql, array($id));
 	$sipusers_result	=	$this->db->query($sipusers_sql, array($id));
 	$sipname_result	=	$this->db->query($sipname_sql, array($id));
 	$voiceboxes_result=	$this->db->query($voiceboxes_sql, array($id));
@@ -255,11 +250,6 @@ function followmeInsert($followme_for_insertion) {
 		$followme_insert		=	$this->db->insert('followme', $followme_for_insertion);
 		
 		return $this->db->insert_id();
-/*$insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
-
-   $insertfollow = $this->db->query($insert);
-//   return $insertfollow->result_array();
-*/
     }
     
 function followmeUpdate() {
@@ -267,7 +257,7 @@ function followmeUpdate() {
 $edit = "update followme set folloename='$followname',ringtime='$ringtime',extlist='$extlist',setdst='$setdst',dst='$dst' where id='$id'";
 
    $editfollow = $this->db->query($edit);
-//   return $editfollow->result_array();
+
 
     }  
   
@@ -303,7 +293,7 @@ public function queue_count($searchterm)
 function queueSelect($limit, $start) {
 
 	  	$this->db->limit($limit, $start);
-				$this->db->order_by("name", "DESC"); 
+				$this->db->order_by("id", "DESC"); 
 				$query = $this->db->get("queue_table");
 					if ($query->num_rows() > 0) 
 						{
@@ -355,7 +345,7 @@ function queueUpdate() {
 $editsql = "update queue_table set announce_frequency='$announce_frequency',announce_holdtime='$announce_holdtime',eventmemberstatus='$eventmemberstatus',eventwhencalled='$eventwhencalled', joinempty='$joinempty',leavewhenempty='$leavewhenempty',memberdelay='$memberdelay',queue_callswaiting ='$queue_callswaiting',reportholdtime='$reportholdtime', retry='$retry', ringinuse='$ringinuse', servicelevel='$servicelevel', strategy='$strategy',timeout='$timeout',timeoutrestart='$timeoutrestart',weight='$weight',wrapuptime='$wrapuptime',name='$name' where id='$id'";
 
    $editquery = $this->db->query($editsql);
-//   return $editquery->result_array();
+
 
     }
     
@@ -438,7 +428,7 @@ function inboundUpdate() {
 $update = "update inbound set";
 
    $updateinbound = $this->db->query($update);
-//   return $updateinbound->result_array();
+
 
     }
 

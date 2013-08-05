@@ -55,7 +55,7 @@
             <?php endforeach; ?>
 <? } else { ?>
             <tr>
-                <td colspan="2">No Records.</td>
+                <td colspan="5">No Records.</td>
             </tr>
 <? } ?>
     </table>

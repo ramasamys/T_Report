@@ -93,6 +93,83 @@ class Report_content extends CI_Controller {
             redirect('login/logout');
         }
     }
+	
+	  function auto_get_agent() {
+		 if ($this->session->userdata('logged_in')) {
+        $queryString = $this->input->get('q');
+        $agent_list = $this->report->getAgents($queryString);
+        $items = array();
+        foreach ($agent_list as $values) {
+            array_push($items, $values->dst);
+        }
+        if (count($items) == 0)
+            return;
+        for ($i = 0; $i < count($items); $i++) {
+            echo "$items[$i] \n";
+        }
+    
+	} else {
+            redirect('login/logout');
+        }
+	}
+	
+		  function auto_get_phone() {
+		 if ($this->session->userdata('logged_in')) {
+        $queryString = $this->input->get('q');
+        $agent_list = $this->report->getPhone($queryString);
+        $items = array();
+        foreach ($agent_list as $values) {
+            array_push($items, $values->clid);
+        }
+        if (count($items) == 0)
+            return;
+        for ($i = 0; $i < count($items); $i++) {
+            echo "$items[$i] \n";
+        }
+    
+	} else {
+            redirect('login/logout');
+        }
+	}
+
+	
+	 function predictive_agent() {
+		 if ($this->session->userdata('logged_in')) {
+        $queryString = $this->input->get('q');
+        $agent_list = $this->report->getPredictiveAgents($queryString);
+        $items = array();
+        foreach ($agent_list as $values) {
+            array_push($items, $values->agent);
+        }
+        if (count($items) == 0)
+            return;
+        for ($i = 0; $i < count($items); $i++) {
+            echo "$items[$i] \n";
+        }
+    
+	} else {
+            redirect('login/logout');
+        }
+	}
+	
+		  function predictive_phone() {
+		 if ($this->session->userdata('logged_in')) {
+        $queryString = $this->input->get('q');
+        $agent_list = $this->report->getPredictivePhone($queryString);
+        $items = array();
+        foreach ($agent_list as $values) {
+            array_push($items, $values->dest);
+        }
+        if (count($items) == 0)
+            return;
+        for ($i = 0; $i < count($items); $i++) {
+            echo "$items[$i] \n";
+        }
+    
+	} else {
+            redirect('login/logout');
+        }
+	}
 
 }
 

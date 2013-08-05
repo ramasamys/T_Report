@@ -62,6 +62,8 @@ class Summary extends CI_Controller {
             echo "$items[$i] \n";
         }
     }
+	
+
 
 }
 ?>
