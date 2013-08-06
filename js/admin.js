@@ -11,6 +11,8 @@ $(document).ready(function() {
 
     $('.create-extension').live('click', function() {
         $('label.error').remove();
+        $('#mailbox').attr('checked', false);
+        $('.show-fields').hide();
         $('.sip-extension').val('');
         $('.display-name').val('');
         $('.sceret-fld').val('');
