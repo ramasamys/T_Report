@@ -28,8 +28,6 @@ $(document).ready(function() {
             sip_extension: {required: true, digits: true},
             display_name: "required",
             secret: "required",
-            call_group: "required",
-            pickup_group: "required",
             mailid: {required: '#mailbox:checked', email: true,},
             password_ext: {required: '#mailbox:checked', digits: true},
         },
@@ -59,8 +57,21 @@ $(document).ready(function() {
             password_ext: "Please enter only numbers as password.",
         },
         submitHandler: function(form) {
-            $("#pbx-new-extensions").submit();
-            $('.edit-extension-div').dialog('close');
+            var sipextension = $('.sip-extension').val();
+            var display_name = $('.display-name').val();
+            var sceret_fld = $('.sceret-fld').val();
+            if( sipextension != '' && display_name != '' && sceret_fld != '' ) {
+	      var post_data = {sipextension:sipextension,display_name:display_name,sceret_fld:sceret_fld};
+		    $.ajax({
+		      type:'POST',
+		      url: baseUrl + "index.php/pbx_admin/insert_extension",
+		      data:post_data,
+		      success: function(data) {
+                              $('.edit-extension-div').dialog('close');
+		      }
+	      });            
+        }
+            
         }
     });
 
