@@ -4,7 +4,7 @@
         <script>
             var baseUrl = "<?php echo base_url(); ?>";
         </script>
-        <meta charset="utf-8
+        <meta charset="utf-8">
               <?php $version = time(); ?>
             <script src="<?php echo base_url(); ?>js/jquery1.5.1.min.js" type="text/javascript"></script>
             <script src="<?php echo base_url() ?>js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
