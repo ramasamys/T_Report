@@ -16,7 +16,7 @@
         <tr>
             <td style="width:20%;">Inbound  :</td>
             <td style="width:20%;">
-                <input type="text" name="search"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url() . 'index.php/pbx_admin/getInbound'; ?>" />
+                <input type="text" name="search"  class="textbox-style numbers-only" id="agent-name-autocomplete" url="<?php echo base_url() . 'index.php/pbx_admin/getInbound'; ?>" />
             </td>
 
             <td style="width:30%;"><input type="submit" name="submit_data" value="Search" class="button-color" /></td>

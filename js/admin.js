@@ -1,8 +1,8 @@
 $(document).ready(function() {
     //Ramasamy
     $('.create-new-extension').dialog({
-        width: 500,
-        height: 400,
+        width: 520,
+        height: 460,
         modal: true,
         title: "Create Extension",
         resizable: false,
@@ -74,7 +74,9 @@ $(document).ready(function() {
             
         }
     });
-
+      $('.numbers-only').live("keyup",function () {
+		this.value = this.value.replace(/[^0-9\.]/g,'');
+      });
     $('.edit-extension-div').dialog({
         width: 500,
         height: 400,
