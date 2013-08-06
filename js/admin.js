@@ -343,17 +343,18 @@ $('.create-new-followme').dialog({
 
     $('.edit-followme').live('click', function() {
         $('label.error').remove();
-			
 		$('.edit-followme-name').val($(this).attr('followme_name'));
 		$('.edit-ring-time').val($(this).attr('ring_time'));
 		$('.edit-extension-list').val($(this).attr('extension_list'));
 		$('.edit-set-destination').val($(this).attr('set_destination'));
 		$('.edit-dependent-value').val($(this).attr('dependent_value'));
+                $('#edit_ring_time').val($(this).attr('ring_time'));
+                $('#set_destination').val($(this).attr('set_destination'));
+                $('#dependent_destination').val($(this).attr('dependent_value'));
 		
         $('.edit-followme-div').dialog('open');
     });
-
-
+   
 
 /////////////delete followme//////////
 

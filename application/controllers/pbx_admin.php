@@ -171,8 +171,7 @@ class Pbx_admin extends CI_Controller {
 
     function followme() {
         if ($this->session->userdata('logged_in')) {
-$search = "";
-
+            $search = "";
             $page_url = base_url() . "index.php/pbx_admin/followme";
             $total_users = $this->pbxadmin->followme_count($search);
             $result_page = $this->global_pagination->index($page_url, $total_users);
