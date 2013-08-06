@@ -349,8 +349,8 @@ $('.create-new-followme').dialog({
 		$('.edit-set-destination').val($(this).attr('set_destination'));
 		$('.edit-dependent-value').val($(this).attr('dependent_value'));
                 $('#edit_ring_time').val($(this).attr('ring_time'));
-                $('#set_destination').val($(this).attr('set_destination'));
-                $('#dependent_destination').val($(this).attr('dependent_value'));
+                $('#edit_set_destination').val($(this).attr('set_destination'));
+                $('#edit_dependent_destination').val($(this).attr('dependent_value'));
 		
         $('.edit-followme-div').dialog('open');
     });

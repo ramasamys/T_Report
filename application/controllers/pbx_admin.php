@@ -179,6 +179,7 @@ class Pbx_admin extends CI_Controller {
             $data['result'] = $this->pbxadmin->followmeList($result_per_page, $result_page);
             $data['links'] = $this->pagination->create_links();
 			$data['extension_list']	= 	$this->pbxadmin->getExtension();
+                        $data['depended_value'] = $this->pbxadmin->dependent_values('Queue');
             $this->load->view('list_followme', $data);
 
         } else {
@@ -443,12 +444,12 @@ class Pbx_admin extends CI_Controller {
         }
     }
 
-    function depended_value(){
-    	$values = $this->pbxadmin->dependedValues();
+   /* function depended_value(){
+    	$values = $this->pbxadmin->dependent_values('Q');
     //	print_r($values);
     	echo $values[0]['name'];
     	    
-    }
+    } */
 	
 	
 			
