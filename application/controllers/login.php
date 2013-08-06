@@ -26,7 +26,7 @@ class Login extends CI_Controller {
 	}
 	else if($username == "" || $username == NULL)
 	{
-		$this->form_validation->set_rules('tv_username', 'Username', 'trim|required|min_length[4]|max_length[12]|xss_clean');
+			$this->form_validation->set_rules('tv_username', 'Username', 'callback_username_check');
 		       if ($this->form_validation->run() == FALSE) 
 				{
 					$this->load->view('login_form');
@@ -35,7 +35,7 @@ class Login extends CI_Controller {
 	
 	else if($password == "" || $password == NULL)
 	{
-		 $this->form_validation->set_rules('tv_password', 'Password', 'trim|required|xss_clean|callback_check_database');
+		 $this->form_validation->set_rules('tv_password', 'Password', 'callback_password_check');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('login_form');
@@ -52,7 +52,34 @@ class Login extends CI_Controller {
         }
 		}
     }
-
+	
+	public function username_check($str)
+	{
+		if ($str == '' || $str == NULL)
+		{
+			$this->form_validation->set_message('username_check', 'The username field is empty.');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
+	
+	public function password_check($str)
+	{
+		if ($str == '' || $str == NULL)
+		{
+			$this->form_validation->set_message('password_check', 'The Password field is empty.');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
+	
+	
     function checkSession() {
 	$this->load->helper('cookie');
         $sessionValues = $this->session->userdata('logged_in');
