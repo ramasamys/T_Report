@@ -53,8 +53,8 @@
 	<td><?php echo $value['dst'];?></td>
 	<td><?php echo $value['disposition'];?></td>
 	<td><?php echo $value['b'];?></td>
-	<td><a href="#"><img src="<?php echo base_url();?>css/images/10.png"/></a></td>
-	<td><a href="#"><img src="<?php echo base_url();?>css/images/audio.png"/></a></td>
+	<td><a href="#"><img title="Click here to Download." src="<?php echo base_url();?>css/images/10.png"/></a></td>
+	<td><a href="#"><img title="Click here to Play." src="<?php echo base_url();?>css/images/audio.png"/></a></td>
 	
     </tr>
    <?php endforeach; ?>
