@@ -134,7 +134,7 @@
 	    </select>
 	 
 		<select name="dependent_destination" id="dependent_destination">
-			<option selected="selected">-</option>
+                         <option selected="selected">-</option>
 		</select>
 	  </td>
     </tr>
@@ -165,9 +165,9 @@
 	<td>Ring Time</td> <td><select type="text" name="edit_ring_time" id="edit_ring_time">
 	
 	<?php
-						for ($i=0; $i <= 60; $i++) {
-							echo '<option value="'.$i.'">'.$i.'</option>';
-						}
+						for ($i=0; $i <= 60; $i++) { ?>
+							<option value="<? echo $i; ?>" ><? echo $i; ?></option>;
+						<? }
 					?>
 	</select>
 	</td>
@@ -183,8 +183,7 @@
 	
 	
 	 <? if(!empty($extension_list)){ 
-     foreach($extension_list as $extensions) : ?>
- 		
+     foreach($extension_list as $extensions) : ?> 		
 		<?php echo '<option value="'.$extensions['name'].'">'.$extensions['name'].'</option>' ?>
 		
    <?php endforeach; ?>
@@ -218,7 +217,11 @@
 	    </select>
 	 
 		<select name="edit_dependent_destination" id="edit_dependent_destination">
-			<option selected="selected">-</option>
+			<? if(!empty($depended_value)){
+                            foreach($depended_value as $values){ ?>
+                    <option value="<? echo $values['list'] ?>"><? echo $values['list']; ?></option>
+                          <?  }
+                        }?>
 		</select>
 	  </td>
     </tr>
