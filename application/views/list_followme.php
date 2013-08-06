@@ -128,7 +128,7 @@
     </tr>
 	
     <tr>
-	<td>Set destination</td> <td><select name="set_destination" id="set_destination"> 
+	<td>Set destination</td> <td><select name="set_destination" class="set_destination"> 
 		<option value="">Select</option>
 		<option value="Queue">Queue</option> 
 	    </select>

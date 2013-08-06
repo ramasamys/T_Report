@@ -227,7 +227,7 @@ console.log(data);
     });
 
 	
-    $("#set_destination").change(function() {
+    $(".set_destination").change(function() { 
         var destination = $(this).val();
         var post_data = {destination:destination} ;
 		$('#dependent_destination').empty();

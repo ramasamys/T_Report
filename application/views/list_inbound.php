@@ -90,7 +90,7 @@
         <tr>
             <td>Set destination</td> 
             <td>
-                <select name="set_destination" id="set_destination"> 
+                <select name="set_destination" class="set_destination"> 
                     <? foreach($destination as $des) { ?>
                     <option value="<? echo $des; ?>"><? echo $des; ?></option>
                     <? } ?>
@@ -122,7 +122,7 @@
         <tr><td>DID number</td><td><input type = "text"  name = "did_number" id = "did_number" value = "" class="textbox-style1" > </td></tr>
        <tr><td>Set destination</td>
 	   <td>
-                <select name="set_destination" id="set_destination"> 
+                <select name="set_destination" class="set_destination"> 
                     <? foreach($destination as $des) { ?>
                     <option value="<? echo $des; ?>"><? echo $des; ?></option>
                     <? } ?>
