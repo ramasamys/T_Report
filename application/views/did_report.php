@@ -4,7 +4,7 @@
 <div class="search-container">
  
 <?php
-	$controller_name = "summary/";
+	$controller_name = "report_content/search_did";
 	$attributes = array('class' => '',
 			'id' => '', 'name' => '');
 	echo form_open($controller_name, $attributes);
