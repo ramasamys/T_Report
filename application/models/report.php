@@ -13,7 +13,7 @@ $sql = "SELECT calldate,clid,src,dst,disposition,sec_to_time(duration) as b from
    $query = $this->db->query($sql);
     return $query->result_array();
 }
-didReportSearch($search, $limit, $start)
+function didReportSearch($search, $limit, $start)
 {
 	
 	//$did_sql = "SELECT calldate,clid,src,dst,disposition,sec_to_time(duration) as b from cdr where uniqueid!='' and lastdata like '%SIP/%' order by calldate desc LIMIT " .$start . ", ".$limit;

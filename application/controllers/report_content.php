@@ -33,7 +33,7 @@ class Report_content extends CI_Controller {
         }
     }
 	
-	public function search_did() {
+	/*public function search_did() {
         if ($this->session->userdata('logged_in')) {
 			
 			$from_date		=	stripslashes($this->input->post('from_date'));
@@ -52,7 +52,7 @@ class Report_content extends CI_Controller {
         } else {
             redirect('login/logout');
         }
-    }
+    }*/
 
     public function queue() {
         if ($this->session->userdata('logged_in')) {
