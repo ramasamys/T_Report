@@ -59,8 +59,6 @@ $sql="SELECT calldate,clid,src,dst,disposition,sec_to_time(duration) AS b FROM c
 
 }
 
-echo $sql;
-//exit;
    $result = $this->db->query($sql);
    return $result->num_rows();
      
