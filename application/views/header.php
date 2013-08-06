@@ -4,14 +4,15 @@
         <script>
             var baseUrl = "<?php echo base_url(); ?>";
         </script>
-        <meta charset="utf-8">
+        <meta charset="utf-8
+              <?php $version = time(); ?>
             <script src="<?php echo base_url(); ?>js/jquery1.5.1.min.js" type="text/javascript"></script>
             <script src="<?php echo base_url() ?>js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
             <script  src="<?php echo base_url(); ?>js/jquery.multiselect2side.js" type="text/javascript" ></script>
             <script src="<?php echo base_url() ?>js/autocomplete-jquery.js" type="text/javascript"></script>
             <script src="<?php echo base_url() ?>js/jquery.validate.js" type="text/javascript"></script>
-            <script src="<?php echo base_url() ?>js/helper.js" type="text/javascript"></script>
-            <script src="<?php echo base_url() ?>js/admin.js" type="text/javascript"></script>
+            <script src="<?php echo base_url() ?>js/helper.js?<? echo $version; ?>" type="text/javascript"></script>
+            <script src="<?php echo base_url() ?>js/admin.js?<? echo $version; ?>" type="text/javascript"></script>
 
             
             <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" type="text/css" />
