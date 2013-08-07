@@ -84,6 +84,19 @@ margin-left: 20px;
   background-repeat: no-repeat;
   height: 63px;
 }
+
+/*************** kumutha ****************/
+#login_error {
+   background-color: #FFEBE8;
+   border-color: #CC0000;
+}
+#login_error, .login .message {
+   margin: 0 0 16px 8px;
+   padding: 12px;
+   text-color: red;
+}
+ 
+ 
 .heading{
   font-style: italic;
   padding: 10px;  

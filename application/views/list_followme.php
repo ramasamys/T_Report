@@ -49,7 +49,7 @@
 		<td><? echo $ringtime = isset($value->ringtime) ? $value->ringtime : '-'; ?></td>
 		<td><? echo $extlist = isset($value->extlist) ? $value->extlist : '-'; ?></td>
 		<td><a href="#" 
-		followme_id="<?php echo $value->f_id; ?>" followme_name="<?php echo $value->f_name; ?>" ring_time="<?php echo $value->ringtime; ?>"extension_list="<?php echo $value->extlist; ?>" set_destination="<?php echo $value->setdst; ?>" dependent_value="<?php echo $value->dst; ?>" class="edit-followme">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-followme" deleteid="<?php echo $value->f_id; ?>">Delete</a></td>
+		followme_id="<?php echo $value->f_id; ?>" followme_name="<?php echo $value->f_name; ?>" ring_time="<?php echo $value->ringtime; ?>" extension_list="<?php echo $value->extlist; ?>" set_destination="<?php echo $value->setdst; ?>" dependent_value="<?php echo $value->dst; ?>" class="edit-followme">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-followme" deleteid="<?php echo $value->f_id; ?>">Delete</a></td>
       
     </tr>
    <?php endforeach; ?>
@@ -81,12 +81,12 @@
               <td class="error_cell"> <label id="followme-name-error"></label></td>
     </tr>    
     <tr>
-	<td>Ring Time</td> <td><select type="text" name="ring_time" id="ring_time"class="ring-time">
+	<td>Ring Time</td> <td><select type="text" name="ring_time" id="ring_time" class="ring-time">
 	
 	<?php
-						for ($i=0; $i <= 60; $i++) {
-							echo '<option value="'.$i.'">'.$i.'</option>';
-						}
+						for ($i=0; $i <= 60; $i++) { ?>
+							<option value="<? echo $i; ?>" ><? echo $i; ?></option>;
+					<?	}
 					?>
 	</select>
 	</td>
@@ -108,15 +108,13 @@
 	<select name="quickpick_extension" id="quickpick_extension">
 	
 	
-	 <? if(!empty($extension_list)){ 
-     foreach($extension_list as $extensions) : ?>
- 		
-		<?php echo '<option value="'.$extensions['name'].'">'.$extensions['name'].'</option>' ?>
-		
-   <?php endforeach; ?>
+	 <? if(!empty($extension_list)){                                                       
+	    foreach($extension_list as $extensions) : ?>
+ 		<option value="<? echo $extensions['name']; ?>"><? echo $extensions['name'];?></option>
+	  <?php endforeach; ?>
    <? } else { ?>
    <option value="">No extensions</option>
-   <? }?>
+   <? } ?>
 	
 	
 	
@@ -130,13 +128,13 @@
     </tr>
 	
     <tr>
-	<td>Set destination</td> <td><select name="set_destination" id="set_destination"> 
+	<td>Set destination</td> <td><select name="set_destination" class="set_destination"> 
 		<option value="">Select</option>
 		<option value="Queue">Queue</option> 
 	    </select>
 	 
 		<select name="dependent_destination" id="dependent_destination">
-			<option selected="selected">-</option>
+                         <option selected="selected">-</option>
 		</select>
 	  </td>
     </tr>
@@ -167,9 +165,9 @@
 	<td>Ring Time</td> <td><select type="text" name="edit_ring_time" id="edit_ring_time">
 	
 	<?php
-						for ($i=0; $i <= 60; $i++) {
-							echo '<option value="'.$i.'">'.$i.'</option>';
-						}
+						for ($i=0; $i <= 60; $i++) { ?>
+							<option value="<? echo $i; ?>" ><? echo $i; ?></option>;
+						<? }
 					?>
 	</select>
 	</td>
@@ -185,8 +183,7 @@
 	
 	
 	 <? if(!empty($extension_list)){ 
-     foreach($extension_list as $extensions) : ?>
- 		
+     foreach($extension_list as $extensions) : ?> 		
 		<?php echo '<option value="'.$extensions['name'].'">'.$extensions['name'].'</option>' ?>
 		
    <?php endforeach; ?>
@@ -220,7 +217,11 @@
 	    </select>
 	 
 		<select name="edit_dependent_destination" id="edit_dependent_destination">
-			<option selected="selected">-</option>
+			<? if(!empty($depended_value)){
+                            foreach($depended_value as $values){ ?>
+                    <option value="<? echo $values['list'] ?>"><? echo $values['list']; ?></option>
+                          <?  }
+                        }?>
 		</select>
 	  </td>
     </tr>

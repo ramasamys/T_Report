@@ -16,7 +16,7 @@
         <tr>
             <td style="width:20%;">Inbound  :</td>
             <td style="width:20%;">
-                <input type="text" name="search"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url() . 'index.php/pbx_admin/getInbound'; ?>" />
+                <input type="text" name="search"  class="textbox-style numbers-only" id="agent-name-autocomplete" url="<?php echo base_url() . 'index.php/pbx_admin/getInbound'; ?>" />
             </td>
 
             <td style="width:30%;"><input type="submit" name="submit_data" value="Search" class="button-color" /></td>
@@ -90,7 +90,7 @@
         <tr>
             <td>Set destination</td> 
             <td>
-                <select name="set_destination" id="set_destination"> 
+                <select name="set_destination" class="set_destination"> 
                     <? foreach($destination as $des) { ?>
                     <option value="<? echo $des; ?>"><? echo $des; ?></option>
                     <? } ?>
@@ -122,7 +122,7 @@
         <tr><td>DID number</td><td><input type = "text"  name = "did_number" id = "did_number" value = "" class="textbox-style1" > </td></tr>
        <tr><td>Set destination</td>
 	   <td>
-                <select name="set_destination" id="set_destination"> 
+                <select name="set_destination" class="set_destination"> 
                     <? foreach($destination as $des) { ?>
                     <option value="<? echo $des; ?>"><? echo $des; ?></option>
                     <? } ?>

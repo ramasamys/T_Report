@@ -4,7 +4,7 @@
 <div class="search-container">
  
 <?php
-	$controller_name = "summary/";
+	$controller_name = "report_content/search_did";
 	$attributes = array('class' => '',
 			'id' => '', 'name' => '');
 	echo form_open($controller_name, $attributes);
@@ -57,7 +57,8 @@
    <?php endforeach; ?>
    <? } else { ?>
     <tr>
-      <td colspan="5">No Records.</td>
+     <td style="text-align: left;"> &nbsp; No Records.</td>
+      <td colspan="4"></td>
     </tr>
   <? } ?>
   </table>

@@ -85,8 +85,40 @@ class Pbx_admin extends CI_Controller {
     }
 
     function insert_extension() {
+        $sipextension = stripslashes($this->input->post('sipextension'));
+        $context = stripslashes($this->input->post('context'));
+        $mailid = stripslashes($this->input->post('mailid'));
+        $password_ext = stripslashes($this->input->post('password_ext'));
+        
+        $sipname['exten'] = $sipextension ;
+        $sipname['name'] = stripslashes($this->input->post('display_name'));
+        
+        $sipusers['name'] = $sipextension;
+        $sipusers['host'] = stripslashes($this->input->post('host'));
+        $sipusers['context'] = $context;
+        $sipusers['fromuser'] = $sipextension;
+        $sipusers['mailbox'] = $mailid;
+        $sipusers['username'] = $sipextension;
+        $sipusers['sippasswd'] = $password_ext;
+        $sipusers['callgroup'] = stripslashes($this->input->post('call_group'));
+        $sipusers['pickupgroup'] = stripslashes($this->input->post('pickup_group'));
+        //$sipusers['secret'] = stripslashes($this->input->post('sceret_fld'));
+        
+        $sipvoice['customer_id'] = $sipextension;
+        $sipvoice['mailbox'] = $sipextension;
+        $sipvoice['password'] = $password_ext;
+        $sipvoice['email'] = $mailid;
+        $sipvoice['context'] = $context;
+        $checkExtensionExist = $this->pbxadmin->checkExtension($sipextension);
+        if(empty($checkExtensionExist)){
+            $extensionStatus = $this->pbxadmin->extensionInsert($sipname,$sipusers,$sipvoice);
+        } else {
+            // update function
+        }
+        
+//        print_r($extensionStatus);
 
-			$extension_for_sipusers = array(   
+/*			$extension_for_sipusers = array(   
 			'name'						=>	stripslashes($this->input->post('sip_extension')),
 			'host'						=>	stripslashes($this->input->post('extension_host')),
 			'context'					=>	stripslashes($this->input->post('context')),
@@ -131,6 +163,8 @@ class Pbx_admin extends CI_Controller {
 					redirect('pbx_admin/viewExtension');
 				
 				}
+ 
+ */
 		    
     }
 
@@ -171,8 +205,7 @@ class Pbx_admin extends CI_Controller {
 
     function followme() {
         if ($this->session->userdata('logged_in')) {
-$search = "";
-
+            $search = "";
             $page_url = base_url() . "index.php/pbx_admin/followme";
             $total_users = $this->pbxadmin->followme_count($search);
             $result_page = $this->global_pagination->index($page_url, $total_users);
@@ -180,6 +213,7 @@ $search = "";
             $data['result'] = $this->pbxadmin->followmeList($result_per_page, $result_page);
             $data['links'] = $this->pagination->create_links();
 			$data['extension_list']	= 	$this->pbxadmin->getExtension();
+                        $data['depended_value'] = $this->pbxadmin->dependent_values('Queue');
             $this->load->view('list_followme', $data);
 
         } else {
@@ -367,7 +401,7 @@ $search = "";
 				);
 				                
 				$this->pbxadmin->queueInsert($queue_for_insertion);
-				redirect('pbx_admin/queue_list');
+				redirect('pbx_admin/queue');
             
         } else {
             redirect('login/logout');
@@ -444,18 +478,6 @@ $search = "";
         }
     }
 
-    function depended_value(){
-    	$values = $this->pbxadmin->dependedValues();
-    //	print_r($values);
-    	echo $values[0]['name'];
-    	    
-    }
-	
-	
-			
-			
-
-	
 	function inbound_search()
 	{
 		 if ($this->session->userdata('logged_in')) {

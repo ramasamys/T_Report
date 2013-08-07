@@ -3,7 +3,14 @@
 	<div class="loginform" >
 		<div class="loginTitle"></div>
 
-<?php echo validation_errors(); ?>
+
+<?php //echo validation_errors(); ?>
+        <?php if(validation_errors()){ ?>
+                  <div id="login_error">
+                    <?php echo '<strong>ERROR</strong>:'.validation_errors(); ?>
+                </div>
+      <?  } ?>                
+
 		<?php
 			$controller_name = "login/verifyLogin";
 			$attributes = array('class' => 'report-login',
@@ -14,6 +21,7 @@
 			$cookiepassword = $this->input->cookie('password', TRUE);
 
 		?>
+		
 			    <p>
 			    <label for="user_login">Username <br>
 					<input type="text" name="tv_username" value="<?php if(!empty($cookieusername)){ echo $cookieusername;} else { echo set_value('tv_username'); }; ?>" placeholder="username" />
