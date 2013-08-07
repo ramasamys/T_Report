@@ -196,6 +196,7 @@ $(document).ready(function() {
 //call popup div
 
     //Arulprakash
+<<<<<<< Updated upstream
     $("#followmedst").change(function() {
         var dst = $(this).val();
         //  alert(dst);
@@ -209,6 +210,21 @@ $(document).ready(function() {
             success: function(response) {
                 alert(response);
                 //$('#destination').html(response);
+=======
+        $("#followmedst").change(function () {
+	    var dst=$(this).val();
+
+	 var dataString = 'dst='+ dst;
+	  $.ajax({
+         type: "POST", 
+	//	 dataType: "html", 
+		 url: baseUrl+"index.php/pbx_admin/depended_value", 
+		 data: dataString,
+		 success: function(response){ 
+		//	var result = eval('(' + response + ')');
+			 alert(response);
+			//$('#destination').html(response);
+>>>>>>> Stashed changes
             }
         });
     });
