@@ -376,6 +376,22 @@ console.log(data);
 	}
       }
       });
+	  
+	  
+////////////play audio////////////
+
+function playSound(audioURL,divid) 
+{
+	 if (document.all) {
+		 document.getElementById(divid).innerHTML = document.all['BGSOUND_ID'].src=audioURL;
+		}
+	 else{
+	  //self.iplayer.location.replace('jsplayer.htm?'+audioURL);
+	  link='jsplayer.htm?'+audioURL;
+	 playback_src = "<iframe width='150px' height='25px' marginheight='0' marginwidth='0' frameborder='0' scrolling='no' src=" + link + "></iframe>";
+	 document.getElementById(divid).innerHTML = playback_src;
+		}
+}
 	
 });
 

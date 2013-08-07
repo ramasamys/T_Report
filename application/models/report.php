@@ -121,7 +121,7 @@ $sql = "SELECT * from predictive";
 
 function recordReport($limit, $start){ 
 
-$sql = "SELECT calldate,clid,src,dst,disposition,sec_to_time(duration) as b from cdr where uniqueid!='' and lastdata like '%SIP/%' order by calldate desc LIMIT " .$start . ", ".$limit;
+$sql = "SELECT uniqueid,calldate,clid,src,dst,disposition,sec_to_time(duration) as b from cdr where uniqueid!='' and lastdata like '%SIP/%' order by calldate desc LIMIT " .$start . ", ".$limit;
 
    $query = $this->db->query($sql);
    return $query->result_array();

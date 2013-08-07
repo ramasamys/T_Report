@@ -193,6 +193,8 @@ class Report_content extends CI_Controller {
             redirect('login/logout');
         }
 	}
+	
+
 
 }
 
