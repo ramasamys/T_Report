@@ -86,87 +86,61 @@ class Pbx_admin extends CI_Controller {
 
     function insert_extension() {
         $sipextension = stripslashes($this->input->post('sipextension'));
-        $context = stripslashes($this->input->post('context'));
-        $mailid = stripslashes($this->input->post('mailid'));
+        $context = stripslashes($this->input->post('extension_context'));
+        $mailid = stripslashes($this->input->post('email_id'));
         $password_ext = stripslashes($this->input->post('password_ext'));
         
         $sipname['exten'] = $sipextension ;
         $sipname['name'] = stripslashes($this->input->post('display_name'));
         
         $sipusers['name'] = $sipextension;
-        $sipusers['host'] = stripslashes($this->input->post('host'));
+        $sipusers['host'] = stripslashes($this->input->post('extension_host'));
         $sipusers['context'] = $context;
         $sipusers['fromuser'] = $sipextension;
         $sipusers['mailbox'] = $mailid;
         $sipusers['username'] = $sipextension;
         $sipusers['sippasswd'] = $password_ext;
         $sipusers['callgroup'] = stripslashes($this->input->post('call_group'));
-        $sipusers['pickupgroup'] = stripslashes($this->input->post('pickup_group'));
-        //$sipusers['secret'] = stripslashes($this->input->post('sceret_fld'));
+        $sipusers['pickupgroup'] = stripslashes($this->input->post('call_pickup_group'));
+        $sipusers['secret'] = stripslashes($this->input->post('secret_fld'));
         
         $sipvoice['customer_id'] = $sipextension;
         $sipvoice['mailbox'] = $sipextension;
         $sipvoice['password'] = $password_ext;
         $sipvoice['email'] = $mailid;
         $sipvoice['context'] = $context;
-        $checkExtensionExist = $this->pbxadmin->checkExtension($sipextension);
-        if(empty($checkExtensionExist)){
-            $extensionStatus = $this->pbxadmin->extensionInsert($sipname,$sipusers,$sipvoice);
-        } else {
-            // update function
-        }
         
-//        print_r($extensionStatus);
-
-/*			$extension_for_sipusers = array(   
-			'name'						=>	stripslashes($this->input->post('sip_extension')),
-			'host'						=>	stripslashes($this->input->post('extension_host')),
-			'context'					=>	stripslashes($this->input->post('context')),
-			'fromuser'					=>	stripslashes($this->input->post('sip_extension')),
-			'mailbox'					=>	stripslashes($this->input->post('mailid')),
-			'username'					=>	stripslashes($this->input->post('sip_extension')),
-			'sippasswd'					=>	stripslashes($this->input->post('password_ext')),
-			'callgroup'					=>	stripslashes($this->input->post('call_group')),
-			'pickupgroup'				=>	stripslashes($this->input->post('pickup_group')),
-			);
-			
-			$extension_for_sipname = array(   
-			'exten'						=>	stripslashes($this->input->post('sip_extension')),
-			'name'						=>	stripslashes($this->input->post('display_name')),
-			);
-			
-			$extension_for_voiceboxes = array(   
-			'customer_id'				=>	stripslashes($this->input->post('sip_extension')),
-			'mailbox'					=>	stripslashes($this->input->post('sip_extension')),				  	  	      	  	  	
-			'password'					=>	stripslashes($this->input->post('password_ext')),	  	  	      	  	  	
-			'email'						=>	stripslashes($this->input->post('mailid')),
-			'context'					=>	stripslashes($this->input->post('context')),
-			);
-
-          
-			$insertid_array		=	array();
-			$insertid_array		=	$this->pbxadmin->extensionInsert($extension_for_sipusers,$extension_for_sipname,$extension_for_voiceboxes);
-			
+		
+		$checkExtensionExist = $this->pbxadmin->checkExtension($sipextension);
+		
+        if(empty($checkExtensionExist)){
+		
+	      $insertid_array		= 	$this->pbxadmin->extensionInsert($sipname,$sipusers,$sipvoice);
+	
 			$sipuser_id		=	$insertid_array[0];
 			$sipname_id		=	$insertid_array[1];
 			$voiceboxes_id	=	$insertid_array[2];
 			
-			if($sipuser_id!="" || $sipuser_id!=0 || $sipname_id!="" || $sipname_id!=0 || $voiceboxes_id!="" || $voiceboxes_id!=0)
+			if(empty($sipuser_id) || empty($sipname_id) || empty($voiceboxes_id))
 				{
-					
-					redirect('pbx_admin/viewExtension');
-			
+						$this->pbxadmin->extension_insert_fail($sipuser_id,$sipname_id,$voiceboxes_id);
+
 				}
-			else
-				{	
-					$this->pbxadmin->extension_insert_fail($sipuser_id,$sipname_id,$voiceboxes_id);
-					redirect('pbx_admin/viewExtension');
+				else
+				{
+					echo json_encode(array('status'=>'success'));
+				}
+
 				
-				}
- 
- */
-		    
-    }
+        }
+
+		else 
+		{
+			$updateid_array		= 	$this->pbxadmin->extensionUpdate($sipname,$sipusers,$sipvoice);
+			echo json_encode(array('status'=>'updated'));
+        }
+        
+}
 
     function edit_extension() {
 

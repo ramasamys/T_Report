@@ -62,12 +62,7 @@
     <div class="pagination-style"><p><?php echo $links; ?></p></div>
 </div>
 <div class="display-type create-new-extension">
-    <?php
-    $controller_name = "pbx_admin/insert_extension";
-    $attributes = array('class' => 'pbx-new-extensions',
-        'id' => 'pbx-new-extensions', 'name' => 'new_extensions');
-    echo form_open($controller_name, $attributes);
-    ?>
+  <form id="pbx-new-extensions" method="post">
     <table width="100%" style="line-height: 30px;">
         <tr>
             <td>SIP Extension <sup>*</sup></td> <td><input type="text" name="sip_extension" class="textbox-style1 sip-extension" value=""></td>
@@ -84,7 +79,7 @@
             <td class="error_cell"> <label id="display-name-error"></label></td>
         </tr>        
         <tr>
-            <td>Secret <sup>*</sup></td> <td><input type="text" name="secret" class="textbox-style1 sceret-fld" value=""></td>
+            <td>Secret <sup>*</sup></td> <td><input type="text" name="secret" class="textbox-style1 secret-fld" value=""></td>
         </tr>
         <tr>
             <td></td>
