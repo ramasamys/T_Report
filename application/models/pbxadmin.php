@@ -92,14 +92,27 @@ function getAllExtension($exten) {
     return $extension_query->result_array();
 	
   }  
- 
-function extensionInsert($extension_for_sipusers,$extension_for_sipname,$extension_for_voiceboxes) 
+  function  checkExtension($id){
+      $sql = "SELECT * from sipname WHERE exten=?";
+      $query = $this->db->query($sql, array($id));
+      return $query->result_array();           
+      
+  }
+          function extensionInsert($sipnamedata,$sipusersdata,$voicedata) 
 	{
-		
-		$sipusers_insert	=	$this->db->insert('sipusers', $extension_for_sipusers);
-		$userid				=	0;
-		$userid				=	$this->db->insert_id();
-		
+		$this->db->insert('sipname', $sipnamedata);
+                $nameid = $this->db->insert_id();
+                
+                $this->db->insert('sipusers', $sipusersdata);
+                $userid = $this->db->insert_id();
+                
+                $this->db->insert('voiceboxes', $voicedata);
+		$voiceid = $this->db->insert_id();
+                
+                $result = array();
+		$result = array("$userid","$nameid","$voiceid");
+                return $result;
+/*		
 		$sipname_insert		=	$this->db->insert('sipname', $extension_for_sipname);
 		$nameid				=	0;
 		$nameid				=	$this->db->insert_id();
@@ -110,8 +123,8 @@ function extensionInsert($extension_for_sipusers,$extension_for_sipname,$extensi
 		
 		
 		$id = array();
-		$id = array("$userid","$nameid","$voiceid");
-		return $id;		
+		$id = array("$userid","$nameid","$voiceid"); */
+				
 		
    }
    

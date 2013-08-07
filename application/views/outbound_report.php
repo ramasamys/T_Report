@@ -20,7 +20,7 @@
       To &nbsp;<input type="text" name="from_data"  class="textbox-style datepicker" /> &nbsp;&nbsp;&nbsp;
       Agent &nbsp;<input type="text" name="agent_name"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url().'index.php/report_content/auto_get_phone' ; ?>" />
 	  
-	  Phone &nbsp;<input type="text" name="phone"  class="textbox-style" id="new-agent-name-autocomplete" new_url="<?php echo base_url().'index.php/report_content/auto_get_agent' ; ?>" />
+	  Phone &nbsp;<input type="text" name="phone"  class="textbox-style numbers-only" id="new-agent-name-autocomplete" new_url="<?php echo base_url().'index.php/report_content/auto_get_agent' ; ?>" />
 	  
       </td>
       </tr><tr>
