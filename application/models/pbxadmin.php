@@ -115,20 +115,7 @@ function extensionInsert($sipnamedata,$sipusersdata,$voicedata)
         $result = array();
 		$result = array("$userid","$nameid","$voiceid");
                 return $result;
-/*		
-		$sipname_insert		=	$this->db->insert('sipname', $extension_for_sipname);
-		$nameid				=	0;
-		$nameid				=	$this->db->insert_id();
-		
-		$voiceboxes_insert	=	$this->db->insert('voiceboxes', $extension_for_voiceboxes);
-		$voiceid			=	0;
-		$voiceid			=	$this->db->insert_id();
-		
-		
-		$id = array();
-		$id = array("$userid","$nameid","$voiceid"); */
-				
-		
+	
    }
    
    function extension_insert_fail($sipuser_id,$sipname_id,$voiceboxes_id)
@@ -153,35 +140,20 @@ function extensionInsert($sipnamedata,$sipusersdata,$voicedata)
 		}
 	}
    
-function extensionUpdate() {
+function extensionUpdate($sipextension,$upd_sipname,$upd_sipusers,$upd_sipvoice) 
+{
 
-$nat = $_POST['nat'];
-$type = $_POST['type'];
-$context = $_POST['context'];
-$fromuser = $_POST['fromuser'];
-$mailbox = $_POST['mailbox'];
-$sippasswd = $_POST['sippasswd'];
-$callerid = $_POST['callerid'];
-$cancallforward = $_POST['cancallforward'];
-$canreinvite = $_POST['canreinvite'];
-$mask = $_POST['mask'];
-$musiconhold = $_POST['musiconhold'];
-$port = $_POST['port'];
-$regseconds = $_POST['regseconds'];
-$lastms = $_POST['lastms'];
-$username = $_POST['username'];
+		$this->db->where('exten', $sipextension);
+		$this->db->update('sipname', $upd_sipname);
 
-$nat = $_POST['name'];
+		$this->db->where('name', $sipextension);
+		$this->db->update('sipusers', $upd_sipusers);
+		
+		$this->db->where('customer_id', $sipextension);
+		$this->db->update('voiceboxes', $upd_sipvoice);
+		
 
-$updatesql = "update sipusers set nat='$nat',type='$type',context='$context',fromuser='$fromuser', mailbox='$mailbox',sippasswd='$sippasswd',callerid='$callerid',cancallforward ='$cancallforward',canreinvite='$canreinvite', mask='$mask', musiconhold='$musiconhold', port='$port', regseconds='$regseconds',lastms='$lastms' where username='$username'";
-
-$update_namesql = "update sipname set name='$name' where exten='$username'";
-
-   $updatequery = $this->db->query($updatesql);
-   $update_namequery = $this->db->query($update_namesql);
-
-
-    }
+}
 
 function extensionDelete($id) {
 
@@ -267,13 +239,20 @@ function followmeInsert($followme_for_insertion) {
 		
 		return $this->db->insert_id();
     }
+	
+ function  checkFollowme($followname){
+ 
+      $sql = "SELECT * from followme WHERE fname=?";
+      $query = $this->db->query($sql, array($followname));
+	  $result_array = $query->result_array();           
+	  return $result_array;
+      
+  }
     
-function followmeUpdate() {
+function followmeUpdate($followme_name,$upd_followme_insert) {
 
-$edit = "update followme set folloename='$followname',ringtime='$ringtime',extlist='$extlist',setdst='$setdst',dst='$dst' where id='$id'";
-
-   $editfollow = $this->db->query($edit);
-
+		$this->db->where('f_name', $followme_name);
+		$this->db->update('followme', $upd_followme_insert);
 
     }  
   
@@ -355,14 +334,21 @@ function queueInsert($data_for_queue) {
    return $this->db->insert_id();
 
     }
+	
+	
+ function  checkQueue($queuename){
+ 
+      $sql = "SELECT * from queue_table WHERE name=?";
+      $query = $this->db->query($sql, array($queuename));
+	  $result_array = $query->result_array();           
+	  return $result_array;
+      
+  }
     
-function queueUpdate() {
+function queueUpdate($queue_name,$upd_queue_insertion) {
 
-$editsql = "update queue_table set announce_frequency='$announce_frequency',announce_holdtime='$announce_holdtime',eventmemberstatus='$eventmemberstatus',eventwhencalled='$eventwhencalled', joinempty='$joinempty',leavewhenempty='$leavewhenempty',memberdelay='$memberdelay',queue_callswaiting ='$queue_callswaiting',reportholdtime='$reportholdtime', retry='$retry', ringinuse='$ringinuse', servicelevel='$servicelevel', strategy='$strategy',timeout='$timeout',timeoutrestart='$timeoutrestart',weight='$weight',wrapuptime='$wrapuptime',name='$name' where id='$id'";
-
-   $editquery = $this->db->query($editsql);
-
-
+		$this->db->where('name', $queue_name);
+		$this->db->update('queue_table', $upd_queue_insertion);
     }
     
 function queueDelete($queue_delete) {
@@ -438,6 +424,15 @@ function inboundInsert($inbound_for_insertion) {
 		return $this->db->insert_id();
 		
     }
+	
+ function  checkInbound($inboundnumber){
+ 
+      $sql = "SELECT * from inbound_rout WHERE did_num=?";
+      $query = $this->db->query($sql, array($inboundnumber));
+	  $result_array = $query->result_array();           
+	  return $result_array;
+      
+  }
 
 function inboundUpdate() {
 

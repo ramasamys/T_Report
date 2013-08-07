@@ -85,6 +85,8 @@ class Pbx_admin extends CI_Controller {
     }
 
     function insert_extension() {
+	
+	if ($this->session->userdata('logged_in')) {
         $sipextension = stripslashes($this->input->post('sipextension'));
         $context = stripslashes($this->input->post('extension_context'));
         $mailid = stripslashes($this->input->post('email_id'));
@@ -109,6 +111,20 @@ class Pbx_admin extends CI_Controller {
         $sipvoice['password'] = $password_ext;
         $sipvoice['email'] = $mailid;
         $sipvoice['context'] = $context;
+		
+		$upd_sipname['name'] = stripslashes($this->input->post('display_name'));
+		
+		$upd_sipusers['host'] = stripslashes($this->input->post('extension_host'));
+        $upd_sipusers['context'] = $context;
+        $upd_sipusers['mailbox'] = $mailid;
+        $upd_sipusers['sippasswd'] = $password_ext;
+        $upd_sipusers['callgroup'] = stripslashes($this->input->post('call_group'));
+        $upd_sipusers['pickupgroup'] = stripslashes($this->input->post('call_pickup_group'));
+        $upd_sipusers['secret'] = stripslashes($this->input->post('secret_fld'));
+		
+		$upd_sipvoice['password'] = $password_ext;
+        $upd_sipvoice['email'] = $mailid;
+        $upd_sipvoice['context'] = $context;
         
 		
 		$checkExtensionExist = $this->pbxadmin->checkExtension($sipextension);
@@ -136,10 +152,14 @@ class Pbx_admin extends CI_Controller {
 
 		else 
 		{
-			$updateid_array		= 	$this->pbxadmin->extensionUpdate($sipname,$sipusers,$sipvoice);
+			$update_array		= 	$this->pbxadmin->extensionUpdate($sipextension,$upd_sipname,$upd_sipusers,$upd_sipvoice);
 			echo json_encode(array('status'=>'updated'));
         }
         
+	}
+  else {
+            redirect('login/logout');
+        }
 }
 
     function edit_extension() {
@@ -238,35 +258,46 @@ class Pbx_admin extends CI_Controller {
 
     function followme_insert() {
         if ($this->session->userdata('logged_in')) {
-            
-						
-         $followme_for_insertion = array(   
-			'f_id'		=>	'',
-			'f_name'	=>	stripslashes($this->input->post('followme_name')),
-			'ringtime'	=>	stripslashes($this->input->post('ring_time')),	
-			'extlist'	=>	stripslashes($this->input->post('followme_list')),	
-			'setdst'	=>	stripslashes($this->input->post('set_destination')),
-			'dst'		=>	stripslashes($this->input->post('dependent_destination')),
-			);
-				                
-				$this->pbxadmin->followmeInsert($followme_for_insertion);
-				redirect('pbx_admin/followme');
+           
+		   $followme_name				=	stripslashes($this->input->post('followme_name'))
+		   $followme_insert_value['f_name']	=	$followme_name;
+		   $followme_insert_value['ringtime']	=	stripslashes($this->input->post('ring_time'));
+		   $followme_insert_value['extlist']	=	stripslashes($this->input->post('followme_list'));
+		   $followme_insert_value['setdst']	=	stripslashes($this->input->post('set_destination'));
+		   $followme_insert_value['dst']	=	stripslashes($this->input->post('dependent_destination'));
 			
+
+		   $upd_followme_insert['ringtime']	=	stripslashes($this->input->post('ring_time'));
+		   $upd_followme_insert['extlist']	=	stripslashes($this->input->post('followme_list'));
+		   $upd_followme_insert['setdst']	=	stripslashes($this->input->post('set_destination'));
+		   $upd_followme_insert['dst']	=	stripslashes($this->input->post('dependent_destination'));
+       
 			
-			//$this->load->view('add_followme');
-        } else {
+		$check_followme = $this->pbxadmin->checkFollowme($followme_name);
+		
+		if(empty($check_followme))
+		{
+			 $followme_array		= 	$this->pbxadmin->followmeInsert($followme_insert_value);
+			
+			echo json_encode(array('status'=>'success'));
+		
+		}
+		
+		else 
+		{
+			$followme_update		= 	$this->pbxadmin->followmeUpdate($followme_name,$upd_followme_insert);
+			echo json_encode(array('status'=>'updated'));
+        }
+		
+    }
+
+	else 
+		{
             redirect('login/logout');
         }
     }
 
-    function followme_update() {
-        if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->followmeUpdate();
-            redirect('pbx_admin/followme_list');
-        } else {
-            redirect('login/logout');
-        }
-    }
+ 
 
     function followme_delete() {
         if ($this->session->userdata('logged_in')) {
@@ -334,62 +365,68 @@ class Pbx_admin extends CI_Controller {
     function queue_insert() {
         if ($this->session->userdata('logged_in')) {
 		
-			
-         $queue_for_insertion = array(   
-			'name'						=>	stripslashes($this->input->post('queue_name')),
-			'musiconhold'				=>	'NULL',					  	  	      	  	  	
-			'announce'					=>	'NULL',	  	  	      	  	  	
-			'context'					=>	'NULL',	  	  	      	  	  	
-			'timeout'					=>	stripslashes($this->input->post('time_out')),
-			'monitor_join'  			=>	'NULL',
-			'monitor_format'			=>	'NULL',			  	  	      	  	  	
-			'queue_youarenext'			=>	'NULL',			  	  	      	  	  	
-			'queue_thereare'			=>	'NULL',			  	  	      	  	  	
-			'queue_callswaiting'		=>	stripslashes($this->input->post('queue_call_wait')),	
-			'queue_holdtime'			=>	'NULL',
-			'queue_minutes'				=>	'NULL',		  	  	      	  	  	
-			'queue_seconds'				=>	'NULL',		  	  	      	  	  	
-			'queue_lessthan'			=>	'NULL',		  	  	      	  	  	
-			'queue_thankyou'			=>	'NULL',		  	  	      	  	  	
-			'queue_reporthold'			=>	'NULL',			  	  	      	  	  	
-			'announce_frequency'		=>	stripslashes($this->input->post('announce_frequency')),	
-			'announce_round_seconds'	=>	'NULL',
-			'announce_holdtime'			=>	stripslashes($this->input->post('announce_holdtime')),
-			'retry'						=>	stripslashes($this->input->post('retry')),      	  	  	
-			'wrapuptime'				=>	stripslashes($this->input->post('wrapup_time')),
-			'maxlen'					=>	stripslashes($this->input->post('max_wait_time')),
-			'servicelevel'				=>	stripslashes($this->input->post('service_level')),
-			'strategy'					=>	stripslashes($this->input->post('ring_statergy')),
-			'joinempty'					=>	stripslashes($this->input->post('join_empty')),
-			'leavewhenempty'			=>	stripslashes($this->input->post('leave_when_empty')),
-			'eventmemberstatus'			=>	stripslashes($this->input->post('event_member_status')),
-			'eventwhencalled'			=>	stripslashes($this->input->post('event_when_called')),
-			'reportholdtime'			=>	stripslashes($this->input->post('report_hold_time')),
-			'memberdelay'				=>	stripslashes($this->input->post('member_delay')),
-			'weight'					=>	stripslashes($this->input->post('queue_weight')),	  	  	      	  	  	
-			'timeoutrestart'			=>	stripslashes($this->input->post('timeout_restart')),
-			'periodic_announce'			=>	'NULL',
-			'periodic_announce_frequency'=>	'NULL',
-			'ringinuse'					=>	stripslashes($this->input->post('ring_in_use')),  	  	      	  	  	
-			'setinterfacevar'			=>	'NULL',
-				);
-				                
+		$queue_name = stripslashes($this->input->post('queue_name'));
+        $queue_insertion['name']	=	$queue_name;
+				  	  	      	  	  	
+		$queue_insertion['timeout']	=	stripslashes($this->input->post('time_out'));
+		$queue_insertion['queue_callswaiting']	=	stripslashes($this->input->post('queue_call_wait'));	
+		  	      	  	  	
+		$queue_insertion['announce_frequency'	=	stripslashes($this->input->post('announce_frequency'));	
+		$queue_insertion['announce_holdtime']	=	stripslashes($this->input->post('announce_holdtime'));
+		$queue_insertion['retry']				=	stripslashes($this->input->post('retry'));      	  	  	
+		$queue_insertion['wrapuptime']			=	stripslashes($this->input->post('wrapup_time'));
+		$queue_insertion['maxlen']				=	stripslashes($this->input->post('max_wait_time'));
+		$queue_insertion['servicelevel']		=	stripslashes($this->input->post('service_level'));
+		$queue_insertion['strategy']			=	stripslashes($this->input->post('ring_statergy'));
+		$queue_insertion['joinempty']			=	stripslashes($this->input->post('join_empty'));
+		$queue_insertion['leavewhenempty']		=	stripslashes($this->input->post('leave_when_empty'));
+		$queue_insertion['eventmemberstatus']	=	stripslashes($this->input->post('event_member_status'));
+		$queue_insertion['eventwhencalled']		=	stripslashes($this->input->post('event_when_called'));
+		$queue_insertion['reportholdtime']		=	stripslashes($this->input->post('report_hold_time'));
+		$queue_insertion['memberdelay']			=	stripslashes($this->input->post('member_delay'));
+		$queue_insertion['weight']				=	stripslashes($this->input->post('queue_weight'));	  	  	      	  	  	
+		$queue_insertion['timeoutrestart']		=	stripslashes($this->input->post('timeout_restart'));
+		$queue_insertion['ringinuse']			=	stripslashes($this->input->post('ring_in_use'));  	  	      	  	  	
+		
+		
+		$upd_queue_insertion['timeout']	=	stripslashes($this->input->post('time_out'));
+		$upd_queue_insertion['queue_callswaiting']	=	stripslashes($this->input->post('queue_call_wait'));	
+		  	      	  	  	
+		$upd_queue_insertion['announce_frequency'	=	stripslashes($this->input->post('announce_frequency'));	
+		$upd_queue_insertion['announce_holdtime']	=	stripslashes($this->input->post('announce_holdtime'));
+		$upd_queue_insertion['retry']				=	stripslashes($this->input->post('retry'));      	  	  	
+		$upd_queue_insertion['wrapuptime']			=	stripslashes($this->input->post('wrapup_time'));
+		$upd_queue_insertion['maxlen']				=	stripslashes($this->input->post('max_wait_time'));
+		$upd_queue_insertion['servicelevel']		=	stripslashes($this->input->post('service_level'));
+		$upd_queue_insertion['strategy']			=	stripslashes($this->input->post('ring_statergy'));
+		$upd_queue_insertion['joinempty']			=	stripslashes($this->input->post('join_empty'));
+		$upd_queue_insertion['leavewhenempty']		=	stripslashes($this->input->post('leave_when_empty'));
+		$upd_queue_insertion['eventmemberstatus']	=	stripslashes($this->input->post('event_member_status'));
+		$upd_queue_insertion['eventwhencalled']		=	stripslashes($this->input->post('event_when_called'));
+		$upd_queue_insertion['reportholdtime']		=	stripslashes($this->input->post('report_hold_time'));
+		$upd_queue_insertion['memberdelay']			=	stripslashes($this->input->post('member_delay'));
+		$upd_queue_insertion['weight']				=	stripslashes($this->input->post('queue_weight'));	  	  	      	  	  	
+		$upd_queue_insertion['timeoutrestart']		=	stripslashes($this->input->post('timeout_restart'));
+		$upd_queue_insertion['ringinuse']			=	stripslashes($this->input->post('ring_in_use')); 
+		
+		$checkQueueExist = $this->pbxadmin->checkQueue($queue_name);
+		
+        if(empty($checkQueueExist)){
+		
 				$this->pbxadmin->queueInsert($queue_for_insertion);
-				redirect('pbx_admin/queue');
-            
+				echo json_encode(array('status'=>'success'));
+        }
+		else
+		{
+				$update_array		= 	$this->pbxadmin->queueUpdate($queue_name,$upd_queue_insertion);
+				echo json_encode(array('status'=>'updated'));
+		}
+		
         } else {
             redirect('login/logout');
         }
     }
 
-    function queue_update() {
-        if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->queueUpdate();
-            redirect('pbx_admin/queue_list');
-        } else {
-            redirect('login/logout');
-        }
-    }
 
     function queue_delete() {
         if ($this->session->userdata('logged_in')) {
@@ -402,24 +439,6 @@ class Pbx_admin extends CI_Controller {
         }
     }
 
-    function insert_inbound() {
-        if ($this->session->userdata('logged_in')) {
-		
-         $inbound_for_insertion = array(   
-			'did_num'	=>	stripslashes($this->input->post('did_number')),
-			'did_name'	=>	stripslashes($this->input->post('did_name')),
-			'setdst'	=>	stripslashes($this->input->post('set_destination')),	
-			'dst'		=>	stripslashes($this->input->post('dependent_destination')),	
-			
-			);
-				                
-				$this->pbxadmin->inboundInsert($inbound_for_insertion);
-				redirect('pbx_admin/inbound');
-            
-        } else {
-            redirect('login/logout');
-        }
-    }
 
     function inbound() {
 
@@ -440,6 +459,41 @@ class Pbx_admin extends CI_Controller {
         }	
 
      }
+	 
+    function insert_inbound() {
+        if ($this->session->userdata('logged_in')) {
+		
+		$did_number	=	stripslashes($this->input->post('did_number'));
+         $inbound_insertion['did_num']	=	$did_number;
+		 $inbound_insertion['did_name']	=	stripslashes($this->input->post('did_name'));
+		 $inbound_insertion['setdst']	=	stripslashes($this->input->post('set_destination'));	
+		 $inbound_insertion['dst']		=	stripslashes($this->input->post('dependent_destination'));
+				                
+		 
+		 $upd_inbound_insertion['did_name']	=	stripslashes($this->input->post('did_name'));
+		 $upd_inbound_insertion['setdst']	=	stripslashes($this->input->post('set_destination'));	
+		 $upd_inbound_insertion['dst']		=	stripslashes($this->input->post('dependent_destination'));
+
+		$checkInboundExist = $this->pbxadmin->checkInbound($did_number);
+		
+        if(empty($checkInboundExist)){
+			    
+				$this->pbxadmin->inboundInsert($inbound_insertion);
+				echo json_encode(array('status'=>'success'));
+		
+		}
+		else
+		{
+			$update_array		= 	$this->pbxadmin->inboundUpdate($did_number,$upd_inbound_insertion);
+			echo json_encode(array('status'=>'updated'));
+        }
+				
+				
+            
+        } else {
+            redirect('login/logout');
+        }
+    }
 	 
 	 function inbound_dependent()
 	 {
