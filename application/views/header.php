@@ -12,6 +12,7 @@
             <script src="<?php echo base_url() ?>js/jquery.validate.js" type="text/javascript"></script>
             <script src="<?php echo base_url() ?>js/helper.js" type="text/javascript"></script>
             <script src="<?php echo base_url() ?>js/admin.js" type="text/javascript"></script>
+             <script src="<?php echo base_url() ?>js/agent.js" type="text/javascript"></script>
 
             
             <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" type="text/css" />

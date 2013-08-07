@@ -105,7 +105,9 @@ class Login extends CI_Controller {
 
     function queue_login() {
         if ($this->session->userdata('logged_in')) {
-            $number = $this->user->agentQueue();
+        
+       // $queue=$_POST['queue'];
+        $number = $this->user->agentQueue();
         } else {
             redirect('login/logout');
         }
