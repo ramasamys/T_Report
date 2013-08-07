@@ -24,12 +24,12 @@
 		
 			    <p>
 			    <label for="user_login">Username <br>
-					<input type="text" name="tv_username" value="<?php if(!empty($cookieusername)){ echo $cookieusername;} else { echo set_value('tv_username'); }; ?>" placeholder="username" />
+					<input type="text" name="tv_username" value="<?php if(!empty($cookieusername)){ echo $cookieusername;} else { echo set_value('tv_username'); }; ?>" placeholder="username" onclick="if(this.value == this.defaultValue) this.value = ''"/>
 				</label>
 			    </p>
 				<p>
 					<label for="user_pass">Password <br>
-					<input type="password" name="tv_password" value="<?php if(!empty($cookiepassword)){ echo $cookiepassword;} else { echo set_value('tv_password'); }; ?>" placeholder="password"  />
+					<input type="password" name="tv_password" value="<?php if(!empty($cookiepassword)){ echo $cookiepassword;} else { echo set_value('tv_password'); }; ?>" placeholder="password"  onclick="if(this.value == this.defaultValue) this.value = ''"/>
 				</p>
 <p class="forgetmenot">
 <label for="rememberme">
@@ -44,7 +44,6 @@ Remember Me
 				</p>
 			
 		</form>
-
 	</div>
 
 	
