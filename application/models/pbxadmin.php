@@ -93,23 +93,26 @@ function getAllExtension($exten) {
 	
   }  
   function  checkExtension($id){
+ 
       $sql = "SELECT * from sipname WHERE exten=?";
       $query = $this->db->query($sql, array($id));
-      return $query->result_array();           
+	  $result_array = $query->result_array();           
+	   return $result_array;
       
   }
-          function extensionInsert($sipnamedata,$sipusersdata,$voicedata) 
+ 
+function extensionInsert($sipnamedata,$sipusersdata,$voicedata) 
 	{
 		$this->db->insert('sipname', $sipnamedata);
-                $nameid = $this->db->insert_id();
+        $nameid = $this->db->insert_id();
                 
-                $this->db->insert('sipusers', $sipusersdata);
-                $userid = $this->db->insert_id();
+        $this->db->insert('sipusers', $sipusersdata);
+        $userid = $this->db->insert_id();
                 
-                $this->db->insert('voiceboxes', $voicedata);
+        $this->db->insert('voiceboxes', $voicedata);
 		$voiceid = $this->db->insert_id();
                 
-                $result = array();
+        $result = array();
 		$result = array("$userid","$nameid","$voiceid");
                 return $result;
 /*		
