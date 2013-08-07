@@ -9,6 +9,7 @@ class Report_content extends CI_Controller {
         parent::__construct();
         $this->load->helper(array('url', 'form'));
         $this->load->library("pagination");
+		$this->load->helper('download');
         $this->load->model('report', 'report', TRUE);
         $this->load->model('global_pagination', 'global_pagination', TRUE);
     }
@@ -193,6 +194,15 @@ class Report_content extends CI_Controller {
             redirect('login/logout');
         }
 	}
+	
+	function audio_donwload($audio)
+	{
+		$path	=	base_url() . "audio/";
+		$audio_name	=	$audio.".mp3";
+		$full_path	=	$path.$audio.".mp3";
+		$data = file_get_contents("$full_path");
+		force_download("$audio_name", $data);
+	} 
 	
 
 
