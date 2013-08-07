@@ -60,38 +60,37 @@ $(document).ready(function() {
             var sipextension = $('.sip-extension').val();
             var display_name = $('.display-name').val();
             var secret_fld = $('.secret-fld').val();
-			var call_group = $('.call-group').val();
-			var call_pickup_group = $('.call-pickup').val();
-			var extension_context = $('.extension-context').val();
-			var extension_host = $('.extension-host').val();
-			var email_id = $('.email-id').val();
-			var password_ext = $('.password-ext').val();
-			
-			
+            var call_group = $('.call-group').val();
+            var call_pickup_group = $('.call-pickup').val();
+            var extension_context = $('.extension-context').val();
+            var extension_host = $('.extension-host').val();
+            var email_id = $('.email-id').val();
+            var password_ext = $('.password-ext').val();
+
             if (sipextension != '' && display_name != '' && secret_fld != '') {
                 var post_data = {sipextension: sipextension, display_name: display_name, secret_fld: secret_fld};
                 $.ajax({
                     type: 'POST',
                     url: baseUrl + "index.php/pbx_admin/insert_extension",
                     data: post_data,
-                    success: function(data) {					
-					var myObject = eval('(' + data + ')');
+                    success: function(data) {
+                        var myObject = eval('(' + data + ')');
 
-                    if(myObject.status="success")
-					{
-			        $('.create-new-extension').dialog('close');
+                        if (myObject.status = "success")
+                        {
+                            $('.create-new-extension').dialog('close');
+                        }
                     }
-					}
                 });
             }
 
         }
     });
-   
-   $('.numbers-only').live("keyup", function() {
+
+    $('.numbers-only').live("keyup", function() {
         this.value = this.value.replace(/[^0-9\.]/g, '');
     });
-	
+
     $('.edit-extension-div').dialog({
         width: 400,
         height: 360,
@@ -113,7 +112,7 @@ $(document).ready(function() {
         $('.edit-sip-callerid').val($(this).attr('callerid'));
     });
 
-/* queue */
+    /* queue */
 
     $('.create-new-queue').dialog({
         width: 500,
@@ -264,7 +263,7 @@ $(document).ready(function() {
     });
 
 
-/* edit inbound  */
+    /* edit inbound  */
 
     $('.edit-inbound-div').dialog({
         width: 500,
@@ -282,7 +281,7 @@ $(document).ready(function() {
         $('.edit-inbound-div').dialog('open');
     });
 
-/* delete inbound */
+    /* delete inbound */
 
     $('.delete-inbound').live('click', function() {
         var inbound_delete_id = $(this).attr('deleteid');
@@ -304,7 +303,7 @@ $(document).ready(function() {
     });
 
 
-/* followme  */
+    /* followme  */
 
     $('.create-new-followme').dialog({
         width: 650,
@@ -348,7 +347,7 @@ $(document).ready(function() {
     });
 
 
-/* edit followme */
+    /* edit followme */
 
     $('.edit-followme-div').dialog({
         width: 500,
@@ -373,45 +372,45 @@ $(document).ready(function() {
         $('.edit-followme-div').dialog('open');
     });
 
-   
+
 
 /////////////delete followme//////////
 
-	     $('.delete-followme').live('click',function(){ 
-	var followme_delete_id = $(this).attr('deleteid');
-	var confirmationvalues = confirm("Are you sure you want to delete this followme "+followme_delete_id+"? Click Yes to continue or No to cancel");
-	if(confirmationvalues == true){
-	if(followme_delete_id !=''){
-	  $(this).parents('tr').remove();
-	      var post_data = {followme_delete_id:followme_delete_id};
-		    $.ajax({
-		      type:'POST',
-		      url: baseUrl + "index.php/pbx_admin/followme_delete",
-		      data:post_data,
-		      success: function(data) {
-console.log(data);
-		      }
-	      });
-	}
-      }
-      });
-	  
-	  
+    $('.delete-followme').live('click', function() {
+        var followme_delete_id = $(this).attr('deleteid');
+        var confirmationvalues = confirm("Are you sure you want to delete this followme " + followme_delete_id + "? Click Yes to continue or No to cancel");
+        if (confirmationvalues == true) {
+            if (followme_delete_id != '') {
+                $(this).parents('tr').remove();
+                var post_data = {followme_delete_id: followme_delete_id};
+                $.ajax({
+                    type: 'POST',
+                    url: baseUrl + "index.php/pbx_admin/followme_delete",
+                    data: post_data,
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
+            }
+        }
+    });
+
+
 ////////////play audio////////////
 
 
-$('.play-audio').live('click',function(){ 
+    $('.play-audio').live('click', function() {
 
-	var audioURL = $(this).attr('audio_file');
-	document.getElementById("audio_id").innerHTML=
- "<embed src=\""+audioURL+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
- 
+        var audioURL = $(this).attr('audio_file');
+        document.getElementById("audio_id").innerHTML =
+                "<embed src=\"" + audioURL + "\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
 
-	/*alert(audioURL);
-	link = baseUrl + 'audio/jsplayer.htm?' + audioURL;
-	playback_src = "<iframe width='150px' height='25px' marginheight='0' marginwidth='0' frameborder='0' scrolling='no' src=" + link + "></iframe>";
-	$('.play-audio').innerHTML = playback_src;	*/
-});
+
+        /*alert(audioURL);
+         link = baseUrl + 'audio/jsplayer.htm?' + audioURL;
+         playback_src = "<iframe width='150px' height='25px' marginheight='0' marginwidth='0' frameborder='0' scrolling='no' src=" + link + "></iframe>";
+         $('.play-audio').innerHTML = playback_src;	*/
+    });
 
 
 });
