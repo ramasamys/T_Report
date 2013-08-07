@@ -25,25 +25,26 @@ Class User extends CI_Model {
   
   function agentQueue(){
     $sessionValues = $this->session->userdata('logged_in'); 
-          $sessionId =  $sessionValues['sessionId'];	  
+          $sessionId =  $sessionValues['sessionId'];
+          $agent=$sessionValues['first_name'];
 
-  $agent=$_POST['q'];
-  $que=$_POST['team'];
-  $sql="update logindetail set queue='$que' where sessionId='$sessionId'";
-   $query=$this->db->query($sql);
-  $team = explode(',',$que);
+ //$agent=$_POST['q'];
+  $que=$_POST['queue'];
+ // $sql="update logindetail set queue='$que' where sessionId='$sessionId'";
+  // $query=$this->db->query($sql);
+ // $team = explode(',',$que);
 $unid = rand(0000,9999);
-for($i=0;$i<sizeof($team);$i++)
+for($i=0;$i<sizeof($que);$i++)
 {
 
-$queue=$team[$i];
+$queue=$que[$i];
 $sql22="insert into queue_member_table(unid,membername,queue_name,interface,paused) values('$unid','$agent','$queue','$agent',0)";
 $query=$this->db->query($sql22);
 }
 
-$agentarray=array();
-$agentarray=array("$agent","$que");
-return $agentarray;  
+//$agentarray=array();
+//$agentarray=array("$agent","$que");
+//return $agentarray;  
  
   }
   function insertlogindetail($user,$timestamp)
