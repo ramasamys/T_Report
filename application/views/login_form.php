@@ -3,7 +3,12 @@
 	<div class="loginform" >
 		<div class="loginTitle"></div>
 
-<?php echo validation_errors(); ?>
+<?php //echo validation_errors(); ?>
+        <?php if(validation_errors()){ ?>
+                  <div id="login_error">
+                    <?php echo '<strong>ERROR</strong>:'.validation_errors(); ?>
+                </div>
+      <?  } ?>                
 		<?php
 			$controller_name = "login/verifyLogin";
 			$attributes = array('class' => 'report-login',

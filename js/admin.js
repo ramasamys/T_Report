@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    //Ramasamy
+    /* Ramasamy */
     $('.create-new-extension').dialog({
-        width: 500,
-        height: 400,
+        width: 520,
+        height: 460,
         modal: true,
         title: "Create Extension",
         resizable: false,
@@ -11,6 +11,8 @@ $(document).ready(function() {
 
     $('.create-extension').live('click', function() {
         $('label.error').remove();
+        $('#mailbox').attr('checked', false);
+        $('.show-fields').hide();
         $('.sip-extension').val('');
         $('.display-name').val('');
         $('.sceret-fld').val('');
@@ -21,14 +23,12 @@ $(document).ready(function() {
         $('.create-new-extension').dialog('open');
     });
 
-      $("#pbx-new-extensions").validate({
+    $("#pbx-new-extensions").validate({
         rules: {
             sip_extension: {required: true, digits: true},
             display_name: "required",
             secret: "required",
-            call_group: "required",
-            pickup_group: "required",
-            mailid: {required: '#mailbox:checked', email: true,},
+            mailid: {required: '#mailbox:checked', email: true, },
             password_ext: {required: '#mailbox:checked', digits: true},
         },
         errorPlacement: function(error, element) {
@@ -57,11 +57,26 @@ $(document).ready(function() {
             password_ext: "Please enter only numbers as password.",
         },
         submitHandler: function(form) {
-            $("#pbx-new-extensions").submit();
-            $('.edit-extension-div').dialog('close');
+            var sipextension = $('.sip-extension').val();
+            var display_name = $('.display-name').val();
+            var sceret_fld = $('.sceret-fld').val();
+            if (sipextension != '' && display_name != '' && sceret_fld != '') {
+                var post_data = {sipextension: sipextension, display_name: display_name, sceret_fld: sceret_fld};
+                $.ajax({
+                    type: 'POST',
+                    url: baseUrl + "index.php/pbx_admin/insert_extension",
+                    data: post_data,
+                    success: function(data) {
+                        $('.edit-extension-div').dialog('close');
+                    }
+                });
+            }
+
         }
     });
-
+    $('.numbers-only').live("keyup", function() {
+        this.value = this.value.replace(/[^0-9\.]/g, '');
+    });
     $('.edit-extension-div').dialog({
         width: 500,
         height: 400,
@@ -76,12 +91,7 @@ $(document).ready(function() {
         $('.edit-extension-div').dialog('open');
     });
 
-
-
-
-
-/////////////////kumutha////////////////////////
-
+/* queue */
 
     $('.create-new-queue').dialog({
         width: 500,
@@ -123,8 +133,49 @@ $(document).ready(function() {
         }
     });
 
+    /* edit queue */
 
-/////inbound//////	
+    $('.edit-queue-div').dialog({
+        width: 500,
+        height: 600,
+        modal: true,
+        title: "Edit queue",
+        resizable: false,
+        autoOpen: false
+    });
+
+    $('.edit-queue').live('click', function() {
+        $('label.error').remove();
+        $('.edit-queue-name').val($(this).attr('queue_name'));
+        $('.edit-queue-calls-waiting').val($(this).attr('queue_calls_waiting'));
+
+
+        $('.edit-queue-div').dialog('open');
+    });
+
+    /* delete queue */
+
+    $('.delete-queue').live('click', function() {
+        var queue_delete_id = $(this).attr('deleteid');
+        var confirmationvalues = confirm("Are you sure you want to delete this queue " + queue_delete_id + "? Click Yes to continue or No to cancel");
+        if (confirmationvalues == true) {
+            if (queue_delete_id != '') {
+                $(this).parents('tr').remove();
+                var post_data = {queue_delete_id: queue_delete_id};
+                $.ajax({
+                    type: 'POST',
+                    url: baseUrl + "index.php/pbx_admin/queue_delete",
+                    data: post_data,
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
+            }
+        }
+    });
+
+
+    /* inbound  */
 
 
     $('.create-new-inbound').dialog({
@@ -141,9 +192,9 @@ $(document).ready(function() {
 
         $('.did-name').val('');
         $('.did-number').val('');
-		$('.set-destination').val('');
-		
-		
+        $('.set-destination').val('');
+
+
         $('.create-new-inbound').dialog('open');
     });
 
@@ -170,38 +221,70 @@ $(document).ready(function() {
         }
     });
 
-	
-    $("#set_destination").change(function() {
+
+    $(".set_destination").change(function() {
         var destination = $(this).val();
-        var post_data = {destination:destination} ;
-		$('#dependent_destination').empty();
+        var post_data = {destination: destination};
+        $('#dependent_destination').empty();
         $.ajax({
-            type: "POST",     
-            dataType:"html",
+            type: "POST",
+            dataType: "html",
             url: baseUrl + "index.php/pbx_admin/inbound_dependent",
             data: post_data,
             success: function(data) {
                 var result = '';
-               var myObject = eval('(' + data + ')');
-                    for (var index in myObject) {
-                      $('#dependent_destination').append('<option value="'+myObject[index].list+'">'+myObject[index].list+'</option>'); 
-                    }
+                var myObject = eval('(' + data + ')');
+                for (var index in myObject) {
+                    $('#dependent_destination').append('<option value="' + myObject[index].list + '">' + myObject[index].list + '</option>');
+                }
             }
         });
-
-
-
     });
 
 
+/* edit inbound  */
+
+    $('.edit-inbound-div').dialog({
+        width: 500,
+        height: 400,
+        modal: true,
+        title: "Edit queue",
+        resizable: false,
+        autoOpen: false
+    });
+
+    $('.edit-inbound').live('click', function() {
+        $('label.error').remove();
 
 
-	
-	
-////followme////
+        $('.edit-inbound-div').dialog('open');
+    });
+
+/* delete inbound */
+
+    $('.delete-inbound').live('click', function() {
+        var inbound_delete_id = $(this).attr('deleteid');
+        var confirmationvalues = confirm("Are you sure you want to delete this inbound route " + inbound_delete_id + "? Click Yes to continue or No to cancel");
+        if (confirmationvalues == true) {
+            if (inbound_delete_id != '') {
+                $(this).parents('tr').remove();
+                var post_data = {inbound_delete_id: inbound_delete_id};
+                $.ajax({
+                    type: 'POST',
+                    url: baseUrl + "index.php/pbx_admin/inbound_delete",
+                    data: post_data,
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
+            }
+        }
+    });
 
 
-$('.create-new-followme').dialog({
+/* followme  */
+
+    $('.create-new-followme').dialog({
         width: 650,
         height: 400,
         modal: true,
@@ -213,7 +296,6 @@ $('.create-new-followme').dialog({
 
     $('.create-followme').live('click', function() {
         $('label.error').remove();
-       
         $('.followme-name').val('');
         $('.followme-list').html('');
         $('.create-new-followme').dialog('open');
@@ -221,38 +303,32 @@ $('.create-new-followme').dialog({
 
     $("#pbx-new-followme").validate({
         rules: {
-           
-		   followme_name: "required",
-               
-			   },
+            followme_name: "required",
+        },
         errorPlacement: function(error, element) {
             if (element.attr('name') == 'followme_name') {
                 error.insertAfter('#followme-name-error');
             }
-            
-           
         },
         messages: {
-            
-			followme_name: "Please enter followme name.",
-            
-			},
+            followme_name: "Please enter followme name.",
+        },
         submitHandler: function(form) {
             $("#pbx-new-followme").submit();
         }
     });
 
 
-	
-	$('#quickpick_extension').change(function() {
+
+    $('#quickpick_extension').change(function() {
         // update input box with the currently selected value
-        $('#followme_list').append($('#quickpick_extension').val()+'\n');
+        $('#followme_list').append($('#quickpick_extension').val() + '\n');
     });
-	
 
-//edit followme
 
-	$('.edit-followme-div').dialog({
+/* edit followme */
+
+    $('.edit-followme-div').dialog({
         width: 500,
         height: 400,
         modal: true,
@@ -263,52 +339,41 @@ $('.create-new-followme').dialog({
 
     $('.edit-followme').live('click', function() {
         $('label.error').remove();
-			
-		$('.edit-followme-name').val($(this).attr('followme_name'));
-		$('.edit-ring-time').val($(this).attr('ring_time'));
-		$('.edit-extension-list').val($(this).attr('extension_list'));
-		$('.edit-set-destination').val($(this).attr('set_destination'));
-		$('.edit-dependent-value').val($(this).attr('dependent_value'));
-		
+        $('.edit-followme-name').val($(this).attr('followme_name'));
+        $('.edit-ring-time').val($(this).attr('ring_time'));
+        $('.edit-extension-list').val($(this).attr('extension_list'));
+        $('.edit-set-destination').val($(this).attr('set_destination'));
+        $('.edit-dependent-value').val($(this).attr('dependent_value'));
+        $('#edit_ring_time').val($(this).attr('ring_time'));
+        $('#edit_set_destination').val($(this).attr('set_destination'));
+        $('#edit_dependent_destination').val($(this).attr('dependent_value'));
+
         $('.edit-followme-div').dialog('open');
     });
 
 
+/* delete followme  */
 
-//kanimozhi//
- $('.edit-queue-div').dialog({
-        width: 500,
-        height: 600,
-        modal: true,
-        title: "Edit queue",
-        resizable: false,
-        autoOpen: false
-    });
-	
-    $('.edit-queue').live('click', function() {
-        $('label.error').remove();
-		$('.edit-queue-name').val($(this).attr('queue_name'));
-		$('.edit-queue-calls-waiting').val($(this).attr('queue_calls_waiting'));
-		
-		
-        $('.edit-queue-div').dialog('open');
-    });
-	
-$('.edit-inbound-div').dialog({
-        width: 500,
-        height: 400,
-        modal: true,
-        title: "Edit queue",
-        resizable: false,
-        autoOpen: false
+    $('.delete-followme').live('click', function() {
+        var followme_delete_id = $(this).attr('deleteid');
+        var confirmationvalues = confirm("Are you sure you want to delete this followme " + followme_delete_id + "? Click Yes to continue or No to cancel");
+        if (confirmationvalues == true) {
+            if (followme_delete_id != '') {
+                $(this).parents('tr').remove();
+                var post_data = {followme_delete_id: followme_delete_id};
+                $.ajax({
+                    type: 'POST',
+                    url: baseUrl + "index.php/pbx_admin/followme_delete",
+                    data: post_data,
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
+            }
+        }
     });
 
-    $('.edit-inbound').live('click', function() {
-        $('label.error').remove();
-		
-		
-        $('.edit-inbound-div').dialog('open');
-    });
-	
 });
+
+
 

@@ -17,7 +17,7 @@
         <tr>
             <td style="width:20%;">Extension  :</td>
             <td style="width:20%;">
-                <input type="text" name="search"  class="textbox-style" id="agent-name-autocomplete" url="<?php echo base_url() . 'index.php/pbx_admin/getExtension'; ?>" />
+                <input type="text" name="search"  class="textbox-style numbers-only" id="agent-name-autocomplete" url="<?php echo base_url() . 'index.php/pbx_admin/getExtension'; ?>" />
             </td>     
             <td style="width:30%;"><input type="submit" name="submit_data" value="Search" class="button-color" /></td>
             <td style="width:30%;"><input type="button" name="export_data" value="Export" class="button-color" /></td>
@@ -49,13 +49,13 @@
                     <td><?php echo $value->name; ?></td>
                     <td><? echo $mailbox = @($value->mailbox) ? $value->mailbox : '-'; ?></td>
                     <td><? echo $cid = isset($value->callerid) ? $value->callerid : '-'; ?></td>
-                    <td><a href="#" class="edit-extension">Edit</a> &nbsp;|&nbsp;<a href="#" class="delete-extension" deleteid="<?php echo $value->id; ?>" >Delete</a></td>
+                    <td><a href="#" class="edit-extension">Edit</a> &nbsp;|&nbsp;<a href="#" class="delete-extension" deleteid="<?php echo $value->name; ?>" >Delete</a></td>
 
                 </tr>
             <?php endforeach; ?>
 <? } else { ?>
             <tr>
-                <td colspan="2">No Records.</td>
+                <td colspan="5">No Records.</td>
             </tr>
 <? } ?>
     </table>
@@ -68,7 +68,7 @@
         'id' => 'pbx-new-extensions', 'name' => 'new_extensions');
     echo form_open($controller_name, $attributes);
     ?>
-    <table width="100%">
+    <table width="100%" style="line-height: 30px;">
         <tr>
             <td>SIP Extension <sup>*</sup></td> <td><input type="text" name="sip_extension" class="textbox-style1 sip-extension" value=""></td>
         </tr>

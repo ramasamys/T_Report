@@ -85,8 +85,40 @@ class Pbx_admin extends CI_Controller {
     }
 
     function insert_extension() {
+        $sipextension = stripslashes($this->input->post('sipextension'));
+        $context = stripslashes($this->input->post('context'));
+        $mailid = stripslashes($this->input->post('mailid'));
+        $password_ext = stripslashes($this->input->post('password_ext'));
+        
+        $sipname['exten'] = $sipextension ;
+        $sipname['name'] = stripslashes($this->input->post('display_name'));
+        
+        $sipusers['name'] = $sipextension;
+        $sipusers['host'] = stripslashes($this->input->post('host'));
+        $sipusers['context'] = $context;
+        $sipusers['fromuser'] = $sipextension;
+        $sipusers['mailbox'] = $mailid;
+        $sipusers['username'] = $sipextension;
+        $sipusers['sippasswd'] = $password_ext;
+        $sipusers['callgroup'] = stripslashes($this->input->post('call_group'));
+        $sipusers['pickupgroup'] = stripslashes($this->input->post('pickup_group'));
+        //$sipusers['secret'] = stripslashes($this->input->post('sceret_fld'));
+        
+        $sipvoice['customer_id'] = $sipextension;
+        $sipvoice['mailbox'] = $sipextension;
+        $sipvoice['password'] = $password_ext;
+        $sipvoice['email'] = $mailid;
+        $sipvoice['context'] = $context;
+        $checkExtensionExist = $this->pbxadmin->checkExtension($sipextension);
+        if(empty($checkExtensionExist)){
+            $extensionStatus = $this->pbxadmin->extensionInsert($sipname,$sipusers,$sipvoice);
+        } else {
+            // update function
+        }
+        
+//        print_r($extensionStatus);
 
-			$extension_for_sipusers = array(   
+/*			$extension_for_sipusers = array(   
 			'name'						=>	stripslashes($this->input->post('sip_extension')),
 			'host'						=>	stripslashes($this->input->post('extension_host')),
 			'context'					=>	stripslashes($this->input->post('context')),
@@ -131,6 +163,8 @@ class Pbx_admin extends CI_Controller {
 					redirect('pbx_admin/viewExtension');
 				
 				}
+ 
+ */
 		    
     }
 
@@ -159,8 +193,8 @@ class Pbx_admin extends CI_Controller {
     function deleteExtension() {
         if ($this->session->userdata('logged_in')) {
 
-            $id = stripslashes($this->input->get('delete_id'));           
-            $this->pbxadmin->extensionDelete($id);
+		    $id = $this->input->post('delete_id');   
+			$this->pbxadmin->extensionDelete($id);
             redirect('pbx_admin/extension_list');
         } else {
             redirect('login/logout');
@@ -171,8 +205,7 @@ class Pbx_admin extends CI_Controller {
 
     function followme() {
         if ($this->session->userdata('logged_in')) {
-$search = "";
-
+            $search = "";
             $page_url = base_url() . "index.php/pbx_admin/followme";
             $total_users = $this->pbxadmin->followme_count($search);
             $result_page = $this->global_pagination->index($page_url, $total_users);
@@ -180,6 +213,7 @@ $search = "";
             $data['result'] = $this->pbxadmin->followmeList($result_per_page, $result_page);
             $data['links'] = $this->pagination->create_links();
 			$data['extension_list']	= 	$this->pbxadmin->getExtension();
+                        $data['depended_value'] = $this->pbxadmin->dependent_values('Queue');
             $this->load->view('list_followme', $data);
 
         } else {
@@ -262,8 +296,10 @@ $search = "";
 
     function followme_delete() {
         if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->followmeDelete();
-            redirect('pbx_admin/followme_list');
+		
+			$followme_delete_id = $this->input->post('followme_delete_id');   
+			$this->pbxadmin->followmeDelete($followme_delete_id);
+            redirect('pbx_admin/followme');
         } else {
             redirect('login/logout');
         }
@@ -383,8 +419,10 @@ $search = "";
 
     function queue_delete() {
         if ($this->session->userdata('logged_in')) {
-            $this->pbxadmin->queueDelete();
-            redirect('pbx_admin/queue_list');
+            
+			$queue_delete_id = $this->input->post('queue_delete_id');   
+			$this->pbxadmin->queueDelete($queue_delete_id);
+            redirect('pbx_admin/queue');
         } else {
             redirect('login/logout');
         }
@@ -440,12 +478,12 @@ $search = "";
         }
     }
 
-    function depended_value(){
-    	$values = $this->pbxadmin->dependedValues();
+   /* function depended_value(){
+    	$values = $this->pbxadmin->dependent_values('Q');
     //	print_r($values);
     	echo $values[0]['name'];
     	    
-    }
+    } */
 	
 	
 			
@@ -489,6 +527,20 @@ $search = "";
             echo "$items[$i] \n";
         }
     }
+	
+	
+	 function inbound_delete() {
+        if ($this->session->userdata('logged_in')) {
+            
+			$inbound_delete_id = $this->input->post('inbound_delete_id');   
+			$this->pbxadmin->inboundDelete($inbound_delete_id);
+            redirect('pbx_admin/inbound');
+        } else {
+            redirect('login/logout');
+        }
+    }
+
+	
 	
 	function realtime()
 	{

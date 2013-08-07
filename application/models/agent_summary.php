@@ -28,23 +28,27 @@ $sql = "SELECT callid,DATE_FORMAT(time,'%d-%m-%Y') as date1, queuename, agent,(s
 function queueSummary($filter) {
 $sql2="";
 $sql3="";
+	$date="";
    if($filter!=NULL){
    if($filter['from'] !=""){
    $from = $filter['from'];
    $to = $filter['to'];
               $sql2= "AND date(time) between '$from' and '$to''" ;
+			  $date = $from." - ".$to;
               }
                if($filter['aname'] !=""){
                $agent = $filter['aname'];
             //  $sql3= " AND agent = '$agent'" ;
               }
-           } 
+           }else{
+				$date = date('Y-m-d');
+			}		   
            
 $sql = "select distinct(queuename),(select distinct(queuename) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename  $sql2 $sql3) as que,(select count(distinct(callid)) from queue_log where event='abandon' and queuename=q.queuename )as Abandon,round(((select count(distinct(callid)) from queue_log where event='abandon' and queuename=q.queuename  $sql2 $sql3) * 100)/(select count(distinct(callid)) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename  $sql2 $sql3),0) as aban_avg,(select count(distinct(callid)) from queue_log where event='CONNECT' and queuename=q.queuename  $sql2 $sql3) as Answered,round(((select count(distinct(callid)) from queue_log where event='CONNECT' and queuename=q.queuename  $sql2 $sql3) * 100)/(select count(distinct(callid)) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename  $sql2 $sql3),0) as answer_avg,(select count(distinct(callid)) from queue_log where (event='abandon' or event='CONNECT') and queuename=q.queuename  $sql2 $sql3) as total from queue_log as q where queuename!='NONE' $sql2 $sql3 group by queuename";
 
    $query = $this->db->query($sql);
+ //  $query[] = array("data" => $date);
    return $query->result_array();
-}
-
+	}
 }
 ?>

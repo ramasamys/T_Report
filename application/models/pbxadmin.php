@@ -43,7 +43,11 @@ function extension_count($searchterm)
 function extensionSelect($limit, $start) {
 
    	$this->db->limit($limit, $start);
+				
+				$this->db->order_by("id", "DESC"); 
 				$query = $this->db->get("sipusers");
+				
+
 					if ($query->num_rows() > 0) 
 						{
 							foreach ($query->result() as $row) 	
@@ -86,17 +90,29 @@ function getAllExtension($exten) {
     $extension_list = "SELECT distinct(name) from sipusers";
 	$extension_query = $this->db->query($extension_list);
     return $extension_query->result_array();
-	//print_r($result);
-	//exit;
+	
   }  
- 
-function extensionInsert($extension_for_sipusers,$extension_for_sipname,$extension_for_voiceboxes) 
+  function  checkExtension($id){
+      $sql = "SELECT * from sipname WHERE exten=?";
+      $query = $this->db->query($sql, array($id));
+      return $query->result_array();           
+      
+  }
+          function extensionInsert($sipnamedata,$sipusersdata,$voicedata) 
 	{
-		
-		$sipusers_insert	=	$this->db->insert('sipusers', $extension_for_sipusers);
-		$userid				=	0;
-		$userid				=	$this->db->insert_id();
-		
+		$this->db->insert('sipname', $sipnamedata);
+                $nameid = $this->db->insert_id();
+                
+                $this->db->insert('sipusers', $sipusersdata);
+                $userid = $this->db->insert_id();
+                
+                $this->db->insert('voiceboxes', $voicedata);
+		$voiceid = $this->db->insert_id();
+                
+                $result = array();
+		$result = array("$userid","$nameid","$voiceid");
+                return $result;
+/*		
 		$sipname_insert		=	$this->db->insert('sipname', $extension_for_sipname);
 		$nameid				=	0;
 		$nameid				=	$this->db->insert_id();
@@ -107,8 +123,8 @@ function extensionInsert($extension_for_sipusers,$extension_for_sipname,$extensi
 		
 		
 		$id = array();
-		$id = array("$userid","$nameid","$voiceid");
-		return $id;		
+		$id = array("$userid","$nameid","$voiceid"); */
+				
 		
    }
    
@@ -160,15 +176,19 @@ $update_namesql = "update sipname set name='$name' where exten='$username'";
 
    $updatequery = $this->db->query($updatesql);
    $update_namequery = $this->db->query($update_namesql);
-//   return $updatequery->result_array();
+
 
     }
 
 function extensionDelete($id) {
 
-    $sql = "delete from sipusers where id=?";
-
-   $query = $this->db->query($sql, array($id));
+    $sipusers_sql	=	"DELETE FROM sipusers WHERE name=?";
+	$sipname_sql	=	"DELETE FROM sipname WHERE exten=?";
+	$voiceboxes_sql	=	"DELETE FROM voiceboxes WHERE customer_id=?";
+	
+	$sipusers_result	=	$this->db->query($sipusers_sql, array($id));
+	$sipname_result	=	$this->db->query($sipname_sql, array($id));
+	$voiceboxes_result=	$this->db->query($voiceboxes_sql, array($id));
 
     }
 
@@ -197,6 +217,7 @@ function followmeList($limit, $start)
 
 	
 		$this->db->limit($limit, $start);
+		$this->db->order_by("f_id", "DESC"); 
 		$query = $this->db->get("followme");
 			if ($query->num_rows() > 0) 
 				{
@@ -242,11 +263,6 @@ function followmeInsert($followme_for_insertion) {
 		$followme_insert		=	$this->db->insert('followme', $followme_for_insertion);
 		
 		return $this->db->insert_id();
-/*$insert = "insert into followme(id,followname,ringtime,extlist,setdst,dst)values('$id','$followname','$ringtime','$extlist','$setdst','$dst')";
-
-   $insertfollow = $this->db->query($insert);
-//   return $insertfollow->result_array();
-*/
     }
     
 function followmeUpdate() {
@@ -254,16 +270,15 @@ function followmeUpdate() {
 $edit = "update followme set folloename='$followname',ringtime='$ringtime',extlist='$extlist',setdst='$setdst',dst='$dst' where id='$id'";
 
    $editfollow = $this->db->query($edit);
-//   return $editfollow->result_array();
+
 
     }  
-    
-function followmeDelete() {
+  
+  
+function followmeDelete($followme_delete) {
 
-$remove = "delete from followme where id = '$id'";
-
-   $removefollow = $this->db->query($remove);
-//   return $removefollow->result_array();
+	$followme_sql = "DELETE FROM followme WHERE f_id = ?";
+	$followme_result = $this->db->query($followme_sql, array($followme_delete));
 
     }
     
@@ -291,6 +306,7 @@ public function queue_count($searchterm)
 function queueSelect($limit, $start) {
 
 	  	$this->db->limit($limit, $start);
+				$this->db->order_by("id", "DESC"); 
 				$query = $this->db->get("queue_table");
 					if ($query->num_rows() > 0) 
 						{
@@ -342,17 +358,14 @@ function queueUpdate() {
 $editsql = "update queue_table set announce_frequency='$announce_frequency',announce_holdtime='$announce_holdtime',eventmemberstatus='$eventmemberstatus',eventwhencalled='$eventwhencalled', joinempty='$joinempty',leavewhenempty='$leavewhenempty',memberdelay='$memberdelay',queue_callswaiting ='$queue_callswaiting',reportholdtime='$reportholdtime', retry='$retry', ringinuse='$ringinuse', servicelevel='$servicelevel', strategy='$strategy',timeout='$timeout',timeoutrestart='$timeoutrestart',weight='$weight',wrapuptime='$wrapuptime',name='$name' where id='$id'";
 
    $editquery = $this->db->query($editsql);
-//   return $editquery->result_array();
+
 
     }
     
-function queueDelete() {
+function queueDelete($queue_delete) {
 
-$removesql = "delete from queue_table where id='$id'";
-
-   $removequery = $this->db->query($removesql);
-//   return $removequery->result_array();
-
+	$queue_sql	=	"DELETE FROM queue_table WHERE name=?";
+	$queue_result = $this->db->query($queue_sql, array($queue_delete));
     }
 
 	
@@ -375,6 +388,8 @@ public function inbound_count($searchterm)
 function inboundList($limit, $start) {
 	
 	  	$this->db->limit($limit, $start);
+		
+				$this->db->order_by("id", "DESC"); 
 				$query = $this->db->get("inbound_rout");
 					if ($query->num_rows() > 0) 
 						{
@@ -426,18 +441,17 @@ function inboundUpdate() {
 $update = "update inbound set";
 
    $updateinbound = $this->db->query($update);
-//   return $updateinbound->result_array();
+
 
     }
 
-function inboundDelete() {
 
-$delete = "delete from inbound_route where id = '$id'";
+function inboundDelete($inbound_delete) {
 
-   $deleteinbound = $this->db->query($delete);
-//   return $deleteinbound->result_array();
+	$inbound_sql 	=	"DELETE FROM inbound_rout WHERE did_num = ?";
+	$inbound_result = 	$this->db->query($inbound_sql, array($inbound_delete));
 
-    }
+   }
 
 function dependent_values($values){ 	
 

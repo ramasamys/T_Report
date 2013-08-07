@@ -22,6 +22,7 @@ Class User extends CI_Model {
     $query = $this->db->query($sql);
     return $query->result();
   } 
+  
   function agentQueue(){
     $sessionValues = $this->session->userdata('logged_in'); 
           $sessionId =  $sessionValues['sessionId'];	  
