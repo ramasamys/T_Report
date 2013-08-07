@@ -454,12 +454,12 @@ function inboundDelete($inbound_delete) {
 function dependent_values($values){ 	
 
 	if($values == "Extension"){
-			$sql = "select distinct(username) as list from sipusers";
+			$sql = "select distinct(username) as list from sipusers where username!=''";
 			$query = $this->db->query($sql);
                         return $query->result_array($query);
 		}
 	else if($values == "Queue") {
-		     $sql = "select distinct(name) as list from queue_table";
+		     $sql = "select distinct(name) as list from queue_table where name!=''";
                      $query = $this->db->query($sql);
                      return $query->result_array($query);
 		}
@@ -467,7 +467,7 @@ function dependent_values($values){
                         return array('list'=> "Hangup");
 		}	
 	else if($values == "Follow Me")	{
-			$sql = "select distinct(f_name) as list from followme";
+			$sql = "select distinct(f_name) as list from followme where f_name!=''";
 			$query = $this->db->query($sql);
                         return $query->result_array($query);
 		}

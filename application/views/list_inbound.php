@@ -73,17 +73,17 @@
     ?>
     <table width="100%">
         <tr>
-            <td>DID name <sup>*</sup></td> <td><input type="text" name="did_name" class="textbox-style1 did-name" value=""></td><td></td>
+            <td>DID name <sup>*</sup></td> <td><input type="text" name="did_name" class="textbox-style1 did-name" value=""></td>
         </tr>
         <tr>
-            <td></td>
+            
             <td class="error_cell"> <label id="did-name-error"></label></td>
         </tr>    
         <tr>
-            <td>DID number <sup>*</sup></td> <td><input type="text" name="did_number" class="textbox-style1 did-number" value=""></td><td></td>
+            <td>DID number <sup>*</sup></td> <td><input type="text" name="did_number" class="textbox-style1 did-number" value=""></td>
         </tr>
         <tr>
-            <td></td>
+            
             <td class="error_cell"> <label id="did-number-error"></label></td>
         </tr>        
 
@@ -95,21 +95,19 @@
                     <option value="<? echo $des; ?>"><? echo $des; ?></option>
                     <? } ?>
                    </select>
-            </td>
-
-            <td>
+           
                 <select name="dependent_destination" id="dependent_destination">
                 <option selected="selected">-</option>
 				</select>
             </td>
         </tr>
         <tr>
-            <td></td>
+            
             <td class="error_cell"> <label id="set-destination-error"></label></td>
         </tr>        
 
         <tr>
-            <td></td>
+            
             <td><input type="submit" name="insert" value="Save" class="button-color">&nbsp;<input type="reset" name="reset" value="Reset" class="button-color"></td>
         </tr>
     </table>
@@ -127,10 +125,14 @@
                     <option value="<? echo $des; ?>"><? echo $des; ?></option>
                     <? } ?>
                    </select>
+				   
+				    <select name="dependent_destination" id="dependent_destination">
+                <option selected="selected">-</option>
+				</select>
             </td>
 			</tr>	  
         <tr>
-            <td></td>
+           
             <td><input type="submit" name="" value="Update" class="button-color"/></td>
         </tr>
     </table>
