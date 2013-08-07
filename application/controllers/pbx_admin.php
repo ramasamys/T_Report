@@ -401,7 +401,7 @@ class Pbx_admin extends CI_Controller {
 				);
 				                
 				$this->pbxadmin->queueInsert($queue_for_insertion);
-				redirect('pbx_admin/queue_list');
+				redirect('pbx_admin/queue');
             
         } else {
             redirect('login/logout');

@@ -351,27 +351,46 @@ $(document).ready(function() {
         $('.edit-followme-div').dialog('open');
     });
 
+   
 
-/* delete followme  */
+/////////////delete followme//////////
 
-    $('.delete-followme').live('click', function() {
-        var followme_delete_id = $(this).attr('deleteid');
-        var confirmationvalues = confirm("Are you sure you want to delete this followme " + followme_delete_id + "? Click Yes to continue or No to cancel");
-        if (confirmationvalues == true) {
-            if (followme_delete_id != '') {
-                $(this).parents('tr').remove();
-                var post_data = {followme_delete_id: followme_delete_id};
-                $.ajax({
-                    type: 'POST',
-                    url: baseUrl + "index.php/pbx_admin/followme_delete",
-                    data: post_data,
-                    success: function(data) {
-                        console.log(data);
-                    }
-                });
-            }
-        }
-    });
+	     $('.delete-followme').live('click',function(){ 
+	var followme_delete_id = $(this).attr('deleteid');
+	var confirmationvalues = confirm("Are you sure you want to delete this followme "+followme_delete_id+"? Click Yes to continue or No to cancel");
+	if(confirmationvalues == true){
+	if(followme_delete_id !=''){
+	  $(this).parents('tr').remove();
+	      var post_data = {followme_delete_id:followme_delete_id};
+		    $.ajax({
+		      type:'POST',
+		      url: baseUrl + "index.php/pbx_admin/followme_delete",
+		      data:post_data,
+		      success: function(data) {
+console.log(data);
+		      }
+	      });
+	}
+      }
+      });
+	  
+	  
+////////////play audio////////////
+
+
+$('.play-audio').live('click',function(){ 
+
+	var audioURL = $(this).attr('audio_file');
+	document.getElementById("audio_id").innerHTML=
+ "<embed src=\""+audioURL+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
+ 
+
+	/*alert(audioURL);
+	link = baseUrl + 'audio/jsplayer.htm?' + audioURL;
+	playback_src = "<iframe width='150px' height='25px' marginheight='0' marginwidth='0' frameborder='0' scrolling='no' src=" + link + "></iframe>";
+	$('.play-audio').innerHTML = playback_src;	*/
+});
+
 
 });
 

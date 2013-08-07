@@ -61,7 +61,8 @@
    <?php endforeach; ?>
    <? } else { ?>
     <tr>
-      <td colspan="6">No Records.</td>
+     <td style="text-align: left;"> &nbsp; No Records.</td>
+      <td colspan="5"></td>
     </tr>
   <? } ?>
   </table>
