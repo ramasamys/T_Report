@@ -259,7 +259,7 @@ class Pbx_admin extends CI_Controller {
     function followme_insert() {
         if ($this->session->userdata('logged_in')) {
            
-		   $followme_name				=	stripslashes($this->input->post('followme_name'))
+		   $followme_name				=	stripslashes($this->input->post('followme_name'));
 		   $followme_insert_value['f_name']	=	$followme_name;
 		   $followme_insert_value['ringtime']	=	stripslashes($this->input->post('ring_time'));
 		   $followme_insert_value['extlist']	=	stripslashes($this->input->post('followme_list'));
@@ -371,7 +371,7 @@ class Pbx_admin extends CI_Controller {
 		$queue_insertion['timeout']	=	stripslashes($this->input->post('time_out'));
 		$queue_insertion['queue_callswaiting']	=	stripslashes($this->input->post('queue_call_wait'));	
 		  	      	  	  	
-		$queue_insertion['announce_frequency'	=	stripslashes($this->input->post('announce_frequency'));	
+		$queue_insertion['announce_frequency']	=	stripslashes($this->input->post('announce_frequency'));	
 		$queue_insertion['announce_holdtime']	=	stripslashes($this->input->post('announce_holdtime'));
 		$queue_insertion['retry']				=	stripslashes($this->input->post('retry'));      	  	  	
 		$queue_insertion['wrapuptime']			=	stripslashes($this->input->post('wrapup_time'));
@@ -392,7 +392,7 @@ class Pbx_admin extends CI_Controller {
 		$upd_queue_insertion['timeout']	=	stripslashes($this->input->post('time_out'));
 		$upd_queue_insertion['queue_callswaiting']	=	stripslashes($this->input->post('queue_call_wait'));	
 		  	      	  	  	
-		$upd_queue_insertion['announce_frequency'	=	stripslashes($this->input->post('announce_frequency'));	
+		$upd_queue_insertion['announce_frequency']	=	stripslashes($this->input->post('announce_frequency'));	
 		$upd_queue_insertion['announce_holdtime']	=	stripslashes($this->input->post('announce_holdtime'));
 		$upd_queue_insertion['retry']				=	stripslashes($this->input->post('retry'));      	  	  	
 		$upd_queue_insertion['wrapuptime']			=	stripslashes($this->input->post('wrapup_time'));
