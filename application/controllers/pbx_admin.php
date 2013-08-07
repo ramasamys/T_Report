@@ -478,18 +478,6 @@ class Pbx_admin extends CI_Controller {
         }
     }
 
-   /* function depended_value(){
-    	$values = $this->pbxadmin->dependent_values('Q');
-    //	print_r($values);
-    	echo $values[0]['name'];
-    	    
-    } */
-	
-	
-			
-			
-
-	
 	function inbound_search()
 	{
 		 if ($this->session->userdata('logged_in')) {
