@@ -89,14 +89,15 @@ class Login extends CI_Controller {
 		      setcookie("username", $sessionValues['username'], time() + 360000, "/");
 		      setcookie("password", $sessionValues['password'], time() + 360000, "/");
 		   }
-		   
+	//	  echo 	$sessionValues['username']."====>".$sessionValues['password'];exit;	   
         if (!empty($sessionValues) && $sessionValues['role'] == 'Administrator') {
             $this->load->view('admin_settings');
         }
         if (!empty($sessionValues) && $sessionValues['role'] == 'Agent') {
             $queueList['queue'] = $this->user->queues();
             $queueList['loggedin'] = $this->user->checkQueue();
-	    $this->load->view('agent',$queueList);
+            $queueList['pause'] = $this->user->pausestatus();
+	    $this->load->view('agentmain',$queueList);
         }
         if (empty($sessionValues)) {
             $this->logout();
@@ -159,7 +160,11 @@ class Login extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
         
        // $queue=$_POST['queue'];
-        $number = $this->user->agentQueue();
+		$this->user->agentQueue();
+       	    $queueList['queue'] = $this->user->queues();
+            $queueList['loggedin'] = $this->user->checkQueue();
+            $queueList['pause'] = $this->user->pausestatus();
+       $this->load->view('agentmain', $queueList);
         } else {
             redirect('login/logout');
         }
@@ -167,7 +172,7 @@ class Login extends CI_Controller {
 
     function agentmaincontrol() {
         if ($this->session->userdata('logged_in')) {
-            $data['pas'] = $this->user->pausestatus();
+           
 
             $this->load->view('agentmain', $data);
         } else {
@@ -178,6 +183,10 @@ class Login extends CI_Controller {
     function agentpause() {
         if ($this->session->userdata('logged_in')) {
             $this->user->agentpausefun();
+			$queueList['queue'] = $this->user->queues();
+            $queueList['loggedin'] = $this->user->checkQueue();
+            $queueList['pause'] = $this->user->pausestatus();
+			$this->load->view('agentmain', $queueList);
         } else {
 
             redirect('login/logout');
@@ -198,6 +207,17 @@ class Login extends CI_Controller {
         $this->session->sess_destroy();
         redirect();
     }
+    
+    function queue_logout(){
+   
+         $this->user->queueLogout();
+       $queueList['queue'] = $this->user->queues();
+       $queueList['loggedin'] = $this->user->checkQueue();
+       $queueList['pause'] = $this->user->pausestatus();
+       $this->load->view('agentmain', $queueList);
+    
+    }
+    
 
 }
 ?>

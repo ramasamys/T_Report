@@ -1,5 +1,7 @@
 $(document).ready(function() {
-  
+$('.blink').blink();
+
+
      $('.add_queue_popup').dialog({
         width: 500,
         height: 400,
@@ -18,8 +20,20 @@ $(document).ready(function() {
         resizable: false,
         autoOpen: false
     });
-     
-     
+
+	$("#allcheck").click(function(){
+    if($(this).is(":checked"))
+        $(".checkall").attr("checked", "checked");
+    else
+        $(".checkall").removeAttr("checked");
+});
+
+$("#checkall").click(function(){
+    if($(this).is(":checked"))
+        $(".check").attr("checked", "checked");
+    else
+        $(".check").removeAttr("checked");
+});
      
      
     
@@ -32,18 +46,4 @@ $(document).ready(function() {
        $('.remove_queue').live('click', function() {
           $('.remove_queue_popup').dialog('open');
     });
-     
-     
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-	    });
+  });
