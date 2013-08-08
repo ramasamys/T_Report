@@ -409,26 +409,4 @@ $(document).ready(function() {
             }
         }
     });
-
-
-////////////play audio////////////
-
-
-    $('.play-audio').live('click', function() {
-
-        var audioURL = $(this).attr('audio_file');
-        document.getElementById("audio_id").innerHTML =
-                "<embed src=\"" + audioURL + "\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
-
-
-        /*alert(audioURL);
-         link = baseUrl + 'audio/jsplayer.htm?' + audioURL;
-         playback_src = "<iframe width='150px' height='25px' marginheight='0' marginwidth='0' frameborder='0' scrolling='no' src=" + link + "></iframe>";
-         $('.play-audio').innerHTML = playback_src;	*/
-    });
-
-
 });
-
-
-

@@ -54,7 +54,9 @@
 	<td><?php echo $value['disposition'];?></td>
 	<td><?php echo $value['b'];?></td>
 	<td><a href="<?php echo base_url().'index.php/report_content/audio_donwload/'.$value['uniqueid']; ?>"><img title="Click here to Download." src="<?php echo base_url();?>css/images/10.png"/></a></td>
-	<td id="audio_id"><a href="#" class="play-audio" audio_file="<?php echo $value['uniqueid'].'.mp3'; ?>"><img title="Click here to Play." src="<?php echo base_url();?>css/images/audio.png"/></a></td>
+	<td>
+                <audio controls src="<?php echo base_url()."audio/".$value['uniqueid'].'.mp3'; ?>" ></audio>
+        </td>
 
 	
     </tr>
