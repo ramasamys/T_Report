@@ -46,10 +46,10 @@
                 ?>
                 <tr>
                     <td><?php echo $value->name; ?></td>
-					<td><? echo $queue_callswaiting = isset($value->queue_callswaiting) ? $value->queue_callswaiting : '-'; ?></td>
-					<td><? echo $retry = isset($value->retry) ? $value->retry : '-'; ?></td>
-					<td><? echo $strategy = isset($value->strategy) ? $value->strategy : '-'; ?></td>
-					<td><? echo $timeout = isset($value->timeout) ? $value->timeout : '-'; ?></td>
+					<td><? echo $queue_callswaiting = @($value->queue_callswaiting) ? $value->queue_callswaiting : '-'; ?></td>
+					<td><? echo $retry = @($value->retry) ? $value->retry : '-'; ?></td>
+					<td><? echo $strategy = @($value->strategy) ? $value->strategy : '-'; ?></td>
+					<td><? echo $timeout = @($value->timeout) ? $value->timeout : '-'; ?></td>
 					
 					
                     <td><a href="#" queue_name="<?php echo $value->name;?>" queue_calls_waiting="<?php echo $value->queue_callswaiting;?>" queue_retry="<?php echo $value->retry;?>" queue_strategy="<?php echo $value->strategy;?>" queue_timeout="<?php echo $value->timeout;?>" class="edit-queue">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-queue" deleteid="<?php echo $value->name; ?>">Delete</a></td>
@@ -58,7 +58,7 @@
             <?php endforeach; ?>
 <? } else { ?>
             <tr>
-                <td colspan="2">No Records.</td>
+                <td colspan="6">No Records.</td>
             </tr>
 <? } ?>
     </table>
@@ -72,12 +72,7 @@
 
 
 <div class="display-type create-new-queue">
-    <?php
-    $controller_name = "pbx_admin/queue_insert";
-    $attributes = array('class' => 'pbx-new-queue',
-        'id' => 'pbx-new-queue', 'name' => 'new_queue');
-    echo form_open($controller_name, $attributes);
-    ?>
+   <form id="pbx-new-queue" method="post">
     <table>
         <tr>
 
@@ -316,7 +311,8 @@
 </form>
 </div>
 <div class="display-type edit-queue-div" >
-    <table>
+<form id="pbx-edit-queue" method="post">    
+<table>
 
   <tr><td >Queue Name</td><td > <input type = "text"  name = "edit_queue_name" id = "edit_queue_name" readonly="readonly" value = "" class="textbox-style1 edit-queue-name" > </td></tr>
   
@@ -369,6 +365,7 @@
   </tr>
 
     </table>
+	</form>
 </div>
 
 

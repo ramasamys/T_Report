@@ -386,31 +386,17 @@ class Pbx_admin extends CI_Controller {
 		$queue_insertion['ringinuse']			=	stripslashes($this->input->post('ring_in_use'));  	  	      	  	  	
 		
 		
-		$upd_queue_insertion['timeout']	=	stripslashes($this->input->post('time_out'));
+		$upd_queue_insertion['timeout']				=	stripslashes($this->input->post('time_out'));
 		$upd_queue_insertion['queue_callswaiting']	=	stripslashes($this->input->post('queue_call_wait'));	
-		  	      	  	  	
-		$upd_queue_insertion['announce_frequency']	=	stripslashes($this->input->post('announce_frequency'));	
-		$upd_queue_insertion['announce_holdtime']	=	stripslashes($this->input->post('announce_holdtime'));
-		$upd_queue_insertion['retry']				=	stripslashes($this->input->post('retry'));      	  	  	
-		$upd_queue_insertion['wrapuptime']			=	stripslashes($this->input->post('wrapup_time'));
-		$upd_queue_insertion['maxlen']				=	stripslashes($this->input->post('max_wait_time'));
-		$upd_queue_insertion['servicelevel']		=	stripslashes($this->input->post('service_level'));
+		$upd_queue_insertion['retry']				=	stripslashes($this->input->post('retry'));   
 		$upd_queue_insertion['strategy']			=	stripslashes($this->input->post('ring_statergy'));
-		$upd_queue_insertion['joinempty']			=	stripslashes($this->input->post('join_empty'));
-		$upd_queue_insertion['leavewhenempty']		=	stripslashes($this->input->post('leave_when_empty'));
-		$upd_queue_insertion['eventmemberstatus']	=	stripslashes($this->input->post('event_member_status'));
-		$upd_queue_insertion['eventwhencalled']		=	stripslashes($this->input->post('event_when_called'));
-		$upd_queue_insertion['reportholdtime']		=	stripslashes($this->input->post('report_hold_time'));
-		$upd_queue_insertion['memberdelay']			=	stripslashes($this->input->post('member_delay'));
-		$upd_queue_insertion['weight']				=	stripslashes($this->input->post('queue_weight'));	  	  	      	  	  	
-		$upd_queue_insertion['timeoutrestart']		=	stripslashes($this->input->post('timeout_restart'));
-		$upd_queue_insertion['ringinuse']			=	stripslashes($this->input->post('ring_in_use')); 
+		
 		
 		$checkQueueExist = $this->pbxadmin->checkQueue($queue_name);
 		
         if(empty($checkQueueExist)){
 		
-				$this->pbxadmin->queueInsert($queue_for_insertion);
+				$this->pbxadmin->queueInsert($queue_insertion);
 				echo json_encode(array('status'=>'success'));
         }
 		else
