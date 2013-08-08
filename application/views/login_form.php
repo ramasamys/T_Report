@@ -16,15 +16,17 @@
 			$attributes = array('class' => 'report-login',
 					'id' => 'report-login', 'name' => 'report_login');
 			echo form_open($controller_name, $attributes);
+			$cookieusername="";
+			$cookiepassword="";
 //			$getusercookie=get_cookie($username);
-			$cookieusername = $this->input->cookie('username', TRUE);
-			$cookiepassword = $this->input->cookie('password', TRUE);
+//			$cookieusername = $this->input->cookie('username', TRUE);
+//			$cookiepassword = $this->input->cookie('password', TRUE);
 
 		?>
 		
 			    <p>
 			    <label for="user_login">Username <br>
-					<input type="text" name="tv_username" value="<?php if(!empty($cookieusername)){ echo $cookieusername;} else { echo set_value('tv_username'); }; ?>" placeholder="username" onclick="if(this.value == this.defaultValue) this.value = ''"/>
+					<input type="text" name="tv_username" value="<?php if(!empty($cookieusername)){ echo $cookieusername;} else { echo set_value('tv_username'); }; ?>" placeholder="username" onfocus="javascript: if(this.value == this.defaultValue){ this.value = ''; }"/>
 				</label>
 			    </p>
 				<p>
