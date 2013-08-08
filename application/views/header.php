@@ -11,8 +11,7 @@
             <script  src="<?php echo base_url(); ?>js/jquery.multiselect2side.js" type="text/javascript" ></script>
             <script src="<?php echo base_url() ?>js/autocomplete-jquery.js" type="text/javascript"></script>
             <script src="<?php echo base_url() ?>js/jquery.validate.js" type="text/javascript"></script>
-            <script src="<?php echo base_url() ?>js/jquery.blink.min.js" type="text/javascript"></script>
-			<script src="<?php echo base_url() ?>js/jquery-blink.js" type="text/javascript"></script>
+            <script src="<?php echo base_url() ?>js/jquery-blink.js" type="text/javascript"></script>
 
             <script src="<?php echo base_url() ?>js/helper.js?<? echo $version ?>" type="text/javascript"></script>
             <script src="<?php echo base_url() ?>js/admin.js?<? echo $version ?>" type="text/javascript"></script>
