@@ -38,13 +38,13 @@ for($i=0;$i<sizeof($que);$i++)
 {
 
 $queue=$que[$i];
-$sql22="insert into queue_member_table(unid,membername,queue_name,interface,paused) values('$unid','$agent','$queue','$agent',0)";
+$sql22="insert into queue_member_table(uniqueid,membername,queue_name,interface,paused) values('$unid','$agent','$queue','$agent',0)";
 $query=$this->db->query($sql22);
 }
 
-//$agentarray=array();
-//$agentarray=array("$agent","$que");
-//return $agentarray;  
+$agentarray=array();
+$agentarray=array("$agent");
+return $agentarray;  
  
   }
   function insertlogindetail($user,$timestamp)
@@ -171,6 +171,21 @@ $loggedagent = $sessionValues['first_name'];
 $checkqueuesql = "select queue_name from queue_member_table where membername='$loggedagent'";
 $checkqueuequery=$this->db->query($checkqueuesql);
 return $checkqueuequery->result_array();
+}
+
+function queueLogout(){
+$sessionValues = $this->session->userdata('logged_in');
+$loggedagent = $sessionValues['first_name'];
+
+$queues = $_POST['queues'];
+for($i=0;$i<sizeof($queues);$i++)
+{
+
+$queue=$queues[$i];
+$sql="DELETE FROM queue_member_table where membername='$loggedagent' and queue_name='$queue'";
+$query=$this->db->query($sql);
+}
+
 }
   
   
