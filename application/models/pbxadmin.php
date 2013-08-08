@@ -43,9 +43,9 @@ function extension_count($searchterm)
 function extensionSelect($limit, $start) {
 
    	$this->db->limit($limit, $start);
-				
-				$this->db->order_by("id", "DESC"); 
-				$query = $this->db->get("sipusers");
+	
+	$extension_sql = "SELECT sipusers.id, sipusers.context, sipusers.callerid, sipusers.mailbox, sipusers.host, sipusers.name, sipname.name AS display_name, sipusers.secret, sipusers.callgroup, sipusers.pickupgroup FROM sipname INNER JOIN sipusers ON sipname.exten = sipusers.name ORDER BY sipusers.id DESC LIMIT ". $start. " ,".$limit ;	
+	$query = $this->db->query($extension_sql);	
 				
 
 					if ($query->num_rows() > 0) 

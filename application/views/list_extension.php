@@ -1,4 +1,3 @@
- 
 <?php include "header.php"; ?>
 
 <div class="search-container">
@@ -33,10 +32,11 @@
     <table class="global-table-style">
         <tr>
 
-            <th>Display Name</th>
             <th>Extensions</th>
-            <th>Mailbox</th>
-            <th>Caller Id</th>
+			<th>Display Name</th>
+            <th>Secret</th>
+            <th>Call group</th>
+            <th>Call pickup group</th>
             <th>Actions</th>
 
 
@@ -45,20 +45,19 @@
             foreach ($result as $value) :
                 ?>
                 <tr style="text-align: center">
-                    <td><? echo $name = isset($value->callerid) ? $value->callerid : '-'; ?></td>
                     <td><?php echo $value->name; ?></td>
-                    <td><? echo $mailbox = @($value->mailbox) ? $value->mailbox : '-'; ?></td>
-                    <td><? echo $cid = isset($value->callerid) ? $value->callerid : '-'; ?></td>
-                    <td><a href="#" class="edit-extension" context="<? echo $value->context; ?>" mailbox="<? echo $value->mailbox; ?>" 
-                           secret="<? echo $value->secret; ?>" callerid="<? echo $value->callerid; ?>" 
-                           extensionsip="<? echo $value->id; ?>"  extname="<? echo $value->name; ?>" hostname="<? echo $value->host;?>">Edit</a> 
+					<td><? echo $display_name = isset($value->display_name) ? $value->display_name : '-'; ?></td>
+                    <td><? echo $secret = @($value->secret) ? $value->secret : '-'; ?></td>
+                    <td><? echo $callgroup = @($value->callgroup) ? $value->callgroup : '-'; ?></td>
+                    <td><? echo $callpickgroup = @($value->pickupgroup) ? $value->pickupgroup : '-'; ?></td>
+                    <td><a href="#" class="edit-extension" context="<? echo $value->context; ?>" display_name="<? echo $value->display_name; ?>" secret="<? echo $value->secret; ?>" callerid="<? echo $value->callerid; ?>" extensionsip="<? echo $value->id; ?>"  extname="<? echo $value->name; ?>" ext_hostname="<? echo $value->host;?>">Edit</a> 
                     &nbsp;|&nbsp;<a href="#" class="delete-extension" deleteid="<?php echo $value->name; ?>" >Delete</a></td>
 
                 </tr>
             <?php endforeach; ?>
 <? } else { ?>
             <tr>
-                <td colspan="5">No Records.</td>
+                <td colspan="6">No Records.</td>
             </tr>
 <? } ?>
     </table>
@@ -147,14 +146,12 @@
 <div class="display-type edit-extension-div" >
     <table>
 
-        <tr><td >Extension</td><td > <input type = "text"  name = "ext" id = "ext" value = " " class="textbox-style1 edit-sip-ext" > </td></tr>
-        <tr><td>Host</td><td><input type = "text"  name = "host" id = "host" value = " " class="textbox-style1 edit-sip-host" > </td></tr>
-        <tr><td>Name</td><td><input type = "text"  name = "name" id = "name" value = " " class="textbox-style1 edit-sip-name" > </td></tr>        
-        <tr><td>Context</td><td><input type = "text"  name = "context" id = "context" value = " " class="textbox-style1 edit-sip-context" > </td></tr>
-        
-        <tr><td> Mailbox</td><td><input type = "text"  name = "mailbox" id = "mailbox" value = " " class="textbox-style1 edit-sip-mailbox"> </td></tr>
-        <tr><td>Secret</td><td><input type = "text"  name = "sippasswd" id = "sippasswd" value = " " class="textbox-style1 edit-sip-secret"> </td></tr>
-        <tr><td>CallerId</td><td><input type = "text"  name = "callerid" id = "callerid" value = " " class="textbox-style1 edit-sip-callerid" > </td></tr>
+        <tr><td >Extension <sup>*</sup></td><td > <input type = "text"  name = "ed_extension" id = "ed_extension" value = " " class="textbox-style1 edit-sip-ext" > </td></tr>
+        <tr><td>Display name <sup>*</sup></td><td><input type = "text"  name = "ed_displayname" id = "ed_displayname" value = " " class="textbox-style1 edit-sip-name" > </td></tr>        
+		<tr><td>Secret <sup>*</sup></td><td><input type = "text"  name = "ed_secret" id = "ed_secret" value = " " class="textbox-style1 edit-sip-secret"> </td></tr>
+		<tr><td>Context</td><td><input type = "text"  name = "ed_context" id = "ed_context" value = " " class="textbox-style1 edit-sip-context" > </td></tr>
+		<tr><td>Host</td><td><input type = "text"  name = "ed_host" id = "ed_host" value = " " class="textbox-style1 edit-sip-host" > </td></tr>
+        <tr><td>CallerId</td><td><input type = "text"  name = "ed_callerid" id = "ed_callerid" value = " " class="textbox-style1 edit-sip-callerid" > </td></tr>
         <tr>
             <td></td>
             <td><input type="submit" name="" value="Update" class="button-color"/></td>

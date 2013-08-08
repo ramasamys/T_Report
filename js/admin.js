@@ -92,7 +92,7 @@ $(document).ready(function() {
     });
 
     $('.edit-extension-div').dialog({
-        width: 400,
+        width: 500,
         height: 360,
         modal: true,
         title: "Edit Extension",
@@ -103,12 +103,12 @@ $(document).ready(function() {
     $('.edit-extension').live('click', function() {
         $('label.error').remove();
         $('.edit-extension-div').dialog('open');
-        $('.edit-sip-ext').val($(this).attr('extensionsip'));
-        $('.edit-sip-name').val($(this).attr('extname'));
-        $('.edit-sip-host').val($(this).attr('hostname'));
-        $('.edit-sip-context').val($(this).attr('context'));
-        $('.edit-sip-mailbox').val($(this).attr('mailbox'));
-        $('.edit-sip-secret').val($(this).attr('secret'));
+        
+		$('.edit-sip-ext').val($(this).attr('extensionsip'));
+        $('.edit-sip-name').val($(this).attr('display_name'));
+		$('.edit-sip-secret').val($(this).attr('secret'));
+		$('.edit-sip-context').val($(this).attr('context'));
+        $('.edit-sip-host').val($(this).attr('ext_hostname'));
         $('.edit-sip-callerid').val($(this).attr('callerid'));
     });
 

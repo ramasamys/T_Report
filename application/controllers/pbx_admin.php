@@ -112,6 +112,7 @@ class Pbx_admin extends CI_Controller {
         $sipvoice['email'] = $mailid;
         $sipvoice['context'] = $context;
 		
+				
 		$upd_sipname['name'] = stripslashes($this->input->post('display_name'));
 		
 		$upd_sipusers['host'] = stripslashes($this->input->post('extension_host'));
