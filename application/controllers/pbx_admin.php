@@ -112,18 +112,15 @@ class Pbx_admin extends CI_Controller {
         $sipvoice['email'] = $mailid;
         $sipvoice['context'] = $context;
 		
+				
 		$upd_sipname['name'] = stripslashes($this->input->post('display_name'));
 		
 		$upd_sipusers['host'] = stripslashes($this->input->post('extension_host'));
         $upd_sipusers['context'] = $context;
-        $upd_sipusers['mailbox'] = $mailid;
-        $upd_sipusers['sippasswd'] = $password_ext;
-        $upd_sipusers['callgroup'] = stripslashes($this->input->post('call_group'));
-        $upd_sipusers['pickupgroup'] = stripslashes($this->input->post('call_pickup_group'));
         $upd_sipusers['secret'] = stripslashes($this->input->post('secret_fld'));
+		$upd_sipusers['callerid'] = stripslashes($this->input->post('edit_callerid'));
 		
-		$upd_sipvoice['password'] = $password_ext;
-        $upd_sipvoice['email'] = $mailid;
+		
         $upd_sipvoice['context'] = $context;
         
 		
