@@ -144,11 +144,21 @@
 </form>
 </div>
 <div class="display-type edit-extension-div" >
+<form id="pbx-edit-extensions" method="post">
     <table>
 
-        <tr><td >Extension <sup>*</sup></td><td > <input type = "text"  name = "ed_extension" id = "ed_extension" value = " " class="textbox-style1 edit-sip-ext" > </td></tr>
-        <tr><td>Display name <sup>*</sup></td><td><input type = "text"  name = "ed_displayname" id = "ed_displayname" value = " " class="textbox-style1 edit-sip-name" > </td></tr>        
+        <tr><td >Extension <sup>*</sup></td><td > <input type = "text"  name = "ed_extension" id = "ed_extension" value = " " class="textbox-style1 edit-sip-ext" readonly="readonly"> </td></tr>
+        <tr><td>Display name <sup>*</sup></td><td><input type = "text"  name = "ed_displayname" id = "ed_displayname" value = " " class="textbox-style1 edit-sip-name" > </td></tr> 
+   <tr>
+            <td></td>
+            <td class="error_cell"> <label id="edit-display-name-error"></label></td>
+        </tr>  		
 		<tr><td>Secret <sup>*</sup></td><td><input type = "text"  name = "ed_secret" id = "ed_secret" value = " " class="textbox-style1 edit-sip-secret"> </td></tr>
+		<tr>
+            <td></td>
+            <td class="error_cell"> <label id="edit-secret-extension-error"></label></td>
+        </tr> 
+		
 		<tr><td>Context</td><td><input type = "text"  name = "ed_context" id = "ed_context" value = " " class="textbox-style1 edit-sip-context" > </td></tr>
 		<tr><td>Host</td><td><input type = "text"  name = "ed_host" id = "ed_host" value = " " class="textbox-style1 edit-sip-host" > </td></tr>
         <tr><td>CallerId</td><td><input type = "text"  name = "ed_callerid" id = "ed_callerid" value = " " class="textbox-style1 edit-sip-callerid" > </td></tr>
@@ -157,5 +167,6 @@
             <td><input type="submit" name="" value="Update" class="button-color"/></td>
         </tr>
     </table>
+	</form>
 </div>
 <?php include "footer.php"; ?>
