@@ -68,7 +68,7 @@ $(document).ready(function() {
             var password_ext = $('.password-ext').val();
 
             if (sipextension != '' && display_name != '' && secret_fld != '') {
-                var post_data = {sipextension: sipextension, display_name: display_name, secret_fld: secret_fld};
+                var post_data = {sipextension: sipextension, display_name: display_name, secret_fld: secret_fld, call_group: call_group, call_pickup_group: call_pickup_group, extension_context: extension_context, extension_host: extension_host, email_id: email_id, password_ext: password_ext};
                 $.ajax({
                     type: 'POST',
                     url: baseUrl + "index.php/pbx_admin/insert_extension",
@@ -104,12 +104,65 @@ $(document).ready(function() {
         $('label.error').remove();
         $('.edit-extension-div').dialog('open');
         
-		$('.edit-sip-ext').val($(this).attr('extensionsip'));
+		$('.edit-sip-ext').val($(this).attr('extname'));
         $('.edit-sip-name').val($(this).attr('display_name'));
 		$('.edit-sip-secret').val($(this).attr('secret'));
 		$('.edit-sip-context').val($(this).attr('context'));
         $('.edit-sip-host').val($(this).attr('ext_hostname'));
         $('.edit-sip-callerid').val($(this).attr('callerid'));
+    });
+	
+	 $("#pbx-edit-extensions").validate({
+        rules: {
+           
+            ed_displayname: "required",
+            ed_secret: "required",
+            
+        },
+        errorPlacement: function(error, element) {
+           
+            if (element.attr('name') == 'ed_displayname') {
+                error.insertAfter('#edit-display-name-error');
+            }
+            if (element.attr('name') == 'ed_secret') {
+                error.insertAfter('#edit-secret-extension-error');
+            }
+           
+        },
+        messages: {
+            
+            ed_displayname: "Please enter Display Name.",
+            ed_secret: "Please enter Secret.",
+            
+        },
+        submitHandler: function(form) {
+            var sipextension = $('.edit-sip-ext').val();
+            var display_name = $('.edit-sip-name').val();
+            var secret_fld = $('.edit-sip-secret').val();
+            var extension_context = $('.edit-sip-context').val();
+            var extension_host = $('.edit-sip-host').val();
+            var edit_callerid = $('.edit-sip-callerid').val();
+           
+            
+
+            if (sipextension != '' && display_name != '' && secret_fld != '') {
+                var post_data = {sipextension: sipextension, display_name: display_name, secret_fld: secret_fld, extension_context: extension_context, extension_host: extension_host, edit_callerid: edit_callerid};
+                $.ajax({
+                    type: 'POST',
+                    url: baseUrl + "index.php/pbx_admin/insert_extension",
+                    data: post_data,
+                    success: function(data) {
+                        var myObject = eval('(' + data + ')');
+
+                        if (myObject.status = "updated")
+                        {
+                             $('.edit-extension-div').dialog('close');
+                        }
+                    }
+                });
+            }
+
+        }
     });
 
     /* queue */
