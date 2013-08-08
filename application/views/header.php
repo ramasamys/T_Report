@@ -12,18 +12,18 @@
             <script src="<?php echo base_url() ?>js/autocomplete-jquery.js" type="text/javascript"></script>
             <script src="<?php echo base_url() ?>js/jquery.validate.js" type="text/javascript"></script>
 
-            <script src="<?php echo base_url() ?>js/helper.js" type="text/javascript"></script>
-            <script src="<?php echo base_url() ?>js/admin.js" type="text/javascript"></script>
-             <script src="<?php echo base_url() ?>js/agent.js" type="text/javascript"></script>
+            <script src="<?php echo base_url() ?>js/helper.js?<? echo $version ?>" type="text/javascript"></script>
+            <script src="<?php echo base_url() ?>js/admin.js?<? echo $version ?>" type="text/javascript"></script>
+             <script src="<?php echo base_url() ?>js/agent.js?<? echo $version ?>" type="text/javascript"></script>
 
 
             
-            <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" type="text/css" />
-            <link href="<?php echo base_url(); ?>css/menu.css" rel="stylesheet" type="text/css" />
+            <link href="<?php echo base_url(); ?>css/style.css?<? echo $version ?>" rel="stylesheet" type="text/css" />
+            <link href="<?php echo base_url(); ?>css/menu.css?<? echo $version ?>" rel="stylesheet" type="text/css" />
             <link href="<?php echo base_url(); ?>css/jquery-ui-1.8.10.custom.css" rel="stylesheet" type="text/css" />
             <link href="<?php echo base_url(); ?>css/jquery-autocomplete.css" rel="stylesheet" type="text/css" />            
             <link  href="<?php echo base_url(); ?>css/jquery.multiselect2side.css" rel="stylesheet" type="text/css" media="screen" />
-            <link  href="<?php echo base_url(); ?>css/admin.css" rel="stylesheet" type="text/css" />            
+            <link  href="<?php echo base_url(); ?>css/admin.css?<? echo $version ?>" rel="stylesheet" type="text/css" />            
     </head>
 
     <body>

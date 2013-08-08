@@ -95,11 +95,9 @@
         
               <td class="error_cell"> <label id="ring-time-error"></label></td>
     </tr>        
-         
-	 
-	
 	<tr>
-	<td>Quick Pick Extenstion</td> <td>
+	<td>Quick Pick Extenstion</td> 
+        <td>
 	<select name="quickpick_extension" id="quickpick_extension">
 	
 	
@@ -110,25 +108,18 @@
    <? } else { ?>
    <option value="">No extensions</option>
    <? } ?>
-	
-	
-	
-	
-	
-	</select></td>
+	</select>
+        </td>
     </tr>
     <tr>
-        
               <td class="error_cell"> <label id="quickpick-extension-error"></label></td>
     </tr>
-	
 	<tr>
-	<td>FollowMe List</td> <td><textarea name="followme_list" id="followme_list" class="followme-list" value="" cols="40" rows="4" ></textarea></td>
+	<td>FollowMe List</td> <td><textarea name="followme_list" id="followme_list" class="followme-list" cols="40" rows="4" ></textarea></td>
     </tr>
     <tr>
                <td class="error_cell"> <label id="followme-list-error"></label></td>
     </tr>  
-	
     <tr>
 	<td>Set destination</td> <td><select name="set_destination" class="set_destination"> 
 		<option value="">Select</option>
@@ -141,12 +132,9 @@
 	  </td>
     </tr>
     <tr>
-        
               <td class="error_cell"> <label id="set-destination-error"></label></td>
     </tr>        
-     
     <tr>
-        
         <td><input type="submit" name="insert" value="Save" class="button-color">&nbsp;<input type="reset" name="reset" value="Reset" class="button-color"></td>
     </tr>
   </table>
@@ -154,23 +142,20 @@
 </div>
 <div class="display-type edit-followme-div" >
     <table>
-
    <tr>
-
         <td>Followme name <sup>*</sup></td> <td><input type="text" name="edit_followme_name" class="textbox-style1 edit-followme-name" value=""></td>
     </tr>
     <tr>
-        
               <td class="error_cell"> <label id="edit-followme-name-error"></label></td>
     </tr>    
     <tr>
 	<td>Ring Time</td> <td><select type="text" name="edit_ring_time" id="edit_ring_time">
 	
 	<?php
-						for ($i=0; $i <= 60; $i++) { ?>
-							<option value="<? echo $i; ?>" ><? echo $i; ?></option>;
-						<? }
-					?>
+            for ($i=0; $i <= 60; $i++) { ?>
+                    <option value="<? echo $i; ?>" ><? echo $i; ?></option>;
+            <? }
+	?>
 	</select>
 	</td>
     </tr>
@@ -180,7 +165,8 @@
     </tr>        
     
 	<tr>
-	<td>Quick Pick Extenstion</td> <td>
+	<td>Quick Pick Extenstion</td> 
+        <td>
 	<select name="edit_quickpick_extension" id="edit_quickpick_extension">
 	
 	
@@ -192,12 +178,8 @@
    <? } else { ?>
    <option value="">No extensions</option>
    <? }?>
-	
-	
-	
-	
-	
-	</select></td>
+	</select>
+        </td>
     </tr>
     <tr>
         
@@ -205,7 +187,7 @@
     </tr>
 	
 	 <tr>
-	<td>FollowMe List</td> <td><textarea name="edit_followme_list" id="edit_followme_list" class="edit-followme-list" value="" cols="40" rows="4" ></textarea></td><td></td>
+	<td>FollowMe List</td> <td><textarea name="edit_followme_list" id="edit_followme_list" class="edit-followme-list" cols="40" rows="4" ></textarea></td><td></td>
     </tr>
     <tr>
         
@@ -213,7 +195,8 @@
     </tr>  
 	
 	<tr>
-	<td>Set destination</td> <td><select name="edit_set_destination" id="edit_set_destination"> 
+	<td>Set destination</td> 
+        <td><select name="edit_set_destination" id="edit_set_destination"> 
 		<option value="">Select</option>
 		<option value="Queue">Queue</option> 
 	    </select>

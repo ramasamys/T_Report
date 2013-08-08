@@ -428,16 +428,18 @@ $(document).ready(function() {
         $('#edit_ring_time').val($(this).attr('ring_time'));
         $('#edit_set_destination').val($(this).attr('set_destination'));
         $('#edit_dependent_destination').val($(this).attr('dependent_value'));
-		 $('#edit_followme_list').val($(this).attr('followme_list'));
+        $('#edit_followme_list').val($(this).attr('followme_list'));
 
         $('.edit-followme-div').dialog('open');
     });
 	
-	/* $('#edit_quickpick_extension').change(function() {
-        // update input box with the currently selected value
-        $('#edit_followme_list').append($('#edit_quickpick_extension').val() + '\n');
+     $('#edit_quickpick_extension').live('change',function() { 
+         var lastValue = $('#edit_followme_list').val();
+         var currentValue = $(this).val() + '\n';
+         var result = currentValue + lastValue; 
+        $('#edit_followme_list').val(result);
     });
-*/
+
 
 
 /////////////delete followme//////////
