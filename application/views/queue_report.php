@@ -1,6 +1,4 @@
 <?php include "header.php";?>
-<label class="heading">Queue Summary</label>
-<hr>
 <div class="search-container">
  
 <?php

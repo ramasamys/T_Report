@@ -1,7 +1,4 @@
 <?php include "header.php";?>
-<label class="heading">Real Time Report</label>
-<hr>
-<hr>
 <table class="global-table-style">
    <tbody>
 	<td style="float:left;" >Total calls - &nbsp;&nbsp;&nbsp;&nbsp;<a  href="#" >Answered calls -</a>&nbsp;&nbsp;&nbsp;&nbsp;<a  href="#">Abandon calls - </a>
