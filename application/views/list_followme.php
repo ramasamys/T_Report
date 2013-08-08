@@ -49,7 +49,7 @@
 		<td><? echo $ringtime = isset($value->ringtime) ? $value->ringtime : '-'; ?></td>
 		<td><? echo $extlist = isset($value->extlist) ? $value->extlist : '-'; ?></td>
 		<td><a href="#" 
-		followme_id="<?php echo $value->f_id; ?>" followme_name="<?php echo $value->f_name; ?>" ring_time="<?php echo $value->ringtime; ?>" extension_list="<?php echo $value->extlist; ?>" set_destination="<?php echo $value->setdst; ?>" dependent_value="<?php echo $value->dst; ?>" class="edit-followme">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-followme" deleteid="<?php echo $value->f_id; ?>">Delete</a></td>
+		followme_id="<?php echo $value->f_id; ?>" followme_name="<?php echo $value->f_name; ?>" ring_time="<?php echo $value->ringtime; ?>" extension_list="<?php echo $value->extlist; ?>" set_destination="<?php echo $value->setdst; ?>" followme_list="<?php echo $value->extlist;?>" dependent_value="<?php echo $value->dst; ?>" class="edit-followme">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-followme" deleteid="<?php echo $value->f_id; ?>">Delete</a></td>
       
     </tr>
    <?php endforeach; ?>
@@ -96,12 +96,7 @@
               <td class="error_cell"> <label id="ring-time-error"></label></td>
     </tr>        
          
-	 <tr>
-	<td>FollowMe List</td> <td><textarea name="followme_list" id="followme_list" class="followme-list" value="" cols="40" rows="4" ></textarea></td>
-    </tr>
-    <tr>
-               <td class="error_cell"> <label id="followme-list-error"></label></td>
-    </tr>  
+	 
 	
 	<tr>
 	<td>Quick Pick Extenstion</td> <td>
@@ -126,6 +121,13 @@
         
               <td class="error_cell"> <label id="quickpick-extension-error"></label></td>
     </tr>
+	
+	<tr>
+	<td>FollowMe List</td> <td><textarea name="followme_list" id="followme_list" class="followme-list" value="" cols="40" rows="4" ></textarea></td>
+    </tr>
+    <tr>
+               <td class="error_cell"> <label id="followme-list-error"></label></td>
+    </tr>  
 	
     <tr>
 	<td>Set destination</td> <td><select name="set_destination" class="set_destination"> 

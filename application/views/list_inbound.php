@@ -50,7 +50,7 @@
 					<td><?php echo $value->did_name; ?></td>
 					<td><? echo $setdst = isset($value->setdst) ? $value->setdst : '-'; ?></td>
 					<td><? echo $dst = isset($value->dst) ? $value->dst : '-'; ?></td>
-                    <td><a href="#" did_name="<?php echo $value->did_name;?>" did_number="<?php echo $value->did_num;?>" class="edit-inbound">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-inbound" deleteid="<?php echo $value->did_num; ?>">Delete</a></td>
+                    <td><a href="#" did_name="<?php echo $value->did_name;?>" did_number="<?php echo $value->did_num;?>" set_dest="<?php echo $value->setdst; ?>" dest="<?php echo $value->dst; ?>" class="edit-inbound">Edit</a>&nbsp;|&nbsp;<a href="#" class="delete-inbound" deleteid="<?php echo $value->did_num; ?>">Delete</a></td>
                 </tr>
             <?php endforeach; ?>
 <? } else { ?>
@@ -116,17 +116,17 @@
 <div class="display-type edit-inbound-div" >
     <table>
 
-        <tr><td >DID name</td><td > <input type = "text"  name = "did_name" id = "did_name" value = "" class="textbox-style1" > </td></tr>
-        <tr><td>DID number</td><td><input type = "text"  name = "did_number" id = "did_number" value = "" class="textbox-style1" > </td></tr>
+        <tr><td >DID name</td><td > <input type = "text"  name = "edit_did_name" id = "edit_did_name" value = "" class="textbox-style1" > </td></tr>
+        <tr><td>DID number</td><td><input type = "text"  name = "edit_did_number" id = "edit_did_number" value = "" class="textbox-style1" > </td></tr>
        <tr><td>Set destination</td>
 	   <td>
-                <select name="set_destination" class="set_destination"> 
+                <select name="edit_inbound_set_destination" class="edit_inbound_set_destination"> 
                     <? foreach($destination as $des) { ?>
                     <option value="<? echo $des; ?>"><? echo $des; ?></option>
                     <? } ?>
                    </select>
 				   
-				    <select name="dependent_destination" id="dependent_destination">
+				    <select name="edit_inbound_dependent_destination" id="edit_inbound_dependent_destination">
                 <option selected="selected">-</option>
 				</select>
             </td>

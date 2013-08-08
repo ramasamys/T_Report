@@ -158,7 +158,7 @@ $(document).ready(function() {
 
     $('.edit-queue-div').dialog({
         width: 500,
-        height: 600,
+        height: 300,
         modal: true,
         title: "Edit queue",
         resizable: false,
@@ -169,7 +169,9 @@ $(document).ready(function() {
         $('label.error').remove();
         $('.edit-queue-name').val($(this).attr('queue_name'));
         $('.edit-queue-calls-waiting').val($(this).attr('queue_calls_waiting'));
-
+		$('#edit_retry').val($(this).attr('queue_retry'));
+        $('#edit_ring_strategy').val($(this).attr('queue_strategy'));
+        $('#edit_timeout').val($(this).attr('queue_timeout'));
 
         $('.edit-queue-div').dialog('open');
     });
@@ -269,13 +271,18 @@ $(document).ready(function() {
         width: 500,
         height: 400,
         modal: true,
-        title: "Edit queue",
+        title: "Edit Inbound",
         resizable: false,
         autoOpen: false
     });
 
     $('.edit-inbound').live('click', function() {
         $('label.error').remove();
+	
+		$('#edit_did_name').val($(this).attr('did_name'));
+        $('#edit_did_number').val($(this).attr('did_number'));
+        $('#edit_inbound_set_destination').val($(this).attr('set_dest'));
+		$('#edit_inbound_dependent_destination').val($(this).attr('dest'));
 
 
         $('.edit-inbound-div').dialog('open');
@@ -368,10 +375,16 @@ $(document).ready(function() {
         $('#edit_ring_time').val($(this).attr('ring_time'));
         $('#edit_set_destination').val($(this).attr('set_destination'));
         $('#edit_dependent_destination').val($(this).attr('dependent_value'));
+		 $('#edit_followme_list').val($(this).attr('followme_list'));
 
         $('.edit-followme-div').dialog('open');
     });
-
+	
+	/* $('#edit_quickpick_extension').change(function() {
+        // update input box with the currently selected value
+        $('#edit_followme_list').append($('#edit_quickpick_extension').val() + '\n');
+    });
+*/
 
 
 /////////////delete followme//////////

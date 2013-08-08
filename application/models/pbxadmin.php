@@ -87,7 +87,7 @@ function getAllExtension($exten) {
  
  
  function getExtension() {
-    $extension_list = "SELECT distinct(name) from sipusers";
+    $extension_list = "SELECT distinct(name) from sipusers where name!=''";
 	$extension_query = $this->db->query($extension_list);
     return $extension_query->result_array();
 	
