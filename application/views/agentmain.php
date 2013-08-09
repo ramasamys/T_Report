@@ -31,7 +31,7 @@ color:white;
 ">
 <table align="right"><tr>
 <?
-
+if(!empty($loggedin)){ 
 if($pause[0]['CNT'] >0)
 {
 
@@ -53,7 +53,7 @@ else
 <input type="button" name="Unpause" id="unpause" value="Unpause" class="button-color"/></td>	
 	<?
 }
-
+}
 ?>
 <? $sessionValues = $this->session->userdata('logged_in'); ?>
 <input type="hidden" id="agent" value="<?php  echo $sessionValues['first_name'];  ?>" />
@@ -133,7 +133,7 @@ if(in_array($name['name'], $logged)){
 
    <? } else { ?>
     <tr>
-      <td colspan="5">  <?php echo "No queues"; ?></td>
+      <td colspan="5">  <?php echo "No queues to remove"; ?></td>
     </tr>
   <? } ?>
     
