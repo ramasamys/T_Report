@@ -1,12 +1,21 @@
 <?php include "header.php";?>
 
+<?php
+if(!empty($error)){
+foreach($error as $key => $value){
+//echo $value;
+if(strpos($value,'Duplicate entry') !== false )
+ {   echo '<font color="red"> Already logged in </font>';  }
+	}
+}
+?>
 
-  <table style="line-height: 40px;width:100%;">
+<table style="line-height: 40px;width:100%;">
 <tr><td style="text-align: left;"><b>Logged in Queues : </b><? if(!empty($loggedin)){ 
      foreach($loggedin as $names) : ?>
 <?php echo $names['queue_name'].", ";?>
    <?php endforeach; ?>
-   <? } else { ?><font color='red' id='blink' class='blink'>No Queues..!!!</font><?}?></td>
+   <? } else { ?><b><font color='red' id='blink' class='blink'>No Queues...!</font></b><?}?></td>
       <td style="text-align: right;" > <input type="button" name="queue_select" value="SELECT QUEUE" class="queue_select button-color" />
       <input type="button" name="remove_queue"  value="REMOVE QUEUE" class="remove_queue button-color" /></td>
     </tr>
@@ -21,7 +30,6 @@ font-size: 20px;
 color:white;
 ">
 <table align="right"><tr>
-
 <?
 
 if($pause[0]['CNT'] >0)
@@ -73,12 +81,23 @@ else
     <br>
     <br>
 	  
-     <?php foreach($queue as $name) : ?>
-
+     <?php foreach($queue as $name) :?>
 <tr><td align="center">
-<label><?php echo $name['name'];?></label></td><td align="center"><input type="checkbox" class="check" name="queue[]" value="<?php echo $name['name'];?>" />
-   </td></tr>				
-   <?php endforeach; ?>
+<label><?php echo $name['name'];?></label></td><?
+$logged[] = array();
+if(!empty($loggedin)){ 
+foreach($loggedin as $names) :
+$logged[] = $names['queue_name'];
+endforeach;
+}
+if(in_array($name['name'], $logged)){
+
+}else{
+?>
+<td align="center"><input type="checkbox" class="check" name="queue[]" value="<?php echo $name['name'];?>"/>
+   </td></tr>
+   <?php }
+   endforeach; ?>
 
    <? } else { ?>
     <tr>
@@ -96,10 +115,10 @@ else
    $controller_name = "login/queue_logout";
     echo form_open($controller_name);
    ?>
-           <? if(!empty($loggedin)){ ?>
+   <? if(!empty($loggedin)){ ?>
 		    <table align="right"><tr>   <td align="right"><label><b>Select All</b></label></td><td align="right"><input type="checkbox" name="allcheck" id="allcheck" /></td></tr></table>
 		   
-		   <table width="100%" align="center">
+	<table width="100%" align="center">
     <tr><th>QueueName</th><th>Select</th></tr>
     <br>
     <br>
@@ -108,7 +127,7 @@ else
 <?php foreach($loggedin as $names) : ?>
 	   
 <tr><td align="center">
-<label><?php echo $names['queue_name'];?></labe></td><td align="center"><input type="checkbox" class="checkall" name="queues[]" value="<?php echo $names['queue_name'];?>" />
+<label><?php echo $names['queue_name'];?></label></td><td align="center"><input type="checkbox" class="checkall" name="queues[]" value="<?php echo $names['queue_name'];?>" />
    </td></tr>				
    <?php endforeach; ?>
 

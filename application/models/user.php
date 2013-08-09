@@ -23,31 +23,43 @@ Class User extends CI_Model {
     return $query->result();
   } 
   
-  function agentQueue(){
-    $sessionValues = $this->session->userdata('logged_in'); 
+function agentQueue(){
+		  $sessionValues = $this->session->userdata('logged_in'); 
           $sessionId =  $sessionValues['sessionId'];
           $agent=$sessionValues['first_name'];
 
  //$agent=$_POST['q'];
-  $que=$_POST['queue'];
- // $sql="update logindetail set queue='$que' where sessionId='$sessionId'";
-  // $query=$this->db->query($sql);
+ $que=$_POST['queue'];
+ $queString = implode(',',$que);
+ $sql="update logindetail set queue='$queString' where sessionId='$sessionId'";
+
+ $query=$this->db->query($sql);
+//  echo $sql; exit;
  // $team = explode(',',$que);
 $unid = rand(0000,9999);
+
 for($i=0;$i<sizeof($que);$i++)
 {
 
 $queue=$que[$i];
 $sql22="insert into queue_member_table(uniqueid,membername,queue_name,interface,paused) values('$unid','$agent','$queue','$agent',0)";
-$query=$this->db->query($sql22);
+
+$query = $this->db->query($sql22);
+if(!$query){
+   $data["err_msg"] = $this->db->_error_message();
+}
+else{
+$data = "";
+}
 }
 
 $agentarray=array();
 $agentarray=array("$agent");
-return $agentarray;  
+return $data;  
  
-  }
-  function insertlogindetail($user,$timestamp)
+}
+  
+function insertlogindetail($user,$timestamp)
   {
    
   $sql= "insert into logindetail(agent,login,sessionId) values('$user',now(),'$timestamp')";

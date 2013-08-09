@@ -108,6 +108,35 @@ echo "<div align='right'>You have already logged in ";
 </form>
 </div>
 
+<div class="display-type remove_queue_popup">
+    <?php
+   $controller_name = "login/queue_logout";
+    echo form_open($controller_name, $attributes);
+   ?>
+    <table width="100%" align="center">
+    <tr><th>QueueName</th><th>Select</th></tr>
+    <br>
+    <br>
+    <br>
+       <? if(!empty($loggedin)){ 
+     foreach($loggedin as $names) : ?>
+	   
+<tr><td align="center">
+<label><?php echo $names['queue_name'];?></labe></td><td align="center"><input type="checkbox" name="queues[]" value="<?php echo $names['queue_name'];?>" />
+   </td></tr>				
+   <?php endforeach; ?>
+
+   <? } else { ?>
+    <tr>
+      <td colspan="5">  <?php echo "No queues"; ?></td>
+    </tr>
+  <? } ?>
+    
+   <tr><td colspan="2"> <center><input type="submit" class="button-color" id="enterqueueselected" value=" Remove "/></center></td></tr>
+    </table>
+</form>
+</div>
+
 
 
 
