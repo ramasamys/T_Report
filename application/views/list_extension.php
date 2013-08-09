@@ -46,7 +46,7 @@
                 ?>
                 <tr style="text-align: center">
                     <td><?php echo $value->name; ?></td>
-					<td><? echo $display_name = isset($value->display_name) ? $value->display_name : '-'; ?></td>
+					<td><? echo $display_name = @($value->display_name) ? $value->display_name : '-'; ?></td>
                     <td><? echo $secret = @($value->secret) ? $value->secret : '-'; ?></td>
                     <td><? echo $callgroup = @($value->callgroup) ? $value->callgroup : '-'; ?></td>
                     <td><? echo $callpickgroup = @($value->pickupgroup) ? $value->pickupgroup : '-'; ?></td>

@@ -202,8 +202,49 @@ $(document).ready(function() {
             queue_name: "Please enter queue name.",
             queue_call_wait: "Please enter queue call waiting.",
         },
-        submitHandler: function(form) {
-            $("#pbx-new-queue").submit();
+                submitHandler: function(form) {
+            var queue_name = $('.queue-name').val();
+            var announce_frequency = $('#announce_frequency').val();
+            var announce_holdtime = $('#announce_holdtime').val();
+            var announce_position = $('#announce_position').val();
+            var auto_fill = $('#auto_fill').val();
+            var event_member_status = $('#event_member_status').val();
+			var event_when_called = $('#event_when_called').val();
+			var join_empty = $('#join_empty').val();
+			var leave_when_empty = $('#leave_when_empty').val();
+			var max_wait_time = $('#max_wait_time').val();
+			var member_delay = $('#member_delay').val();
+			var penalty_member_limit = $('#penalty_member_limit').val();
+			var queue_call_wait = $('#queue_call_wait').val();
+			var report_hold_time = $('#report_hold_time').val();
+			var retry = $('#retry').val();
+			var ring_in_use = $('#ring_in_use').val();
+			var service_level = $('#service_level').val();
+			var ring_statergy = $('#ring_statergy').val();
+			var time_out = $('#time_out').val();
+			var timeout_restart = $('#timeout_restart').val();
+			var queue_weight = $('#queue_weight').val();
+			var wrapup_time = $('#wrapup_time').val();
+            
+
+            if (queue_name != '' && queue_call_wait != '') 
+			{
+                var post_data = {queue_name: queue_name, announce_frequency: announce_frequency, announce_holdtime: announce_holdtime, announce_position: announce_position, auto_fill: auto_fill, event_member_status: event_member_status, event_when_called: event_when_called, join_empty: join_empty, leave_when_empty: leave_when_empty, max_wait_time: max_wait_time, member_delay: member_delay, penalty_member_limit: penalty_member_limit, queue_call_wait: queue_call_wait, report_hold_time: report_hold_time, retry: retry, ring_in_use: ring_in_use, service_level: service_level, ring_statergy: ring_statergy, time_out: time_out, timeout_restart: timeout_restart, queue_weight: queue_weight, wrapup_time: wrapup_time };
+                $.ajax({
+                    type: 'POST',
+                    url: baseUrl + "index.php/pbx_admin/queue_insert",
+                    data: post_data,
+                    success: function(data) {
+                        var myObject = eval('(' + data + ')');
+
+                        if (myObject.status = "success")
+                        {
+                             $('.create-new-queue').dialog('close');
+                        }
+                    }
+                });
+            }
+
         }
     });
 
@@ -462,26 +503,4 @@ $(document).ready(function() {
             }
         }
     });
-
-
-////////////play audio////////////
-
-
-    $('.play-audio').live('click', function() {
-
-        var audioURL = $(this).attr('audio_file');
-        document.getElementById("audio_id").innerHTML =
-                "<embed src=\"" + audioURL + "\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
-
-
-        /*alert(audioURL);
-         link = baseUrl + 'audio/jsplayer.htm?' + audioURL;
-         playback_src = "<iframe width='150px' height='25px' marginheight='0' marginwidth='0' frameborder='0' scrolling='no' src=" + link + "></iframe>";
-         $('.play-audio').innerHTML = playback_src;	*/
-    });
-
-
 });
-
-
-
