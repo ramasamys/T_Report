@@ -65,7 +65,7 @@ class Login extends CI_Controller {
 
     function checkSession() {
         $sessionValues = $this->session->userdata('logged_in');
- 
+
         if (!empty($sessionValues) && $sessionValues['role'] == 'Administrator') {
             $this->load->view('admin_settings');
         }
@@ -185,12 +185,15 @@ class Login extends CI_Controller {
     }
 
     function queue_logout() {
-
         $this->user->queueLogout();
         $queueList['queue'] = $this->user->queues();
         $queueList['loggedin'] = $this->user->checkQueue();
         $queueList['pause'] = $this->user->pausestatus();
         $this->load->view('agentmain', $queueList);
+    }
+
+    function pageNotFound() {
+        $this->load->view('404');        
     }
 
 }

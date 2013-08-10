@@ -52,3 +52,8 @@
     border:1px solid #c00;
     border-radius: 4px;
 }
+.page-not-found img{
+    position: relative;
+    top: 10em;
+    left: 23em;
+}

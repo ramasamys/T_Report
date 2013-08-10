@@ -164,6 +164,9 @@ Class User extends CI_Model {
             $query = $this->db->query($sql);
         }
     }
+    function pageNotFound(){
+        
+    }
 
 }
 

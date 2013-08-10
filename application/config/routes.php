@@ -39,7 +39,7 @@
 */
 
 $route['default_controller'] = "login";
-$route['404_override'] = '';
+$route['404_override'] = 'login/pageNotFound';
 
 
 /* End of file routes.php */
