@@ -14,9 +14,9 @@ class Summary extends CI_Controller {
 
     public function agent() {
         if ($this->session->userdata('logged_in')) {
-            $search['from'] = $this->input->post('from_date');
-            $search['to'] = $this->input->post('to_date');
-            $search['aname'] = $this->input->post('agent_name');
+            $search['from'] = stripslashes($this->input->post('from_date'));
+            $search['to'] = stripslashes($this->input->post('to_date'));
+            $search['aname'] = stripslashes($this->input->post('agent_name'));
             $data['agent_summary'] = $this->agent->agentSummary($search);
             $this->load->view('agent_summary', $data);
         } else {
@@ -25,9 +25,9 @@ class Summary extends CI_Controller {
     }
     public function queue() {
         if ($this->session->userdata('logged_in')) {
-            $search['from'] = $this->input->post('from_date');
-            $search['to'] = $this->input->post('to_date');
-            $search['aname'] = $this->input->post('agent_name');            
+            $search['from'] = stripslashes($this->input->post('from_date'));
+            $search['to'] = stripslashes($this->input->post('to_date'));
+            $search['aname'] = stripslashes($this->input->post('agent_name'));            
             $data['queue_summary'] = $this->agent->queueSummary($search);
             $this->load->view('queue_summary', $data);
         } else {
